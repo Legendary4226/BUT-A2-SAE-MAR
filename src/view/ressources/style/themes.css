@@ -1,0 +1,8 @@
+:root.default-white-theme {
+    --color-background: #E8F7EE;
+    --color-main: #0353A4;
+    --color-secondary: #0081CC;
+    --color-complementary-1: #1B998B;
+    --color-complementary-2: #FE7F2D;
+    --color-text: #020202;
+}
