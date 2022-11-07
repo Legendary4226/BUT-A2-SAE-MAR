@@ -6,7 +6,7 @@
 </head>
 <body>
 
-    <?php require_once('view/v_home.php');  ?>
+    <?php require_once('view/v_space.php');  ?>
 
 </body>
 </html>
