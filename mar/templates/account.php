@@ -1,4 +1,4 @@
-<?php require_once('ressource/v_header.php');  ?>
+<?php require_once("ressources/header.php");  ?>
 
 <main>
     
@@ -31,4 +31,4 @@
 
 </main>
 
-<?php require_once('ressource/v_footer.php');  ?>
+<?php require_once("ressources/footer.php");  ?>
