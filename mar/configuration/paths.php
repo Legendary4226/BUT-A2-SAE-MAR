@@ -5,3 +5,5 @@ define("CONTROLLERS", "src/controllers/");
 define("LIB", "src/lib/");
 define("MODELS", "src/models/");
 define("TEMPLATES", "templates/");
+
+define("STYLES", TEMPLATES . "ressources/style/");

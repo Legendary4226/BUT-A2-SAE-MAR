@@ -1,3 +1,10 @@
 <header>
-    <h1> My Amazing Reminder <button> Sign in </button> <button> Login </button> </h1> 
+    <div class="header-title">
+        <h1>My Amazing Reminder</h1>
+    </div>
+
+    <div class="header-buttons">
+        <button class="blue-button">Sign in</button>
+        <button class="blue-button">Login</button> 
+    </div>
 </header>

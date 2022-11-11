@@ -1,4 +1,5 @@
-:root.default-white-theme {
+/* Default White Theme */
+:root {
     --color-background: #E8F7EE;
     --color-main: #0353A4;
     --color-secondary: #0081CC;

@@ -1,23 +1,38 @@
-<?php require_once("ressources/header.php");  ?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
-<main>
-    
-    <form mehode="get" action="">
-        <label for="email" > Email* :</label>
-        <input id="email" type="email" name="email">
+    <!-- Global CSS Files -->
+    <?php require_once(TEMPLATES . "ressources/css_files.php") ?>
+
+    <!-- Specific CSS Files -->
+</head>
+<body>
+    <?php require_once("ressources/header.php"); ?>
+
+    <main>
         
-        <label for="pseudo"> Pseudo* :</label>
-        <input id="pseudo" type="text" name="pseudo">
+        <form mehode="get" action="">
+            <label for="email" > Email* :</label>
+            <input id="email" type="email" name="email">
+            
+            <label for="pseudo"> Pseudo* :</label>
+            <input id="pseudo" type="text" name="pseudo">
 
-        <label for="password"> Password* : </label>
-        <input id="password" type="password" name="password">
+            <label for="password"> Password* : </label>
+            <input id="password" type="password" name="password">
 
-        <label for="confpass"> Confirm Pass* : </label>
-        <input id="confpass" type="password" name="confpass">
+            <label for="confpass"> Confirm Pass* : </label>
+            <input id="confpass" type="password" name="confpass">
 
-        <input type="submit" value="Sign in">
-    </form>
+            <input type="submit" value="Sign in">
+        </form>
 
-</main>
+    </main>
 
-<?php require_once("ressources/footer.php");  ?>
+    <?php require_once("ressources/footer.php"); ?>
+</body>
+</html>
