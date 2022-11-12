@@ -15,3 +15,10 @@ body {
 
     background-color: var(--color-background);
 }
+
+body > main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

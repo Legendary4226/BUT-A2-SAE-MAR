@@ -9,37 +9,44 @@
     <?php require_once(TEMPLATES . "ressources/css_files.php") ?>
 
     <!-- Specific CSS Files -->
+    <link rel="stylesheet" href="<?= STYLES ?>templates/space.css">
 </head>
 <body>
     <?php require_once("ressources/header.php"); ?>
 
     <main>
-        <div>
-            <button>Profile and Settings</button>
-            <button>Share my spaces</button>
-        </div>
+        <section>
+            <button> Profile and Settings </button>
+            <button class="button-selected"> Share my spaces </button>
+        </section>
 
-        <div>
-            <button>One of my Spaces</button>
-            <button>Another Space</button>
-        </div>
+        <section>
+            <button class="button-selected" > One of my Spaces </button>
+            <button> Another Space </button>
+        </section>
             
-        <div>
-            <div>
-                <form mehode="get" action="">
-                    <label for="OneSpaces" > Space Name:  One of my Spaces</label>
-                    <input id="OneSpaces" type="text" name="OneSpaces"> 
-                </form>
+        <form methode="POST" action="">
+            <fieldset>
+                <label for="space-name" > Space Name:</label>
+                <input id="space-name" type="text" name="space-name" value="One of my Spaces"> 
+            </fieldset>
 
-                <h1>Share with:</h1>
+            <h1>Share with:</h1>
 
-                <p>emails</p>
-                
-            </div>
-            <div>
-                <img src="">
-            </div>
-        </div>
+            <fieldset>
+                <input type="text" value="email">
+                <label for="Email"> Permission: </label>
+                <select name="email" size="1" id="Email">
+                    <option>Read</option>
+                    <option>Edit</option>
+                </select>
+                <button>add</button>
+            </fieldset>
+
+            <fieldset>
+                <input type="submit"  value="temp">
+            </fieldset>
+        </form>
     </main>
 
     <?php require_once("ressources/footer.php"); ?>
