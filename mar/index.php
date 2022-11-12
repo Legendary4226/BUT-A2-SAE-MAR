@@ -14,5 +14,5 @@ if ($isActionExisting) {
 }
 
 if (! $isActionExisting) {
-    echo "Need to implement a 404 page";
+    header("Location: index.php?action=front/home");
 }

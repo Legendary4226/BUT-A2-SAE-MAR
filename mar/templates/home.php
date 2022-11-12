@@ -11,20 +11,16 @@
     <!-- Specific CSS Files -->
 </head>
 <body>
-    <?php require_once("ressources/header.php"); ?>
+<?php require_once("ressources/header.php"); ?>
 
-    <main>
-        <form mehode="get" action="">
-            <label for="email" > Email* :</label>
-            <input id="email" type="email" name="email">
+<main>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </p>
+    
+    <img src="">
+</main>
 
-            <label for="password"> Password* : </label>
-            <input id="password" type="password" name="password">
-            
-            <input type="submit" value="Sign in">
-        </form>
-    </main>
-
-    <?php require_once("ressources/footer.php"); ?>
+<?php require_once("ressources/footer.php"); ?>
 </body>
 </html>

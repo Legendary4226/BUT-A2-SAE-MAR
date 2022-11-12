@@ -3,12 +3,15 @@
     padding: 0;
 }
 
-body {
-    height: 100vh;
+html {
+    height: calc(100vh - 1px);
+}
 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+body {
+    height: 100%;
+
+    display: grid;
+    grid-template-rows: 4rem 1fr 4rem;
 
     background-color: var(--color-background);
 }

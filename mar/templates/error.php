@@ -9,13 +9,20 @@
     <?php require_once(TEMPLATES . "ressources/css_files.php") ?>
 
     <!-- Specific CSS Files -->
+    <link rel="stylesheet" href="<?= STYLES ?>templates/error.css">
     
 </head>
 <body>
-    <?php require_once("ressources/header.php"); ?>
+<?php require_once("ressources/header.php"); ?>
 
+<main>
+    <h1 class="error-title"><?= (!empty($errorTitle)) ? $errorTitle : "Error" ?></h1>
 
+    <div class="error-box">
+        <p class="error-message"><?= (!empty($error)) ? $error : "Unknown error" ?></p>
+    </div>
+</main>
 
-    <?php require_once("ressources/footer.php"); ?>
+<?php require_once("ressources/footer.php"); ?>
 </body>
 </html>
