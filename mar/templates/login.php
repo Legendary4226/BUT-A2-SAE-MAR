@@ -9,19 +9,26 @@
     <?php require_once(TEMPLATES . "ressources/css_files.php") ?>
 
     <!-- Specific CSS Files -->
+    <link rel="stylesheet" href="<?= STYLES ?>templates/login_signin.css">
 </head>
 <body>
     <?php require_once("ressources/header.php"); ?>
 
     <main>
-        <form mehode="get" action="">
-            <label for="email" > Email* :</label>
-            <input id="email" type="email" name="email">
-
-            <label for="password"> Password* : </label>
-            <input id="password" type="password" name="password">
+        <form methode="POST" action="" class="form-login-signin">
+            <fieldset>
+                <span>
+                    <label for="email" >Email* :</label>
+                    <input id="email" type="email" name="email">
+                </span>
+                
+                <span>
+                    <label for="password">Password* :</label>
+                    <input id="password" type="password" name="password">
+                </span>
+            </fieldset>
             
-            <input type="submit" value="Sign in">
+            <input type="submit" value="Log in">
         </form>
     </main>
 

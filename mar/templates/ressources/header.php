@@ -5,6 +5,6 @@
 
     <div class="header-buttons">
         <button class="blue-button">Sign in</button>
-        <button class="blue-button">Login</button> 
+        <button class="blue-button">Login</button>
     </div>
 </header>

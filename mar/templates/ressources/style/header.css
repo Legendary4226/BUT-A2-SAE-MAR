@@ -17,6 +17,12 @@ header > .header-title {
     justify-content: center;
 }
 
-header > .header-buttons > button {
+.header-buttons {
+    min-width: 20rem;
+
+    display: flex;
+}
+
+.header-buttons > button {
     margin-left: 2rem;
 }
