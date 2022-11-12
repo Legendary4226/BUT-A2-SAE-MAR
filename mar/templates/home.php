@@ -9,6 +9,7 @@
     <?php require_once(TEMPLATES . "ressources/css_files.php") ?>
 
     <!-- Specific CSS Files -->
+    <link rel="stylesheet" href="<?= STYLES ?>templates/home.css">
 </head>
 <body>
 <?php require_once("ressources/header.php"); ?>

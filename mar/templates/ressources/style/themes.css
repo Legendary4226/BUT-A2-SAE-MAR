@@ -6,4 +6,6 @@
     --color-complementary-1: #1B998B;
     --color-complementary-2: #FE7F2D;
     --color-text: #020202;
+
+    --color-secondary-opacity-25: rgba(0, 129, 204, 0.25);
 }
