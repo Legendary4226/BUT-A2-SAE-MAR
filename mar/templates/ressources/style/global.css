@@ -22,3 +22,7 @@ body > main {
     justify-content: center;
     align-items: center;
 }
+
+input:focus {
+    outline: var(--color-secondary-opacity-25) solid 2px;
+}

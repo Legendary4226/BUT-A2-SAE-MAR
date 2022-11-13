@@ -1,9 +1,9 @@
-body > main{
+body > main {
     display: grid;
     grid-template-columns: 1fr 1fr 5fr;
 }
 
-main > section{
+main > section {
     height: calc(100% - 1rem);
 
     display: flex;
@@ -14,7 +14,13 @@ main > section{
     border-right: 1px solid rgba(0, 0, 0, 0.75);
 }
 
-section button{
+fieldset {
+    border: none;
+}
+
+
+
+.panel button {
     width: 8rem;
     margin-bottom: 1rem;
     padding: 0.2rem;
@@ -22,10 +28,96 @@ section button{
     box-shadow: 0px 0px 4px 1px var(--color-secondary-opacity-25);
     border-radius: 10px;
     border: none;
-    
 }
 
-.button-selected{
+.button-selected {
     background-color: var(--color-secondary-opacity-25);
 }
 
+
+
+form {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+
+
+.form-edit-space-settings {
+    flex-direction: column;
+}
+
+.form-edit-space-settings > h1 {
+    font-size: 3em;
+    font-weight: 300;
+}
+
+.space-name label {
+    font-size: 1em;
+    margin-right: 3rem;
+}
+
+.space-name input {
+    width: 16rem;
+    padding: 1rem;
+
+    background-color: var(--color-main);
+    border: none;
+    border-radius: 15px;
+    color: var(--color-background);
+    text-align: center;
+}
+
+#space-share {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+#space-share span {
+    display: flex;
+    gap: 2rem;
+}
+
+form input[type="text"], 
+form select {
+    padding: .2rem .5rem;
+
+    background: none;
+    border: none;
+    border-radius: 5px;
+    color: var(--color-secondary);
+    font-size: 1em;
+}
+
+
+
+.form-add-shared-people {
+
+}
+
+
+
+
+.action {
+    width: 0px;
+    height: 0px;
+    padding: 17px;
+
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.save {
+    background-image: url("templates/ressources/images/icons/");
+    
+}
+.plus {
+    background-image: url("../../images/icons/plus.svg");
+    background-size: contain;
+}
+.delete-people {
+    background-image: url("templates/ressources/images/icons/close.svg");
+}
