@@ -97,9 +97,6 @@ form select {
 
 }
 
-
-
-
 .action {
     width: 0px;
     height: 0px;
@@ -111,8 +108,7 @@ form select {
 }
 
 .save {
-    background-image: url("templates/ressources/images/icons/");
-    
+    background-image: url("templates/ressources/images/icons/");  
 }
 .plus {
     background-image: url("../../images/icons/plus.svg");

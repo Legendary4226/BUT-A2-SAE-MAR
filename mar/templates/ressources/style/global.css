@@ -26,3 +26,7 @@ body > main {
 input:focus {
     outline: var(--color-secondary-opacity-25) solid 2px;
 }
+
+input::placeholder {
+    color: rgb(154, 153, 160);
+}
