@@ -40,8 +40,8 @@
                         <input id="confpass" type="password" name="confpass" placeholder="Confirm new pass">
                     </span>
                     <span>
-                        <label for="theme"> Theme: </label>
-                        <select name="theme" id="theme">
+                        <label for="theme" class="test"> Theme: </label>
+                        <select name="theme" class="theme">
                             <option>Default-White</option>
                             <option>Dark</option>
                         </select>
