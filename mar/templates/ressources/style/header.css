@@ -3,7 +3,6 @@ header {
 
     display: flex;
     justify-content: space-between;
-    align-items: center;
 
     border-bottom: 1px solid rgba(0, 0, 0, 0.75);
 
@@ -25,4 +24,8 @@ header > .header-title {
 
 .header-buttons > button {
     margin-left: 2rem;
+}
+
+.header-left-box-menu {
+    cursor: pointer;
 }

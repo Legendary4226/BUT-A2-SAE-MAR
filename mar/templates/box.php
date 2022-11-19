@@ -1,3 +1,7 @@
+<?php
+$ENABLE_LEFT_BOX_MENU = true;
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,27 +10,48 @@
     <title>Document</title>
 
     <!-- Global CSS Files -->
-    <!--
     <?php require_once(TEMPLATES . "ressources/css_files.php") ?>
-    -->
+
     <!-- Specific CSS Files -->
+    <link rel="stylesheet" href="<?= STYLES ?>templates/box.css">
 </head>
 <body>
 <?php require_once("ressources/header.php"); ?>
-<button>menu</button>
-<menu>
-    <div>
-        <h1>One of my spaces </h1>
-    </div>
-    <div>
-    <p>Box 1</p>
-    <p>Box 2</p>
-    <p>Box 3</p>
-    <p>Box 4</p>
-    <p>Box Title</p>
-    </div>
+
+<menu class="left-box-menu">
+    <form action="" method="POST">
+        <select name="" id="select-space">
+            <option value="">One of my spaces</option>
+            <option value="">Another Space</option>
+        </select>
+    </form>
+    
+    <form action="" method="POST">
+        <span>
+            <?php require(ICON_SVG_BOX_BOX) ?>
+            <input type="text" value="Box 1">
+        </span>
+        <span>
+            <?php require(ICON_SVG_BOX_LEAF) ?>
+            <input type="text" value="Box 2">
+        </span>
+        <span>
+            <?php require(ICON_SVG_BOX_BOX) ?>
+            <input type="text" value="Box 3">
+        </span>
+        <span>
+            <?php require(ICON_SVG_BOX_ROPE_KNOT) ?>
+            <input type="text" value="Box 4">
+        </span>
+        <span>
+            <?php require(ICON_SVG_BOX_BOX) ?>
+            <input type="text" value="Box Title">
+        </span>
+    </form>
+
     <button>Add Box</button>
 </menu>
+
 <main>
     <div>
         <h1>Box Title</h1>
@@ -51,4 +76,4 @@
 
 <?php require_once("ressources/footer.php"); ?>
 </body>
-</html>Z
+</html>

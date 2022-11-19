@@ -1,0 +1,9 @@
+.left-box-menu {
+    width: 15rem;
+    height: calc(100% - 16rem);
+
+    position: absolute;
+    top: 8rem;
+    left: 0;
+
+}
