@@ -5,4 +5,5 @@
 <link rel="stylesheet" href="<?= STYLES ?>header.css">
 <link rel="stylesheet" href="<?= STYLES ?>footer.css">
 
+<link rel="stylesheet" href="<?= STYLES ?>transitions.css">
 <link rel="stylesheet" href="<?= STYLES ?>buttons.css">

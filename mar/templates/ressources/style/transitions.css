@@ -1,0 +1,13 @@
+.transition-simple-bump:hover {
+    transition-timing-function: cubic-bezier(0,1,0,1);
+    transition-duration: 200ms;
+
+    transform: scale(1.5);
+}
+
+.transition-double-bump:hover {
+    transition-timing-function: cubic-bezier(0,1,1,0);
+    transition-duration: 350ms;
+
+    transform: scale(1.5);
+}

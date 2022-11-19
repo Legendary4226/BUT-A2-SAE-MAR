@@ -16,13 +16,28 @@
 
     <main>
         <section class="panel">
-            <button>Profile and Settings</button>
-            <button class="button-selected">Share my spaces</button>
+            <span>
+                <i></i>
+                <button>Profile and Settings</button>
+            </span>
+            <span>
+                <i></i>
+                <button class="button-selected">Share my spaces</button>
+            </span>
+            
         </section>
 
-        <section class="panel">
-            <button class="button-selected">One of my Spaces</button>
-            <button>Another Space</button>
+        <section class="panel secondary">
+            <span>
+                <i></i>
+                <button class="button-selected">One of my Spaces</button>
+            </span>
+            <span>
+                <i></i>
+                <button>Another Space</button>
+            </span>
+            
+            
         </section>
         
         <section>
@@ -34,7 +49,7 @@
 
                 <h1>Share with:</h1>
 
-                <fieldset id="space-share">
+                <fieldset class="space-share">
                     <span>
                         <input type="text" name="email-1" value="example@email.com">
 
@@ -44,7 +59,9 @@
                             <option>Edit</option>
                         </select>
 
-                        <button class="action delete-people">Delete</button>
+                        <button class="action-button transition-simple-bump">
+                            <?php require(ICON_SVG_CLOSE) ?>
+                        </button>
                     </span>
 
                     <span>
@@ -56,7 +73,9 @@
                             <option>Edit</option>
                         </select>
 
-                        <button class="action delete-people">Delete</button>
+                        <button class="action-button transition-simple-bump">
+                            <?php require(ICON_SVG_CLOSE) ?>
+                        </button>
                     </span>
 
                     <span>
@@ -68,25 +87,35 @@
                             <option>Edit</option>
                         </select>
 
-                        <button class="action delete-people">Delete</button>
+                        <button class="action-button transition-simple-bump">
+                            <?php require(ICON_SVG_CLOSE) ?>
+                        </button>
                     </span>
                 </fieldset>
 
                 <fieldset>
-                    <input type="submit"  value="" class="action save">
+                    <button class="action-button transition-simple-bump" id="save-modifications">
+                        <?php require(ICON_SVG_SAVE) ?>
+                    </button>
                 </fieldset>
             </form>
 
-            <form action="" class="form-add-shared-people">
-                <input type="text" placeholder="example@email.com">
+            <form method="POST" action="">
+                <fieldset class="space-share">
+                        <span>
+                            <input class="input-add-people-email" type="text" placeholder="Add a new person">
 
-                <label for="add-email"> Permission :</label>
-                <select name="add-email" id="add-email">
-                    <option>Read</option>
-                    <option>Edit</option>
-                </select>
+                            <label for="add-email"> Permission :</label>
+                            <select name="add-email" id="add-email">
+                                <option>Read</option>
+                                <option>Edit</option>
+                            </select>
 
-                <input type="submit" value="" class="action plus">
+                            <button class="action-button transition-simple-bump" id="add-shared-people">
+                                <?php require_once(ICON_SVG_PLUS) ?>
+                            </button>
+                        </span>
+                </fieldset>
             </form>
         </section>
     </main>

@@ -1,6 +1,7 @@
 <?php
 
 require_once("configuration/paths.php");
+require_once("configuration/icons.php");
 
 
 $isActionExisting = !empty($_GET["action"]) && is_readable(CONTROLLERS . $_GET["action"] . ".php");
