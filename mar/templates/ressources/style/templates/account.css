@@ -29,9 +29,8 @@ form > span{
 }
 
 label{
-    width:100%;
     text-align: center;
-    font-size: 1.4em; 
+    font-size: 1.4em;
 }
 
 button {
@@ -44,8 +43,7 @@ button {
     border: none;
 }
 
-form input,
-select {
+form input, select{
     padding: .2rem .5rem;
 
     border: none;
