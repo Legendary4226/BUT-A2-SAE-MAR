@@ -46,7 +46,7 @@
                             <option>Dark</option>
                         </select>
                     </span>
-                    <input type="submit" value="submit" class="save">
+                    <input type="submit" value="Save" class="save">
                 </form>
             </div>
             <div>

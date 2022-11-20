@@ -19,14 +19,14 @@ $ENABLE_LEFT_BOX_MENU = true;
 <?php require_once("ressources/header.php"); ?>
 
 <menu class="left-box-menu">
-    <form action="" method="POST">
+    <form action="" method="POST" class="form-choose-space">
         <select name="" id="select-space">
             <option value="">One of my spaces</option>
             <option value="">Another Space</option>
         </select>
     </form>
     
-    <form action="" method="POST">
+    <form action="" method="POST" class="form-boxs">
         <span>
             <?php require(ICON_SVG_BOX_BOX) ?>
             <input type="text" value="Box 1">
@@ -53,26 +53,55 @@ $ENABLE_LEFT_BOX_MENU = true;
 </menu>
 
 <main>
-    <div>
-        <h1>Box Title</h1>
-        <div>
-            <p>Work</p>
-            <p>Dishes</p>
-            <p>Buy stuff</p>
-            <p>Clean the floor</p>
-            <button>add new element</button>
-        </div>
-        <div>
-            <p>*A little note </br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </div>
-    </div>7
-    <div>
-        <button>A Label</button>
-        <button>Another Label</button>
-        <button>+</button>
-        <button>o-/<</button>
-    </div>
+    <form action="" method="POST" class="form-box-content">
+        <input type="text" name="box-title" class="box-title" value="Box title">
+        
+        <span class="task">
+            <input type="checkbox" name="task-1">
+            <input type="text" name="task-note-1" value="some text">
+        </span>
+
+        <span class="task">
+            <input type="checkbox" name="task-1">
+            <input type="text" name="task-note-2" value="some text">
+        </span>
+
+        <span class="task">
+            <input type="checkbox" name="task-3">
+            <input type="text" name="task-note-3" value="some text">
+        </span>
+
+        <span class="task">
+            <input type="checkbox" name="task-4">
+            <input type="text" name="task-note-4" value="some text">
+        </span>
+
+        <span class="note">
+            <textarea name="note-1">
+                *A little note
+            </textarea>
+        </span>
+
+        <span class="note">
+            <textarea name="note-2">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </textarea>
+        </span>
+
+        <button class="transition-simple-bump" id="save-modifications">
+            <?php require(ICON_SVG_SAVE) ?>
+        </button>
+    </form>
+
+    
 </main>
+
+<section class="box-management">
+    <button>A Label</button>
+    <button>Another Label</button>
+    <button>+</button>
+    <button>o-/<</button>
+</section>
 
 <?php require_once("ressources/footer.php"); ?>
 </body>
