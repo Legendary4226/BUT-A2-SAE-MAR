@@ -97,10 +97,12 @@ $ENABLE_LEFT_BOX_MENU = true;
 </main>
 
 <section class="box-management">
-    <button>A Label</button>
-    <button>Another Label</button>
-    <button>+</button>
-    <button>o-/<</button>
+    <div class="label">
+        <button class="green-button">A Label</button>
+        <button class="green-button">Another Label</button>
+        <button class="add-label"><?php require(ICON_SVG_PLUS) ?></button>
+    </div>
+    <button> <?php require(ICON_SVG_SHARE) ?></button>
 </section>
 
 <?php require_once("ressources/footer.php"); ?>

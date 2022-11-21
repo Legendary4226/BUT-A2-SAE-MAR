@@ -91,4 +91,44 @@ body > main {
     position: fixed;
     top: 6rem;
     right: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.box-management .label {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    width: 15rem;
+    
+    gap: 5px;
+}
+
+.box-management button {
+    background:none;
+    border: none;
+}
+
+.box-management .green-button {
+    height: 1.8rem;
+    padding: 0 0.5rem;
+
+    background-color: var(--color-complementary-1);
+    border-radius: 20px;
+    color: #FFFFFF;
+
+    font-size: 0.8em;
+}
+
+.box-management .add-label svg{
+    border-radius: 20px;
+    border: 2px solid var(--color-complementary-1);
+    box-sizing: border-box;
+}
+
+.svg-icon-share path,
+.svg-icon-plus path {
+    fill: var(--color-complementary-1);
 }
