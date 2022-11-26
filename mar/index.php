@@ -2,18 +2,19 @@
 
 require_once("configuration/paths.php");
 require_once("configuration/icons.php");
+require_once("configuration/links.php");
 
 
-$isActionExisting = !empty($_GET["action"]) && is_readable(CONTROLLERS . $_GET["action"] . ".php");
+$isPageExisting = !empty($_GET["page"]) && is_readable(CONTROLLERS . $_GET["page"] . ".php");
 
-if ($isActionExisting) {
+if ($isPageExisting) {
     try {
-        require_once(CONTROLLERS . $_GET["action"] . ".php");
+        require_once(CONTROLLERS . $_GET["page"] . ".php");
     } catch (Exception $e) {
         echo "Error when loading the page.";
     };
 }
 
-if (! $isActionExisting) {
-    header("Location: index.php?action=front/home");
+if (! $isPageExisting) {
+    header("Location: index.php?page=front/home");
 }

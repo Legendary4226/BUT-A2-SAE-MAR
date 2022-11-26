@@ -15,23 +15,23 @@
     <?php require_once("ressources/header.php"); ?>
 
     <main>
-        <form mehode="POST" action="" class="form-login-signin">
+        <form mehode="POST" action="<?= LINK_SIGNIN . "&action=createAccount" ?>" class="form-login-signin">
             <fieldset>
                 <span>
                     <label for="email" > Email* :</label>
-                    <input id="email" type="email" name="email">
+                    <input id="email" type="email" name="email" required>
                 </span>
                 <span>
                     <label for="pseudo"> Pseudo* :</label>
-                    <input id="pseudo" type="text" name="pseudo">
+                    <input id="pseudo" type="text" name="pseudo" maxlength="25" required>
                 </span>
                 <span>
                     <label for="password"> Password* : </label>
-                    <input id="password" type="password" name="password">
+                    <input id="password" type="password" name="password" minlength="8" required>
                 </span>
                 <span>
                     <label for="confpass"> Confirm Pass* : </label>
-                    <input id="confpass" type="password" name="confpass">
+                    <input id="confpass" type="password" name="confpass" minlength="8" required>
                 </span>
             </fieldset>
 

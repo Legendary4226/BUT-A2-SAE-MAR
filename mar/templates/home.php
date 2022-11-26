@@ -12,6 +12,12 @@
     <link rel="stylesheet" href="<?= STYLES ?>templates/home.css">
 </head>
 <body>
+<?php
+$headerButtonsLinks = array(
+    "Sign in" => LINK_SIGNIN,
+    "Log in" => LINK_LOGIN
+);
+?>
 <?php require_once("ressources/header.php"); ?>
 
 <main>

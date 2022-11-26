@@ -13,6 +13,11 @@
     
 </head>
 <body>
+<?php
+$headerButtonsLinks = array(
+    "Home" => LINK_HOME
+);
+?>
 <?php require_once("ressources/header.php"); ?>
 
 <main>

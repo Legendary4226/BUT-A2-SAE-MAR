@@ -16,6 +16,12 @@ $ENABLE_LEFT_BOX_MENU = true;
     <link rel="stylesheet" href="<?= STYLES ?>templates/box.css">
 </head>
 <body>
+<?php
+$headerButtonsLinks = array(
+    "Account" => LINK_ACCOUNT,
+    "Log out" => LINK_LOGOUT
+);
+?>
 <?php require_once("ressources/header.php"); ?>
 
 <menu class="left-box-menu">

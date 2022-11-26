@@ -1,6 +1,6 @@
 <header>
     <?php
-    if (isset($ENABLE_LEFT_BOX_MENU)) {
+    if (isset($enableLeftBoxMenu)) {
         echo "<div class='header-left-box-menu'>";
         require(ICON_SVG_MENU);
         echo "</div>";
@@ -11,9 +11,25 @@
     <div class="header-title">
         <h1>My Amazing Reminder</h1>
     </div>
-
+    
     <div class="header-buttons">
-        <button class="blue-button">Sign in</button>
-        <button class="blue-button">Login</button>
+        <?php
+        if (!empty($headerButtonsLinks)) {
+            ob_start();
+
+            foreach ($headerButtonsLinks as $buttonName => $buttonLink) {
+        ?>
+            <a href="<?= $buttonLink ?>">
+                <button class="blue-button"><?= $buttonName ?></button>
+            </a>
+        <?php
+            }
+            ob_end_flush();
+        }
+        else {
+            echo '<a href="index.php?action="><button class="blue-button">Home</button></a>';
+        }
+        ?>
     </div>
+    
 </header>

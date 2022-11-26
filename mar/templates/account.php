@@ -12,50 +12,55 @@
     <link rel="stylesheet" href="<?= STYLES ?>templates/account.css">
 </head>
 <body>
-    <?php require_once("ressources/header.php"); ?>
+<?php
+$headerButtonsLinks = array(
+    "Log out" => LINK_LOGOUT
+);
+?>
+<?php require_once("ressources/header.php"); ?>
 
-    <main>
-        
+<main>
+    
+    <div>
+        <button class="button-selected">Profile and Settings</button>
+        <button>Share my spaces</button>
+    </div>
+    <div>
         <div>
-            <button class="button-selected">Profile and Settings</button>
-            <button>Share my spaces</button>
+            <form methode="get" action="">
+                <span>
+                    <label for="pseudo"> Pseudo:</label>
+                    <input id="pseudo" type="text" name="Actual Pseudo" placeholder="Pseudo">
+                </span>
+                <span>
+                    <label for="email" > Email:</label>
+                    <input id="email" type="email" name="email" placeholder="Actual Email">
+                </span>
+                <span>
+                    <label for="changepass"> Change Pass: </label>
+                    <input id="changepass" type="password" name="changepass" placeholder="Enter new pass">
+                </span>
+                <span>
+                    <label for="confpass"> Confirm Pass: </label>
+                    <input id="confpass" type="password" name="confpass" placeholder="Confirm new pass">
+                </span>
+                <span>
+                    <label for="theme" class="test"> Theme: </label>
+                    <select name="theme" class="theme">
+                        <option>Default-White</option>
+                        <option>Dark</option>
+                    </select>
+                </span>
+                <input type="submit" value="Save" class="save">
+            </form>
         </div>
         <div>
-            <div>
-                <form methode="get" action="">
-                    <span>
-                        <label for="pseudo"> Pseudo:</label>
-                        <input id="pseudo" type="text" name="Actual Pseudo" placeholder="Pseudo">
-                    </span>
-                    <span>
-                        <label for="email" > Email:</label>
-                        <input id="email" type="email" name="email" placeholder="Actual Email">
-                    </span>
-                    <span>
-                        <label for="changepass"> Change Pass: </label>
-                        <input id="changepass" type="password" name="changepass" placeholder="Enter new pass">
-                    </span>
-                    <span>
-                        <label for="confpass"> Confirm Pass: </label>
-                        <input id="confpass" type="password" name="confpass" placeholder="Confirm new pass">
-                    </span>
-                    <span>
-                        <label for="theme" class="test"> Theme: </label>
-                        <select name="theme" class="theme">
-                            <option>Default-White</option>
-                            <option>Dark</option>
-                        </select>
-                    </span>
-                    <input type="submit" value="Save" class="save">
-                </form>
-            </div>
-            <div>
-                <img src="">
-            </div>
+            <img src="">
         </div>
+    </div>
 
-    </main>
+</main>
 
-    <?php require_once("ressources/footer.php"); ?>
+<?php require_once("ressources/footer.php"); ?>
 </body>
 </html>
