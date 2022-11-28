@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS box
 CREATE TABLE IF NOT EXISTS element
 (
     element_id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    element_content VARCHAR(500),
+    element_content MEDIUMTEXT,
     element_box INTEGER NOT NULL,
     element_type VARCHAR(10),
 
@@ -57,6 +57,16 @@ CREATE TABLE IF NOT EXISTS label
     label_id INTEGER PRIMARY KEY AUTO_INCREMENT,
     label_name VARCHAR(25) NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS label_using
+{
+    user_id INTEGER,
+    label_id INTEGER,
+
+    PRIMARY KEY(user_id,label_id),
+    FOREIGN KEY (user_id) REFERENCES user(user_id),
+    FOREIGN KEY (label_id) REFERENCES label(label_id)
+}
 
 /*
 *   Commandes pour intéragir avec la db
