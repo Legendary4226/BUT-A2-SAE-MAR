@@ -19,19 +19,19 @@
             <fieldset>
                 <span>
                     <label for="email" > Email* :</label>
-                    <input id="email" type="email" name="email" required value="test@gmail0com">
+                    <input id="email" type="email" name="email" required>
                 </span>
                 <span>
                     <label for="pseudo"> Pseudo* :</label>
-                    <input id="pseudo" type="text" name="pseudo" maxlength="25" required value="TestPseudo">
+                    <input id="pseudo" type="text" name="pseudo" maxlength="25" required>
                 </span>
                 <span>
                     <label for="password"> Password* : </label>
-                    <input id="password" type="password" name="password" minlength="8" required value="Hummmmmmmmm">
+                    <input id="password" type="password" name="password" minlength="8" required>
                 </span>
                 <span>
                     <label for="confpass"> Confirm Pass* : </label>
-                    <input id="confpass" type="password" name="confpass" minlength="8" required value="Hummmmmmmmm2">
+                    <input id="confpass" type="password" name="confpass" minlength="8" required>
                 </span>
             </fieldset>
 

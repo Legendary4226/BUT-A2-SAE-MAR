@@ -12,26 +12,32 @@
     <link rel="stylesheet" href="<?= STYLES ?>templates/login_signin.css">
 </head>
 <body>
-    <?php require_once("ressources/header.php"); ?>
+<?php
+$headerButtonsLinks = array(
+    "Home" => LINK_HOME,
+    "Signin" => LINK_SIGNIN
+);
+?>
+<?php require_once("ressources/header.php"); ?>
 
-    <main>
-        <form methode="POST" action="" class="form-login-signin">
-            <fieldset>
-                <span>
-                    <label for="email" >Email* :</label>
-                    <input id="email" type="email" name="email">
-                </span>
-                
-                <span>
-                    <label for="password">Password* :</label>
-                    <input id="password" type="password" name="password">
-                </span>
-            </fieldset>
+<main>
+    <form methode="POST" action="" class="form-login-signin">
+        <fieldset>
+            <span>
+                <label for="email" >Email* :</label>
+                <input id="email" type="email" name="email">
+            </span>
             
-            <input type="submit" value="Log in">
-        </form>
-    </main>
+            <span>
+                <label for="password">Password* :</label>
+                <input id="password" type="password" name="password">
+            </span>
+        </fieldset>
+        
+        <input type="submit" value="Log in">
+    </form>
+</main>
 
-    <?php require_once("ressources/footer.php"); ?>
+<?php require_once("ressources/footer.php"); ?>
 </body>
 </html>
