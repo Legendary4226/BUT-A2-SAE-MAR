@@ -20,31 +20,42 @@ CREATE TABLE IF NOT EXISTS space
     FOREIGN KEY (space_owner) REFERENCES users(user_id)
 );
 
+CREATE TABLE IF NOT EXISTS space_sharing
+(
+    share_user_id INTEGER NOT NULL,
+    share_space_id INTEGER NOT NULL,
+    share_permission INTEGER NOT NULL,
+
+    PRIMARY KEY (share_user_id, share_space_id),
+    FOREIGN KEY (share_user_id) REFERENCES users(user_id),
+    FOREIGN KEY (share_space_id) REFERENCES space(space_id)
+);
+
 CREATE TABLE IF NOT EXISTS box
 (
     box_id INTEGER PRIMARY KEY AUTO_INCREMENT,
     box_space INTEGER NOT NULL,
     box_name VARCHAR(20) NOT NULL,
-    box_owner INTEGER,
+    box_owner INTEGER NOT NULL,
 
-    FOREIGN KEY (box_space) REFERENCES space(space_id)
+    FOREIGN KEY (box_space) REFERENCES space(space_id),
     FOREIGN KEY (box_owner) REFERENCES users(user_id)
 );
 
 CREATE TABLE IF NOT EXISTS element
 (
     element_id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    content VARCHAR(500),
-    box_id INTEGER,
+    element_content VARCHAR(500),
+    element_box INTEGER NOT NULL,
     element_type VARCHAR(10),
 
-    FOREIGN KEY (box_id) REFERENCES box(box_id)
+    FOREIGN KEY (element_box) REFERENCES box(box_id)
 );
 
 CREATE TABLE IF NOT EXISTS label 
 (
     label_id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(20)
+    label_name VARCHAR(25) NOT NULL
 );
 
 /*
