@@ -60,8 +60,8 @@ CREATE TABLE IF NOT EXISTS label
 
 CREATE TABLE IF NOT EXISTS label_using
 {
-    user_id INTEGER,
-    label_id INTEGER,
+    user_id INTEGER NOT NULL,
+    label_id INTEGER NOT NULL,
 
     PRIMARY KEY(user_id,label_id),
     FOREIGN KEY (user_id) REFERENCES user(user_id),
