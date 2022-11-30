@@ -42,6 +42,7 @@ class DatabaseConnexion{
         return $stat->fetch();
     }
 
+    //inutilisé
     public function executedBooleanQuery(string $query, array $options = []){
         $stat = self::preparedQuery($query);
         return $stat->execute($options);;

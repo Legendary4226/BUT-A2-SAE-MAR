@@ -7,6 +7,7 @@
     --color-complementary-2: #FE7F2D;
     --color-text: #020202;
 
+    --color-background-opacity-75: rgba(232, 247, 238, 0.75);
     --color-secondary-opacity-25: rgba(0, 129, 204, 0.25);
     --color-complementary1-opacity-25: rgba(27, 153, 139, 0.25);
 }

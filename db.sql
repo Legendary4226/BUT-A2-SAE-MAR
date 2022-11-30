@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS box
     box_id INTEGER PRIMARY KEY AUTO_INCREMENT,
     box_space INTEGER NOT NULL,
     box_name VARCHAR(20) NOT NULL,
-    box_owner INTEGER NOT NULL,
+    box_owner INTEGER NOT NULL, --besoin si boite € espace et espace € user ?
 
     FOREIGN KEY (box_space) REFERENCES space(space_id),
     FOREIGN KEY (box_owner) REFERENCES users(user_id)
@@ -59,14 +59,14 @@ CREATE TABLE IF NOT EXISTS label
 );
 
 CREATE TABLE IF NOT EXISTS label_using
-{
+(
     user_id INTEGER NOT NULL,
     label_id INTEGER NOT NULL,
 
     PRIMARY KEY(user_id,label_id),
     FOREIGN KEY (user_id) REFERENCES user(user_id),
     FOREIGN KEY (label_id) REFERENCES label(label_id)
-}
+)
 
 /*
 *   Commandes pour intéragir avec la db
@@ -76,19 +76,22 @@ CREATE TABLE IF NOT EXISTS label_using
 SELECT count(*) FROM users WHERE email = ?;
 
 -- Rentrer les informations de l'utilisateur dans la bdd
-INSERT INTO users (email,pseudo,pass) VALUES (?,?,?);
+INSERT INTO users (user_email,user_pseudo,user_pass) VALUES (?,?,?);
 
 -- Changer le mot de passe de l'utilisateur
-UPDATE users SET pass=? WHERE email = ?;
+UPDATE users SET user_pass=? WHERE id = ?;
 
--- Changer le mot de passe de l'utilisateur
-UPDATE users SET pseudo=? WHERE email = ?;
+-- Changer le mot pseudo de l'utilisateur
+UPDATE users SET user_pseudo=? WHERE id = ?;
+
+-- Changer infos utilisateur
+UPDATE users SET user_pass=?, user_pseudo=?, user_pass=? where id = ?;
 
 -- Ajouter un espace
 INSERT INTO space ('name',space_id,'owner') VALUES ('nouvel space',?,?)
 
 -- Changer nom de l'espace
-UPDATE space SET 'name' = ? WHERE email = ?;
+UPDATE space SET 'name' = ? WHERE id = ?;
 
 -- Ajouter boite
 INSERT INTO box (space_id,'owner') VALUES (?,?)

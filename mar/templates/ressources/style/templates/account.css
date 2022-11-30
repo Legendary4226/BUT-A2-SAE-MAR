@@ -58,3 +58,7 @@ form input, select{
 .button-selected {
     background-color: var(--color-secondary-opacity-25);
 }
+
+input::placeholder{
+    color: var(--color-background-opacity-75);
+}
