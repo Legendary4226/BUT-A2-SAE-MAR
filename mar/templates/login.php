@@ -21,7 +21,7 @@ $headerButtonsLinks = array(
 <?php require_once("ressources/header.php"); ?>
 
 <main>
-    <form methode="POST" action="" class="form-login-signin">
+    <form method="POST" action="<?= LINK_LOGIN . "&action=LoggedAccount" ?>" class="form-login-signin">
         <fieldset>
             <span>
                 <label for="email" >Email* :</label>

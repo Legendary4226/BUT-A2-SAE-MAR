@@ -27,22 +27,22 @@ $headerButtonsLinks = array(
     </div>
     <div>
         <div>
-            <form methode="get" action="">
+            <form method="post" action="<?= LINK_ACCOUNT . "&action=modifiedAccount" ?>">
                 <span>
                     <label for="pseudo"> Pseudo:</label>
-                    <input id="pseudo" type="text" name="Actual Pseudo" placeholder="Pseudo">
+                    <input id="pseudo" type="text" name="pseudo" placeholder="Pseudo" value="<?= $accountInfos[0] ?>" maxlength="25" required>
                 </span>
                 <span>
                     <label for="email" > Email:</label>
-                    <input id="email" type="email" name="email" placeholder="Actual Email">
+                    <input id="email" type="email" name="email" placeholder="Email" value="<?= $accountInfos[1] ?>" required>
                 </span>
                 <span>
                     <label for="changepass"> Change Pass: </label>
-                    <input id="changepass" type="password" name="changepass" placeholder="Enter new pass">
+                    <input id="changepass" type="password" name="changepass" placeholder="Enter new pass" minlength="8">
                 </span>
                 <span>
                     <label for="confpass"> Confirm Pass: </label>
-                    <input id="confpass" type="password" name="confpass" placeholder="Confirm new pass">
+                    <input id="confpass" type="password" name="confpass" placeholder="Confirm new pass" minlength="8">
                 </span>
                 <span>
                     <label for="theme" class="test"> Theme: </label>
