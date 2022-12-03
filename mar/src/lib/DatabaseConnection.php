@@ -1,56 +1,63 @@
 <?php
 
+/**
+ * Singleton for the Database containing the PDO instance.
+ * @see DatabaseConnection
+ */
 class Database {
     private static $_instance = null;
 
+    /**
+     * Get the DatabaseConnection object.
+     * @return DatabaseConnection
+     */
     public static function getInstance() {
         if(is_null(self::$_instance)) {
-            self::$_instance = new DatabaseConnexion();  
+            self::$_instance = new DatabaseConnection();  
         }
 
         return self::$_instance;
     }
 
+    /**
+     * Delete the PDO Instance.
+     */
     public static function release(){
         self::$_instance = null;
     }
 }
 
-class DatabaseConnexion{
 
-    private static $_PDO;
+/**
+* DatabaseConnection containing the PDO instance and general methods to make queries to the database.
+* Do not use this Object, prefer using the Database singleton object.
+* @see prepareStatement() Ensure that DatabaseConnection instance is unique.
+*/
+class DatabaseConnection{
+    private $_PDO;
 
     function __construct(){
-        self::$_PDO = new PDO('mysql:host='. BD_HOST .';dbname='. BD_DBNAME .';charset=utf8', BD_USER , BD_PWD );
-        self::$_PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->_PDO = new PDO('mysql:host='. BD_HOST .';dbname='. BD_DBNAME .';charset=utf8', BD_USER , BD_PWD);
+        $this->_PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-    public function preparedQuery(string $query){
-        $stat = self::$_PDO->prepare($query);
-        return $stat;
+    /**
+     * Creates a statement.
+     * @param string $query The SQL query
+     */
+    public function prepareStatement(string $query) {
+        return $this->_PDO->prepare($query);
     }
 
-    public function executedQuery(string $query, array $options = []){
-        $stat = self::preparedQuery($query);
-        $stat->execute($options);
-        return $stat;
-    }
-
-    public function executedSelectArrayQuery(string $query, array $options = []){
-        $stat = self::preparedQuery($query);
-        $stat ->execute($options);
-        return $stat->fetch();
-    }
-
-    public function executedBooleanQuery(string $query, array $options = []){
-        $stat = self::preparedQuery($query);
-        return $stat->execute($options);;
-    }
-
-    public function booleanSelectQuery(string $query, array $options = []){
-        if (sizeof(self::executedSelectArrayQuery($query, $options)) == 0){
-            return true;
-        }
-        return false;
+    /**
+     * Executes a query using a prepared query and return the result.
+     * @param string $query The SQL query
+     * @param array $args Optionnal - Argument(s) passed to the execute function of the statement.
+     * @return PDOStatement|false
+     */
+    public function executeQuery(string $query, array $args = []) {
+        $statement = $this->prepareStatement($query);
+        $statement->execute($args);
+        return $statement;
     }
 }

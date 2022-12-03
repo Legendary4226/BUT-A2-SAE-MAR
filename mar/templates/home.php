@@ -14,8 +14,8 @@
 <body>
 <?php
 $headerButtonsLinks = array(
-    "Sign in" => LINK_SIGNIN,
-    "Log in" => LINK_LOGIN
+    "Sign Up" => LINK_SIGNUP,
+    "Sign In" => LINK_LOGIN
 );
 ?>
 <?php require_once("ressources/header.php"); ?>

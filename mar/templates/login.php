@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sign In</title>
 
     <!-- Global CSS Files -->
     <?php require_once(TEMPLATES . "ressources/css_files.php") ?>
@@ -15,7 +15,7 @@
 <?php
 $headerButtonsLinks = array(
     "Home" => LINK_HOME,
-    "Signin" => LINK_SIGNIN
+    "Sign Up" => LINK_SIGNUP
 );
 ?>
 <?php require_once("ressources/header.php"); ?>

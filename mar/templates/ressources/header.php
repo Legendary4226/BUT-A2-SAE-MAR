@@ -27,7 +27,7 @@
             ob_end_flush();
         }
         else {
-            echo '<a href="index.php?action="><button class="blue-button">Home</button></a>';
+            echo '<a href="index.php"><button class="blue-button">Home</button></a>';
         }
         ?>
     </div>
