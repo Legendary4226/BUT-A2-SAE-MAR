@@ -1,7 +1,10 @@
 <?php
 
-define("IMAGES", $_SERVER["DOCUMENT_ROOT"] . "/" . TEMPLATES . "ressources/images/");
-define("ICON_SVG", IMAGES . "svg-icons/");
+// Client get classic images with the URL
+define("IMAGES", "https://" . $_SERVER["SERVER_NAME"] . "/" . TEMPLATES . "ressources/images/");
+
+// Server require SVG Icons with the local absolute PATH
+define("ICON_SVG", $_SERVER["DOCUMENT_ROOT"] . "/" . TEMPLATES . "ressources/images/" . "svg-icons/");
 
 // Action Buttons
 define("ICON_SVG_CLOSE", ICON_SVG . "close-svg.php");

@@ -13,10 +13,17 @@
 </head>
 <body>
 <?php
-$headerButtonsLinks = array(
-    "Sign Up" => LINK_SIGNUP,
-    "Sign In" => LINK_LOGIN
-);
+if ($_SESSION['user_id'] ?? null == null) {
+    $headerButtonsLinks = array(
+        "Sign Up" => LINK_SIGNUP,
+        "Sign In" => LINK_LOGIN
+    );
+} else {
+    $headerButtonsLinks = array(
+        $_SESSION['user_pseudo'] ?? 'Account' => LINK_ACCOUNT,
+        "Log Out" => LINK_LOGOUT
+    );
+}
 ?>
 <?php require_once("ressources/header.php"); ?>
 
