@@ -21,7 +21,7 @@ $headerButtonsLinks = array(
 <?php require_once("ressources/header.php"); ?>
 
 <main>
-    <form method="POST" action="<?= LINK_LOGIN . "&action=LoggedAccount" ?>" class="form-login-signin">
+    <form method="POST" action="<?= LINK_LOGIN . "&action=connectUser" ?>" class="form-login-signin">
         <fieldset>
             <span>
                 <label for="email" >Email* :</label>
@@ -29,8 +29,8 @@ $headerButtonsLinks = array(
             </span>
             
             <span>
-                <label for="password">Password* :</label>
-                <input id="password" type="password" name="password">
+                <label for="pass">Password* :</label>
+                <input id="pass" type="password" name="pass">
             </span>
         </fieldset>
         

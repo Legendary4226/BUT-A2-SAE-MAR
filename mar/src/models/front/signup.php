@@ -11,6 +11,8 @@ class SignUp {
     public function createAccount(string $email, string $username, string $pass, string $confpass) {
         $db = Database::getInstance();
 
+        // The function return value
+        $accountCreated = false;
 
         $isEmailNotInDatabase = $db->executeQuery(
             "SELECT user_id FROM users WHERE user_email = ?",
@@ -36,8 +38,7 @@ class SignUp {
                     $creationSuccess = $accountCreation->rowCount() == 1;
 
                     if ($creationSuccess) {
-                        // REDIRECT LATER TO BOX PAGE
-                        //header('Location: ' . LINK_BOX);
+                        $accountCreated = true;
                     } else {
                         echo 'La création du compte a échouée.';
                     }
@@ -54,5 +55,6 @@ class SignUp {
         } else {
             echo "Email déjà enregistré.";
         }
+        return $accountCreated;
     }
 }
