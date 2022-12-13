@@ -99,3 +99,13 @@ form select {
     width: 50px;
     height: 50px;
 }
+
+#init-clone
+{
+    display: none;
+}
+
+.init-clone-swich
+{
+    display: flex;
+}

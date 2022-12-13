@@ -45,54 +45,40 @@ $headerButtonsLinks = array(
     <section>
         <form methode="POST" action="" class="form-edit-space-settings">
             <fieldset class="space-name">
-                <label for="space-name" >Space Name :</label>
-                <input id="space-name" type="text" name="space-name" value="One of my Spaces"> 
+                <label for="space-name">Space Name :</label>
+                <input id="space-name" type="text" name="space-name" value="One of my Spaces" maxlength="35" required> 
             </fieldset>
 
             <h1>Share with:</h1>
 
             <fieldset class="space-share">
-                <span>
-                    <input type="text" name="email-1" value="example@email.com">
 
-                    <label for="permission-1"> Permission :</label>
-                    <select name="permission-1" id="permission-1">
-                        <option>Read</option>
-                        <option>Edit</option>
+            <span>
+                    <input type="email" name="520" placeholder="example@email.com" required>
+                    <label for="ID:permission"> Permission :</label>
+                    <select name="ID:permission" id="ID:permission">
+                        <option value="read">Read</option>
+                        <option value="edit">Edit</option>
                     </select>
 
-                    <button class="action-button transition-simple-bump">
+                    <button class="action-button transition-simple-bump" class="delete-button" type="button">
                         <?php require(ICON_SVG_CLOSE) ?>
                     </button>
                 </span>
 
-                <span>
-                    <input type="text" name="email-2" value="example@email.com">
-
-                    <label for="permission-2"> Permission :</label>
-                    <select name="permission-2" id="permission-2">
-                        <option>Read</option>
-                        <option>Edit</option>
+                <span id="init-clone">
+                    <input type="email" name="ID" placeholder="example@email.com" required>
+                    <label for="ID:permission"> Permission :</label>
+                    <select name="ID:permission" id="ID:permission">
+                        <option value="read">Read</option>
+                        <option value="edit">Edit</option>
                     </select>
 
-                    <button class="action-button transition-simple-bump">
+                    <button class="action-button transition-simple-bump" class="delete-button" type="button">
                         <?php require(ICON_SVG_CLOSE) ?>
                     </button>
                 </span>
-
-                <span>
-                    <input type="text" name="email-3" value="example@email.com">
-
-                    <label for="permission-3"> Permission :</label>
-                    <select name="permission-3" id="permission-3">
-                        <option>Read</option>
-                        <option>Edit</option>
-                    </select>
-
-                    <button class="action-button transition-simple-bump">
-                        <?php require(ICON_SVG_CLOSE) ?>
-                    </button>
-                </span>
+                
             </fieldset>
 
             <fieldset>
@@ -102,18 +88,11 @@ $headerButtonsLinks = array(
             </fieldset>
         </form>
 
-        <form method="POST" action="">
+        <form id="add-user-form">
             <fieldset class="space-share">
                     <span>
-                        <input class="input-add-people-email" type="text" placeholder="Add a new person">
-
-                        <label for="add-email"> Permission :</label>
-                        <select name="add-email" id="add-email">
-                            <option>Read</option>
-                            <option>Edit</option>
-                        </select>
-
-                        <button class="action-button transition-simple-bump" id="add-shared-people">
+                        <input class="input-add-people-email" type="email" id="new-person" placeholder="example@email.com" maxlength="35">
+                        <button class="action-button transition-simple-bump">
                             <?php require_once(ICON_SVG_PLUS) ?>
                         </button>
                     </span>
@@ -123,5 +102,6 @@ $headerButtonsLinks = array(
 </main>
 
 <?php require_once("ressources/footer.php"); ?>
+<script src="<?= TEMPLATES ?>ressources/JS/space.js"></script>
 </body>
 </html>
