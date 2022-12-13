@@ -2,8 +2,8 @@
 
 session_start();
 
-if (!isset($_COOKIE['user_id'])) {
-    $_COOKIE['user_id'] = null;
+if (!isset($_SESSION['user_id'])) {
+    $_SESSION['user_id'] = null;
 }
 
 require_once("configuration/paths.php");
@@ -14,9 +14,9 @@ require_once("configuration/database.php");
 require_once(LIB . "DatabaseConnection.php");
 
 
-$isPageExisting = !empty($_GET["page"]) && is_readable(CONTROLLERS . $_GET["page"] . ".php");
+$isControllerExists = !empty($_GET["page"]) && is_readable(CONTROLLERS . $_GET["page"] . ".php");
 
-if ($isPageExisting) {
+if ($isControllerExists) {
     try {
 
         $isPageRequiresLoggedIn = preg_match('/^front\//', $_GET["page"]) != 1;

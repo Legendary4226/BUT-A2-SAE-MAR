@@ -13,15 +13,16 @@
 </head>
 <body>
 <?php
-if ($_SESSION['user_id'] ?? null == null) {
+
+if ($_SESSION['user_id'] == null) {
     $headerButtonsLinks = array(
-        "Sign Up" => LINK_SIGNUP,
-        "Sign In" => LINK_LOGIN
+        'Sign Up' => LINK_CONNECTION_SIGNUP,
+        'Sign In' => LINK_CONNECTION_SIGNIN
     );
 } else {
     $headerButtonsLinks = array(
-        $_SESSION['user_pseudo'] ?? 'Account' => LINK_ACCOUNT,
-        "Log Out" => LINK_LOGOUT
+        'Account' => LINK_ACCOUNT,
+        'Log Out' => LINK_CONNECTION_LOGOUT
     );
 }
 ?>

@@ -6,15 +6,15 @@ USE todolist;
 CREATE TABLE IF NOT EXISTS users
 (
     user_id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    user_email VARCHAR(50) NOT NULL,
-    user_pseudo VARCHAR(25) NOT NULL,
+    user_email VARCHAR(50) UNIQUE NOT NULL,
+    user_name VARCHAR(25) NOT NULL,
     user_pass VARCHAR(65) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS space
 (
     space_id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    space_name VARCHAR(20) NOT NULL,
+    space_name VARCHAR(35) NOT NULL,
     space_owner INTEGER NOT NULL,
 
     FOREIGN KEY (space_owner) REFERENCES users(user_id)
@@ -76,16 +76,16 @@ CREATE TABLE IF NOT EXISTS label_using
 SELECT count(*) FROM users WHERE email = ?;
 
 -- Rentrer les informations de l'utilisateur dans la bdd
-INSERT INTO users (user_email,user_pseudo,user_pass) VALUES (?,?,?);
+INSERT INTO users (user_email,user_name,user_pass) VALUES (?,?,?);
 
 -- Changer le mot de passe de l'utilisateur
 UPDATE users SET user_pass=? WHERE id = ?;
 
 -- Changer le mot pseudo de l'utilisateur
-UPDATE users SET user_pseudo=? WHERE id = ?;
+UPDATE users SET user_name=? WHERE id = ?;
 
 -- Changer infos utilisateur
-UPDATE users SET user_pass=?, user_pseudo=?, user_pass=? where id = ?;
+UPDATE users SET user_pass=?, user_name=?, user_pass=? where id = ?;
 
 -- Ajouter un espace
 INSERT INTO space ('name',space_id,'owner') VALUES ('nouvel space',?,?)

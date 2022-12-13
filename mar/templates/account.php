@@ -14,7 +14,7 @@
 <body>
 <?php
 $headerButtonsLinks = array(
-    "Log out" => LINK_LOGOUT
+    "Log out" => LINK_CONNECTION_LOGOUT
 );
 ?>
 <?php require_once("ressources/header.php"); ?>
@@ -22,19 +22,19 @@ $headerButtonsLinks = array(
 <main>
     
     <div>
-        <button class="button-selected">Profile and Settings</button>
-        <button>Share my spaces</button>
+        <a href="<?= LINK_ACCOUNT ?>"><button class="button-selected">Profile and Settings</button></a>
+        <a href="<?= LINK_SPACE_SETTINGS ?>"><button>Share my spaces</button></a>
     </div>
     <div>
         <div>
-            <form method="post" action="<?= LINK_ACCOUNT . "&action=modifiedAccount" ?>">
+            <form method="post" action="<?= LINK_ACCOUNT . "&action=modifyAccount" ?>">
                 <span>
                     <label for="pseudo"> Pseudo:</label>
-                    <input id="pseudo" type="text" name="pseudo" placeholder="Pseudo" value="<?= $accountInfos[0] ?>" maxlength="25" required>
+                    <input id="name" type="text" name="name" placeholder="Pseudo" value="<?= $_SESSION['user_name'] ?>" maxlength="25" required>
                 </span>
                 <span>
                     <label for="email" > Email:</label>
-                    <input id="email" type="email" name="email" placeholder="Email" value="<?= $accountInfos[1] ?>" required>
+                    <input id="email" type="email" name="email" placeholder="Email" value="<?= $_SESSION['user_email'] ?>" required>
                 </span>
                 <span>
                     <label for="changepass"> Change Pass: </label>
@@ -43,13 +43,6 @@ $headerButtonsLinks = array(
                 <span>
                     <label for="confpass"> Confirm Pass: </label>
                     <input id="confpass" type="password" name="confpass" placeholder="Confirm new pass" minlength="8">
-                </span>
-                <span>
-                    <label for="theme" class="test"> Theme: </label>
-                    <select name="theme" class="theme">
-                        <option>Default-White</option>
-                        <option>Dark</option>
-                    </select>
                 </span>
                 <input type="submit" value="Save" class="save">
             </form>

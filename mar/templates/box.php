@@ -19,7 +19,7 @@ $ENABLE_LEFT_BOX_MENU = true;
 <?php
 $headerButtonsLinks = array(
     "Account" => LINK_ACCOUNT,
-    "Log out" => LINK_LOGOUT
+    "Log out" => LINK_CONNECTION_LOGOUT
 );
 ?>
 <?php require_once("ressources/header.php"); ?>

@@ -15,13 +15,13 @@
 <?php
 $headerButtonsLinks = array(
     "Home" => LINK_HOME,
-    "Sign In" => LINK_LOGIN
+    "Sign In" => LINK_CONNECTION_SIGNIN
 );
 ?>
 <?php require_once("ressources/header.php"); ?>
 
 <main>
-    <form method="POST" action="<?= LINK_SIGNUP . "&action=createAccount" ?>" class="form-login-signin">
+    <form method="POST" action="<?= LINK_CONNECTION_SIGNUP ?>" class="form-login-signin">
         <fieldset>
             <span>
                 <label for="email" > Email* :</label>
