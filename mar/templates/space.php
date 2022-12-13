@@ -24,7 +24,7 @@
                 <i></i>
                 <button class="button-selected">Share my spaces</button>
             </span>
-            
+
         </section>
 
         <section class="panel secondary">
@@ -43,8 +43,8 @@
         <section>
             <form methode="POST" action="" class="form-edit-space-settings">
                 <fieldset class="space-name">
-                    <label for="space-name" >Space Name :</label>
-                    <input id="space-name" type="text" name="space-name" value="One of my Spaces"> 
+                    <label for="space-name">Space Name :</label>
+                    <input id="space-name" type="text" name="space-name" value="One of my Spaces" disabled> 
                 </fieldset>
 
                 <h1>Share with:</h1>
@@ -91,6 +91,19 @@
                             <?php require(ICON_SVG_CLOSE) ?>
                         </button>
                     </span>
+
+                    <span class="init_clone">
+                        <input type="text" name="email-1" value="example@email.com">
+                        <label for="permission-1"> Permission :</label>
+                        <select name="permission-1" id="permission-1">
+                            <option>Read</option>
+                            <option>Edit</option>
+                        </select>
+
+                        <button class="action-button transition-simple-bump">
+                            <?php require(ICON_SVG_CLOSE) ?>
+                        </button>
+                    </span>
                 </fieldset>
 
                 <fieldset>
@@ -103,7 +116,7 @@
             <form method="POST" action="">
                 <fieldset class="space-share">
                         <span>
-                            <input class="input-add-people-email" type="text" placeholder="Add a new person">
+                            <input class="input-add-people-email" type="text" id="new_person" placeholder="Add a new person">
 
                             <label for="add-email"> Permission :</label>
                             <select name="add-email" id="add-email">
@@ -121,5 +134,6 @@
     </main>
 
     <?php require_once("ressources/footer.php"); ?>
+    <script src="space.js"></script>
 </body>
 </html>
