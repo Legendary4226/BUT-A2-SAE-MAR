@@ -129,9 +129,5 @@ form select {
 #init-clone
 {
     display: none;
-}
-
-.init-clone-swich
-{
-    display: flex;
+    visibility: hidden;
 }
