@@ -20,12 +20,17 @@ $headerButtonsLinks = array(
 <?php require_once("ressources/header.php"); ?>
 
 <main>
-    
-    <div>
-        <a href="<?= LINK_ACCOUNT ?>"><button class="button-selected">Profile and Settings</button></a>
-        <a href="<?= LINK_SPACE_SETTINGS ?>"><button>Share my spaces</button></a>
-    </div>
-    <div>
+
+    <section class="panel">
+        <a href="#">
+            <button class="button-selected">Profile and Settings</button>
+        </a>
+        <a href="<?= LINK_SPACE_SETTINGS ?>">
+            <button>Share my spaces</button>
+        </a>
+    </section>
+
+    <section>
         <div>
             <form method="post" action="<?= LINK_ACCOUNT . "&action=modifyAccount" ?>">
                 <span>
@@ -50,7 +55,7 @@ $headerButtonsLinks = array(
         <div>
             <img src="">
         </div>
-    </div>
+    </section>
 
 </main>
 

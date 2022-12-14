@@ -69,6 +69,13 @@ CREATE TABLE IF NOT EXISTS label_using
 )
 
 /*
+*   Optimisations (à déterminer en fonction des requêtes)
+*/
+
+-- CREATE INDEX...
+
+
+/*
 *   Commandes pour intéragir avec la db
 */
 

@@ -12,6 +12,7 @@ require_once("configuration/links.php");
 require_once("configuration/database.php");
 
 require_once(LIB . "DatabaseConnection.php");
+require_once(LIB . "ThrowError.php");
 
 
 $isControllerExists = !empty($_GET["page"]) && is_readable(CONTROLLERS . $_GET["page"] . ".php");

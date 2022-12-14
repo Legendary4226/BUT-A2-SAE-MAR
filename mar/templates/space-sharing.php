@@ -9,6 +9,7 @@
     <?php require_once(TEMPLATES . "ressources/css_files.php") ?>
 
     <!-- Specific CSS Files -->
+    <link rel="stylesheet" href="<?= STYLES ?>templates/account.css">
     <link rel="stylesheet" href="<?= STYLES ?>templates/space.css">
 </head>
 <body>
@@ -16,26 +17,25 @@
 
     <main>
         <section class="panel">
-            <span>
+            <a href="<?= LINK_ACCOUNT ?>">
                 <i></i>
                 <button>Profile and Settings</button>
-            </span>
-            <span>
+            </a>
+            <a href="#">
                 <i></i>
                 <button class="button-selected">Share my spaces</button>
-            </span>
-            
+            </a>
         </section>
 
         <section class="panel secondary">
-            <span>
+            <a href="#">
                 <i></i>
                 <button class="button-selected">One of my Spaces</button>
-            </span>
-            <span>
+            </a>
+            <a href="#">
                 <i></i>
                 <button>Another Space</button>
-            </span>
+            </a>
             
             
         </section>

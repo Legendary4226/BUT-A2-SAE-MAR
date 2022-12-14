@@ -1,5 +1,5 @@
 <?php
 
-require_once(MODELS . "spaces/box.php");
+$enableLeftBoxMenu = true;
 
 require_once(TEMPLATES . "box.php");

@@ -28,11 +28,19 @@ if ($action == "signin") {
                 $_SESSION['user_name'] = $user->getUserName();
                 $_SESSION['user_pass'] = $user->getUserPass();
             } else {
-                echo "Le mot de passe n'est pas valide";
+                ThrowError::redirect(
+                    "Mot de passe",
+                    "Le mot de passe n'est pas valide.",
+                    LINK_CONNECTION_SIGNIN
+                );
             } 
             
         } else {
-            echo "Le compte n'existe pas";
+            ThrowError::redirect(
+                "Compte inexistant",
+                "Le compte associé à l'email n'existe pas.",
+                LINK_CONNECTION_SIGNIN
+            );
         }
     } else {
         //echo 'Please fill in the fields';
@@ -66,17 +74,33 @@ if ($action == "signup") {
                         // TODO Next steps to create the space etc.
                         header("Location: " . LINK_HOME);
                     } else {
-                        echo "La création a échoué";
+                        ThrowError::redirect(
+                            "Echec de la création",
+                            "Une erreur avec la base de données nous empêche de créer votre compte, pas de bol.",
+                            LINK_CONNECTION_SIGNUP
+                        );
                     }
 
                 } else {
-                    echo "Email déjà enregistré.";
+                    ThrowError::redirect(
+                        "Email déjà enregistré",
+                        "L'email donné est déjà associé à un compte.",
+                        LINK_CONNECTION_SIGNUP
+                    );
                 }
             } else {
-                echo 'Mot de passes différents ou de moins de 8 caractères.';
+                ThrowError::redirect(
+                    "Sécurité",
+                    "Les mots de passes sont différents ou ont moins de 8 caractères.",
+                    LINK_CONNECTION_SIGNUP
+                );
             }
         } else {
-            echo 'Username with more than 25 characters.';
+            ThrowError::redirect(
+                "Nom d'utilisateur",
+                "Votre nom d'utilisateur fait plus de 25 caractères.",
+                LINK_CONNECTION_SIGNUP
+            );
         }
     } else {
         //echo 'Please fill in the fields';

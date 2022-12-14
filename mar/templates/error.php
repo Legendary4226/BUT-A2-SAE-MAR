@@ -21,11 +21,17 @@ $headerButtonsLinks = array(
 <?php require_once("ressources/header.php"); ?>
 
 <main>
-    <h1 class="error-title"><?= (!empty($errorTitle)) ? $errorTitle : "Error" ?></h1>
+    <h1 class="error-title"><?= (!empty($_GET['title'])) ? $_GET['title'] : "Error" ?></h1>
 
     <div class="error-box">
-        <p class="error-message"><?= (!empty($error)) ? $error : "Unknown error" ?></p>
+        <p class="error-message"><?= (!empty($_GET['message'])) ? $_GET['message'] : "Unknown error" ?></p>
     </div>
+
+    <a href="<?= (!empty($_GET['return'])) ? $_GET['return'] : LINK_HOME ?>">
+        <button class="blue-button transition-simple-bump">
+            Go Back
+        </button>
+    </a>
 </main>
 
 <?php require_once("ressources/footer.php"); ?>

@@ -13,21 +13,27 @@ if (!empty($_GET['action'])) {
 
 if ($action == 'modifyAccount'){
 
+    $atLeastOneModified = false;
     $updateUser = new User($_SESSION['user_id'], $_SESSION['user_email'], $_SESSION['user_name'], $_SESSION['user_pass']);
 
-    if (!empty($_POST['name'])) {
-        
+    if (!empty($_POST['name'] && $_POST['name'] != $_SESSION['user_name'])) {
         if (strlen($_POST['name']) <= 25) {
             $_SESSION['user_name'] = htmlspecialchars($_POST['name']);
             $updateUser->setUserName($_SESSION['user_name']);
+            $atLeastOneModified = true;
         } else {
-            echo "Le nom d'utilisateur a plus de 25 caractères.";
+            ThrowError::redirect(
+                "Nom d'utilisateur",
+                "Votre nom d'utilisateur fait plus de 25 caractères.",
+                LINK_ACCOUNT
+            );
         }
     }
 
-    if (!empty($_POST['email'])) {
+    if (!empty($_POST['email']) && $_POST['email'] != $_SESSION['user_email']) {
         $_SESSION['user_email'] = htmlspecialchars($_POST['email']);
         $updateUser->setUserEmail($_SESSION['user_email']);
+        $atLeastOneModified = true;
     }
 
     if (!empty($_POST['changepass']) && !empty($_POST['confpass'])) {
@@ -35,13 +41,19 @@ if ($action == 'modifyAccount'){
         if (strlen($_POST['changepass']) >= 8 && $_POST['changepass'] == $_POST['confpass']) {
             $_SESSION['user_pass'] = password_hash($_POST['changepass'], PASSWORD_BCRYPT);
             $updateUser->setUserPass($_SESSION['user_pass']);
-
+            $atLeastOneModified = true;
         } else {
-            echo "Les mot de passe sont différent ou ont moins de 8 caractères.";
+            ThrowError::redirect(
+                "Sécurité",
+                "Les mots de passes sont différents ou ont moins de 8 caractères.",
+                LINK_ACCOUNT
+            );
         }
     }
 
-    $userPDO->updateUser($updateUser);
+    if ($atLeastOneModified) {
+        $userPDO->updateUser($updateUser);
+    }
 }
 
 require_once(TEMPLATES . $viewToRequire);

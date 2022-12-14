@@ -1,3 +1,3 @@
 <?php
 
-require_once(TEMPLATES . "space.php");
+require_once(TEMPLATES . "space-sharing.php");
