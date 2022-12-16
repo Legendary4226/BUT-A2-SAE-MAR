@@ -2,7 +2,7 @@
 
 require_once(MODELS . "User.php");
 
-$userPDO = new UserPDO();
+$userDAO = new UserDAO();
 
 $action = null;
 $viewToRequire = "signin";
@@ -17,7 +17,7 @@ if ($action == "signin") {
     // Check $_POST values
     if (!empty($_POST['email']) && !empty($_POST['pass'])) {
 
-        $user = $userPDO->getUserByEmail($_POST['email']);
+        $user = $userDAO->getUserByEmail($_POST['email']);
         if ($user != null) {
             
             $validPass = password_verify($_POST['pass'], $user->getUserPass());
@@ -27,6 +27,8 @@ if ($action == "signin") {
                 $_SESSION['user_email'] = $user->getUserEmail();
                 $_SESSION['user_name'] = $user->getUserName();
                 $_SESSION['user_pass'] = $user->getUserPass();
+
+                header("Location: " . LINK_HOME);
             } else {
                 ThrowError::redirect(
                     "Mot de passe",
@@ -66,13 +68,12 @@ if ($action == "signup") {
                     password_hash($_POST['pass'], PASSWORD_BCRYPT)
                 );
 
-                $isEmailNotInDatabase = $userPDO->getUserByEmail($newUser->getUserEmail()) == null;
+                $isEmailNotInDatabase = $userDAO->getUserByEmail($newUser->getUserEmail()) == null;
                 if ($isEmailNotInDatabase) {
 
-                    $accountCreated = $userPDO->createUser($newUser);
+                    $accountCreated = $userDAO->createUser($newUser);
                     if ($accountCreated) {
-                        // TODO Next steps to create the space etc.
-                        header("Location: " . LINK_HOME);
+                        header("Location: " . LINK_CONNECTION_SIGNIN);
                     } else {
                         ThrowError::redirect(
                             "Echec de la création",

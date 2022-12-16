@@ -42,7 +42,7 @@ class User {
 
 
 
-class UserPDO {
+class UserDAO {
     private DatabaseConnection $db;
 
     public function __construct()

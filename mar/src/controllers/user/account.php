@@ -2,16 +2,17 @@
 
 require_once(MODELS . "User.php");
 
-$userPDO = new UserPDO();
+$userDAO = new UserDAO();
 
 $action = null;
-$viewToRequire = "account.php";
+$viewToRequire = "account";
 
 if (!empty($_GET['action'])) {
     $action = $_GET['action'];
 }
 
 if ($action == 'modifyAccount'){
+    $viewToRequire = "account";
 
     $atLeastOneModified = false;
     $updateUser = new User($_SESSION['user_id'], $_SESSION['user_email'], $_SESSION['user_name'], $_SESSION['user_pass']);
@@ -52,8 +53,13 @@ if ($action == 'modifyAccount'){
     }
 
     if ($atLeastOneModified) {
-        $userPDO->updateUser($updateUser);
+        $userDAO->updateUser($updateUser);
     }
 }
 
-require_once(TEMPLATES . $viewToRequire);
+if ($action == "shareSpace") {
+    $viewToRequire = "space-sharing";
+}
+
+
+require_once(TEMPLATES . $viewToRequire . ".php");

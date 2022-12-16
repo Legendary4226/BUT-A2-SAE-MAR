@@ -14,6 +14,7 @@
 <body>
 <?php
 $headerButtonsLinks = array(
+    "Spaces" => LINK_SPACE,
     "Log out" => LINK_CONNECTION_LOGOUT
 );
 ?>
@@ -25,7 +26,7 @@ $headerButtonsLinks = array(
         <a href="#">
             <button class="button-selected">Profile and Settings</button>
         </a>
-        <a href="<?= LINK_SPACE_SETTINGS ?>">
+        <a href="<?= LINK_ACCOUNT_SPACE_SETTINGS ?>">
             <button>Share my spaces</button>
         </a>
     </section>
