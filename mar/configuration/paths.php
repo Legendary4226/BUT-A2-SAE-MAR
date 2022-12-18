@@ -7,3 +7,4 @@ define("MODELS", "src/models/");
 define("TEMPLATES", "templates/");
 
 define("STYLES", TEMPLATES . "ressources/style/");
+define("JAVASCRIPT", TEMPLATES . "ressources/javascript/");

@@ -12,6 +12,7 @@ define("ICON_SVG_PLUS", ICON_SVG . "plus-svg.php");
 define("ICON_SVG_SAVE", ICON_SVG . "save-svg.php");
 define("ICON_SVG_MENU", ICON_SVG . "menu-svg.php");
 define("ICON_SVG_SHARE", ICON_SVG . "share-svg.php");
+define("ICON_SVG_TRASH_CAN", ICON_SVG . "trash-can-svg.php");
 
 // Box Icons
 define("ICON_SVG_BOX_BOX", ICON_SVG . "box-box-svg.php");

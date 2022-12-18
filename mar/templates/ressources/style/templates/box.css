@@ -6,6 +6,9 @@ body > main {
     justify-content: flex-start;
 }
 
+.svg-icon-trash-can path {
+    fill: var(--color-complementary-2);
+}
 
 
 /*
@@ -14,19 +17,102 @@ body > main {
 
 .left-box-menu {
     width: 15rem;
-    height: calc(100% - 16rem);
+    height: calc(100% - 14rem);
+    padding: 1rem;
 
     position: fixed;
-    top: 8rem;
+    top: 6rem;
     /* Hidden by default */
-    left: calc(100% + 15rem); 
+    right: 100%;
+
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+
+    box-shadow: 0px 0px 7px 1px var(--color-secondary);
+    border-radius: 15px;
+
+    transition: 300ms cubic-bezier(.77,.24,.86,.79) transform;
 }
 
 .left-box-menu.show {
-    left: 1rem;
+    transform: translateX(calc(100% + 1rem));
 }
 
+.left-box-menu .svg-icon-trash-can {
+    transform: scale(0.8);
+    opacity: 0;
 
+    transition: 200ms ease opacity;
+}
+
+.left-box-menu > button {
+    width: 100%;
+    height: 2.8rem;
+    padding-left: .3rem;
+
+    justify-self: center;
+
+    display: grid;
+    grid-template-columns: auto 1fr;
+    justify-items: center;
+    align-items: center;
+
+    border: 2px solid var(--color-text);
+    border-radius: 10px;
+}
+
+.left-box-menu > button path {
+    fill: var(--color-text);
+}
+
+#select-space {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: .5rem;
+
+    background: none;
+    border: none;
+    border-bottom: 2px solid var(--color-secondary-opacity-25);
+
+    font-size: 1.5em;
+}
+
+.form-boxs a {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    justify-items: center;
+
+    padding: .3rem;
+    margin-bottom: .5rem;
+
+    border-radius: 10px;
+
+    transition: 250ms ease-in-out background-color;
+}
+
+.form-boxs a:hover {
+    background-color: var(--color-secondary-opacity-25);
+}
+
+.form-boxs a.selected {
+    background-color: var(--color-secondary-opacity-25);
+}
+
+.form-boxs a:hover .svg-icon-trash-can {
+    opacity: 1;
+}
+
+.form-boxs a input {
+    width: 8rem;
+
+    border: none;
+    border-radius: 10px;
+    background: none;
+
+    text-align: center;
+    cursor: text;
+    overflow-x: visible;
+}
 
 /*
     Box title, content and save button

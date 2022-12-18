@@ -1,7 +1,7 @@
 <header>
     <?php
     if (isset($enableLeftBoxMenu)) {
-        echo "<div class='header-left-box-menu'>";
+        echo "<div class='header-left-box-menu' id='left-box-button'>";
         require(ICON_SVG_MENU);
         echo "</div>";
     }

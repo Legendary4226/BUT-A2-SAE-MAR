@@ -11,3 +11,23 @@
 
     transform: scale(1.5);
 }
+
+.transition-simple-grow:hover {
+    transition-timing-function: ease-in-out;
+    transition-duration: 250ms;
+
+    transform: scale(1.2);
+}
+
+@keyframes simple-jump {
+    50% {
+        transform: translateY(-1rem);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.transition-simple-jump:hover {
+    animation: 400ms simple-jump ease-in-out;
+}

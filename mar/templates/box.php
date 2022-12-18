@@ -24,38 +24,46 @@ $headerButtonsLinks = array(
 ?>
 <?php require_once("ressources/header.php"); ?>
 
-<menu class="left-box-menu">
+<menu class="left-box-menu" id="left-box-menu">
     <form action="" method="POST" class="form-choose-space">
-        <select name="" id="select-space">
-            <option value="">One of my spaces</option>
-            <option value="">Another Space</option>
+        <select name="space-id" id="select-space">
+            <option value="ID">One of my spaces</option>
+            <option value="ID">Another Space</option>
         </select>
     </form>
     
     <form action="" method="POST" class="form-boxs">
-        <span>
+        <a href="#" class="selected">
             <?php require(ICON_SVG_BOX_BOX) ?>
             <input type="text" value="Box 1">
-        </span>
-        <span>
+            <?php require(ICON_SVG_TRASH_CAN) ?>
+        </a>
+        <a href="#">
             <?php require(ICON_SVG_BOX_LEAF) ?>
             <input type="text" value="Box 2">
-        </span>
-        <span>
+            <?php require(ICON_SVG_TRASH_CAN) ?>
+        </a>
+        <a href="#">
             <?php require(ICON_SVG_BOX_BOX) ?>
             <input type="text" value="Box 3">
-        </span>
-        <span>
+            <?php require(ICON_SVG_TRASH_CAN) ?>
+        </a>
+        <a href="#">
             <?php require(ICON_SVG_BOX_ROPE_KNOT) ?>
             <input type="text" value="Box 4">
-        </span>
-        <span>
+            <?php require(ICON_SVG_TRASH_CAN) ?>
+        </a>
+        <a href="#">
             <?php require(ICON_SVG_BOX_BOX) ?>
             <input type="text" value="Box Title">
-        </span>
+            <?php require(ICON_SVG_TRASH_CAN) ?>
+        </a>
     </form>
 
-    <button>Add Box</button>
+    <button class="empty-button transition-simple-jump">
+        <?php require(ICON_SVG_PLUS) ?>
+        Add Box
+    </button>
 </menu>
 
 <main>
@@ -112,5 +120,7 @@ $headerButtonsLinks = array(
 </section>
 
 <?php require_once("ressources/footer.php"); ?>
+
+<script src="<?= JAVASCRIPT ?>box.js"></script>
 </body>
 </html>
