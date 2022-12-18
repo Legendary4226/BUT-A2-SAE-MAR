@@ -36,10 +36,8 @@ CREATE TABLE IF NOT EXISTS box
     box_id INTEGER PRIMARY KEY AUTO_INCREMENT,
     box_space INTEGER NOT NULL,
     box_name VARCHAR(20) NOT NULL,
-    box_owner INTEGER NOT NULL, --besoin si boite € espace et espace € user ?
 
     FOREIGN KEY (box_space) REFERENCES space(space_id),
-    FOREIGN KEY (box_owner) REFERENCES users(user_id)
 );
 
 CREATE TABLE IF NOT EXISTS element

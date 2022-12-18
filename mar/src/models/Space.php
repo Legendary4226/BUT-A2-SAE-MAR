@@ -58,4 +58,55 @@ class SpaceDAO {
 
         return $result != false;
     }
+
+    /**
+     * Get an array with all Spaces of the user.
+     * @param string $user_id
+     * @return array Containing Spaces of the user associating space_id => Space.
+     */
+    public function getSpaces(string $user_id)
+    {
+        $result = $this->db->executeQuery(
+            "SELECT * FROM space WHERE space_owner = ?",
+            array(
+                $user_id
+            )
+        )->fetchAll();
+
+        $spaces = array();
+        foreach($result as $space) {
+            $spaces[$space[0]] = new Space(
+                $space[0],
+                $space[1],
+                $space[2]
+            );
+        }
+
+        return $spaces;
+    }
+
+    /**
+     * Get a Space.
+     * @param string $space_id
+     * @return Space return space corresponding of $space_id
+     */
+    public function getSpace(string $space_id)
+    {
+        $result = $this->db->executeQuery(
+            "SELECT * FROM space WHERE space_id = ?",
+            array(
+                $space_id
+            )
+        )->fetch();
+
+        if ($result != false) {
+            $result = new Space(
+                $result[0],
+                $result[1],
+                $result[2]
+            );
+        }
+
+        return $result;
+    }
 }
