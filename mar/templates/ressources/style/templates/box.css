@@ -26,10 +26,12 @@ body > main {
     right: 100%;
 
     display: grid;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto 1fr auto auto;
+    gap: 1rem;
 
     box-shadow: 0px 0px 7px 1px var(--color-secondary);
     border-radius: 15px;
+    background-color: var(--color-background);
 
     transition: 300ms cubic-bezier(.77,.24,.86,.79) transform;
 }
@@ -67,7 +69,6 @@ body > main {
 
 #select-space {
     width: 100%;
-    margin-bottom: 1rem;
     padding: .5rem;
 
     background: none;
@@ -75,6 +76,20 @@ body > main {
     border-bottom: 2px solid var(--color-secondary-opacity-25);
 
     font-size: 1.5em;
+}
+
+#save-boxs-change {
+    display: flex;
+    justify-content: center;
+}
+
+#add-box-clone {
+    display: none;
+    visibility: hidden;
+}
+
+.form-boxs {
+    overflow-y: auto;
 }
 
 .form-boxs a {
@@ -98,12 +113,17 @@ body > main {
     background-color: var(--color-secondary-opacity-25);
 }
 
+.form-boxs a.deleted {
+    display: none;
+    visibility: hidden;
+}
+
 .form-boxs a:hover .svg-icon-trash-can {
     opacity: 1;
 }
 
 .form-boxs a input {
-    width: 8rem;
+    width: 8.1rem;
 
     border: none;
     border-radius: 10px;
@@ -111,7 +131,6 @@ body > main {
 
     text-align: center;
     cursor: text;
-    overflow-x: visible;
 }
 
 /*

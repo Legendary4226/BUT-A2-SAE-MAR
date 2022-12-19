@@ -13,6 +13,20 @@ selectSpace.addEventListener("change", () => {
 })
 
 
+/* Add Box */
+let formBoxs = document.getElementsByClassName("form-boxs")[0]
+let submitBoxsChange = document.getElementById("submit-boxs-change")
+let addBoxClone = document.getElementById("add-box-clone").cloneNode(true)
+addBoxClone.removeAttribute("id")
+let newBoxsId = -1
+
+document.getElementById("add-box").addEventListener("click", () => {
+    addBoxClone.querySelector("input").name = newBoxsId
+    newBoxsId--
+    formBoxs.appendChild(addBoxClone.cloneNode(true))
+})
+
+
 /* Cancel <a> click event on <input> of Boxs */
 let selectBoxForm = document.getElementsByClassName("form-boxs")[0]
 selectBoxForm.addEventListener("click", (event) => {
@@ -24,14 +38,34 @@ selectBoxForm.addEventListener("click", (event) => {
         }
     }
 
-    if (event.target.nodeName == "svg") {
+
+    /* Delete Box */
+    let trash = false
+    let aParent = null
+    if (event.target.nodeName == "svg" && event.target.classList.contains("svg-icon-trash-can")) {
         event.preventDefault()
-        
-        // TODO DELETE ELEMENT
+        aParent = event.target.parentElement
+        trash = true
+    }
+    if (event.target.nodeName == "path" && event.target.parentElement.classList.contains("svg-icon-trash-can")) {
+        event.preventDefault()
+        aParent = event.target.parentElement.parentElement
+        trash = true
+    }
+
+    if (trash) {
+        aParent.classList.toggle("deleted")
+        if (aParent.querySelector("input").name < 0) {
+            aParent.remove()
+        } else {
+            aParent.querySelector("input").name += "-deleted"
+        }
     }
 })
 
 
-/* Add Box */
-
+/* Save boxs change */
+document.getElementById("save-boxs-change").addEventListener("click", () => {
+    submitBoxsChange.dispatchEvent(new MouseEvent("click"))
+})
 

@@ -27,40 +27,43 @@ $headerButtonsLinks = array(
 <menu class="left-box-menu" id="left-box-menu">
     <form action="" method="POST" class="form-choose-space">
         <select name="space-id" id="select-space">
-            <option value="ID">One of my spaces</option>
-            <option value="ID">Another Space</option>
+            <option name="SPACE_ID">One of my spaces</option>
+            <option name="SPACE_ID">Another Space</option>
         </select>
     </form>
     
     <form action="" method="POST" class="form-boxs">
+        <!-- Hidden input used to submit form with JS -->
+        <input id="submit-boxs-change" type="submit" style="display: none; visibility: hidden;">
+
+
+        <a href="#" id="add-box-clone">
+            <?php require(ICON_SVG_BOX_BOX) ?>
+            <input type="text" value="New Box" maxlength="20" required>
+            <?php require(ICON_SVG_TRASH_CAN) ?>
+        </a>
+
+        
         <a href="#" class="selected">
             <?php require(ICON_SVG_BOX_BOX) ?>
-            <input type="text" value="Box 1">
-            <?php require(ICON_SVG_TRASH_CAN) ?>
-        </a>
-        <a href="#">
-            <?php require(ICON_SVG_BOX_LEAF) ?>
-            <input type="text" value="Box 2">
+            <input type="text" value="Box 1" name="2" maxlength="20" required>
             <?php require(ICON_SVG_TRASH_CAN) ?>
         </a>
         <a href="#">
             <?php require(ICON_SVG_BOX_BOX) ?>
-            <input type="text" value="Box 3">
-            <?php require(ICON_SVG_TRASH_CAN) ?>
-        </a>
-        <a href="#">
-            <?php require(ICON_SVG_BOX_ROPE_KNOT) ?>
-            <input type="text" value="Box 4">
+            <input type="text" value="Box 2" name="500" maxlength="20" required>
             <?php require(ICON_SVG_TRASH_CAN) ?>
         </a>
         <a href="#">
             <?php require(ICON_SVG_BOX_BOX) ?>
-            <input type="text" value="Box Title">
+            <input type="text" value="Box 3" name="812" maxlength="20" required>
             <?php require(ICON_SVG_TRASH_CAN) ?>
         </a>
     </form>
 
-    <button class="empty-button transition-simple-jump">
+    <button id="save-boxs-change" class="empty-button transition-simple-jump">Save</button>
+
+    <button class="empty-button transition-simple-jump" id="add-box">
         <?php require(ICON_SVG_PLUS) ?>
         Add Box
     </button>
