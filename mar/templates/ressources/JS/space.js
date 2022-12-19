@@ -24,10 +24,7 @@ var usersForm = document.querySelector(".form-edit-space-settings .space-share")
 usersForm.addEventListener("click",(event)=>{
     if(event.target.nodeName == "svg")
     {
-        console.log("good");
-    } else
-    {
-        console.log("bah non")
+        event.target.parentNode.parentNode.remove();
     }
 })
 
