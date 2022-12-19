@@ -60,7 +60,7 @@
                             <option>Edit</option>
                         </select>
 
-                        <button class="action-button transition-simple-bump">
+                        <button class="action-button transition-simple-bump" id="delete-button-example" class="delete-button" type="button">
                             <?php require(ICON_SVG_CLOSE) ?>
                         </button>
                     </span>
@@ -76,7 +76,7 @@
             <form id="add-user-form">
                 <fieldset class="space-share">
                         <span>
-                            <input class="input-add-people-email" type="text" id="new_person" placeholder="Add a new person">
+                            <input class="input-add-people-email" type="text" id="new-person" placeholder="Add a new person">
                             <button class="action-button transition-simple-bump" id="add-shared-people">
                                 <?php require_once(ICON_SVG_PLUS) ?>
                             </button>
@@ -87,6 +87,6 @@
     </main>
 
     <?php require_once("ressources/footer.php"); ?>
-    <script src="<?= TEMPLATES ?>ressources/javascript/space.js"></script>
+    <script src="<?= TEMPLATES ?>ressources/JS/space.js"></script>
 </body>
 </html>
