@@ -26,6 +26,10 @@ usersForm.addEventListener("click",(event)=>{
     {
         event.target.parentNode.parentNode.remove();
     }
+    else if(event.target.parentNode.nodeName == "svg")
+    {
+        event.target.parentNode.parentNode.parentNode.remove();
+    }
 })
 
 
