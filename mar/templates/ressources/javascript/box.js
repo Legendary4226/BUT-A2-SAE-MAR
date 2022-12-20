@@ -5,13 +5,11 @@ document.getElementById("left-box-button").addEventListener("click", () => {
 })
 
 
-/* Make SELECT trigger SUBMIT on change of value */
-let selectSpaceForm = document.getElementsByClassName("form-choose-space")[0]
+/* Make SELECT trigger SUBMIT on change of value to SWITCH SPACE */
 let selectSpace = document.getElementById("select-space")
 selectSpace.addEventListener("change", () => {
-    selectSpaceForm.dispatchEvent(new Event("submit"))
+    document.getElementById("submit-space-switch").click()
 })
-
 
 /* Add Box */
 let formBoxs = document.getElementsByClassName("form-boxs")[0]

@@ -2,14 +2,14 @@
 
 class Box {
     private $box_id;
-    private string $box_name;
     private $box_space;
+    private string $box_name;
 
-    public function __construct($box_id, string $box_name, $box_space)
+    public function __construct($box_id, $box_space, string $box_name)
     {
         $this->box_id = $box_id;
-        $this->box_name = $box_name;
         $this->box_space = $box_space;
+        $this->box_name = $box_name;
     }
 
     // Getters
@@ -58,6 +58,24 @@ class BoxDAO {
             array(
                 htmlspecialchars($box->getBoxName()),
                 $box->getBoxSpace()
+            )
+        );
+
+        return $result != false;
+    }
+
+    /**
+     * Delete a Box.
+     * This function suppose that all informations are correct.
+     * @param Box $box
+     * @return bool if delete, else return Null
+     */
+    public function deleteBox($boxId)
+    {
+        $result = $this->db->executeQuery(
+            "DELETE FROM box WHERE box_id = ?;",
+            array(
+                $boxId,
             )
         );
 

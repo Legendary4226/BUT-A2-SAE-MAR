@@ -31,6 +31,9 @@ if (!isset($_SESSION['user_current_box'])) {
     $_SESSION['user_current_box'] = array_key_first($user_boxes);
 }
 
+
+
+
 $action = null;
 $viewToRequire = "box";
 
@@ -42,8 +45,29 @@ if (!empty($_GET['action'])) {
 //var_dump($boxDAO->getBoxes($_SESSION['user_current_space']));
 //var_dump($elementDAO->getElements($_SESSION['user_current_box']));
 
-if ($action == "save") {
-
+$spaceBoxs = $boxDAO->getBoxes($_SESSION['user_current_space']);
+if ($action == "saveBox") {
+    //echo $_POST;
+    foreach ($_POST as $boxId=>$boxName){
+        if ($boxId < 0){ // Uniquement les boxes crées
+            $boxDAO->createBox(new Box($boxId, $_SESSION['user_current_space'], $boxName));
+        }
+        if (str_contains($boxId,"-deleted") ){
+            $boxDAO->deleteBox(substr($boxId, 0, -8));
+        }
+    }
+    
+    $spaceBoxs = $boxDAO->getBoxes($_SESSION['user_current_space']);
 }
+
+if ($action == "switchSpace") {
+    $_SESSION['user_current_space'] = $_POST["space-id"];
+    $spaceBoxs = $boxDAO->getBoxes($_SESSION['user_current_space']);
+}
+
+if ($action == "saveBoxContent") {
+    //echo ($_POST("note-1"));
+}
+
 
 require_once(TEMPLATES . $viewToRequire . ".php");

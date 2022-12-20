@@ -25,14 +25,29 @@ $headerButtonsLinks = array(
 <?php require_once("ressources/header.php"); ?>
 
 <menu class="left-box-menu" id="left-box-menu">
-    <form action="" method="POST" class="form-choose-space">
+    <form action="<?= LINK_SPACE . "&action=switchSpace"?>" method="POST" class="form-choose-space">
+        <!-- Hidden input used to submit form with JS -->
+        <input id="submit-space-switch" type="submit" style="display: none; visibility: hidden;">
+
         <select name="space-id" id="select-space">
-            <option name="SPACE_ID">One of my spaces</option>
-            <option name="SPACE_ID">Another Space</option>
+
+            <?php
+            ob_start();
+            foreach ($user_spaces as $space) {
+                if ($space->getSpaceId() == $_SESSION['user_current_space']){
+                    $selected = "selected";
+                } else {$selected = null;}
+
+            ?>
+                <option value="<?=$space->getSpaceId() ?>" <?= $selected?>> <?=$space->getSpaceName() ?> </option>
+            <?php
+            }
+            ob_end_flush();
+            ?>
         </select>
     </form>
     
-    <form action="" method="POST" class="form-boxs">
+    <form action="<?= LINK_SPACE . "&action=saveBox"?>" method="POST" class="form-boxs">
         <!-- Hidden input used to submit form with JS -->
         <input id="submit-boxs-change" type="submit" style="display: none; visibility: hidden;">
 
@@ -43,22 +58,20 @@ $headerButtonsLinks = array(
             <?php require(ICON_SVG_TRASH_CAN) ?>
         </a>
 
-        
-        <a href="#" class="selected">
-            <?php require(ICON_SVG_BOX_BOX) ?>
-            <input type="text" value="Box 1" name="2" maxlength="20" required>
-            <?php require(ICON_SVG_TRASH_CAN) ?>
-        </a>
-        <a href="#">
-            <?php require(ICON_SVG_BOX_BOX) ?>
-            <input type="text" value="Box 2" name="500" maxlength="20" required>
-            <?php require(ICON_SVG_TRASH_CAN) ?>
-        </a>
-        <a href="#">
-            <?php require(ICON_SVG_BOX_BOX) ?>
-            <input type="text" value="Box 3" name="812" maxlength="20" required>
-            <?php require(ICON_SVG_TRASH_CAN) ?>
-        </a>
+        <?php 
+        ob_start();
+        foreach ($spaceBoxs as $box) {
+        ?>
+            <a href="#<?= $box->getBoxId() ?>">
+                <?php require(ICON_SVG_BOX_BOX) ?>
+                <input type="text" value="<?= $box->getBoxName() ?>" name="<?= $box->getBoxId() ?>" maxlength="20" required>
+                <?php require(ICON_SVG_TRASH_CAN) ?>
+            </a>
+        <?php
+        }
+        ob_end_flush();
+        ?>
+
     </form>
 
     <button id="save-boxs-change" class="empty-button transition-simple-jump">Save</button>
@@ -70,7 +83,7 @@ $headerButtonsLinks = array(
 </menu>
 
 <main>
-    <form action="" method="POST" class="form-box-content">
+    <form action="<?= LINK_SPACE . "&action=saveBoxContent"?>" method="POST" class="form-box-content">
         <input type="text" name="box-title" class="box-title" value="Box title">
         
         <span class="task">
@@ -79,7 +92,7 @@ $headerButtonsLinks = array(
         </span>
 
         <span class="task">
-            <input type="checkbox" name="task-1">
+            <input type="checkbox" name="task-2">
             <input type="text" name="task-note-2" value="some text">
         </span>
 
