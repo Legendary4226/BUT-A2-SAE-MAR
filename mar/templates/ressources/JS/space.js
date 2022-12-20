@@ -1,36 +1,50 @@
-var shared_users = document.getElementById("init-clone");
-var peopleCounter = document.querySelectorAll("new-user").length;
-var users = document.getElementsByClassName("space-share")[0];
+let sharedUserInputs = document.getElementById("init-clone").cloneNode(true);
+sharedUserInputs.removeAttribute("id")
+let id = -1;
+let usersFieldset = document.getElementsByClassName("space-share")[0];
 
-var userResponse = document.getElementById("new-person").value;
-
-var addBtn = document.getElementById("add-shared-people");
-
+/* Add shared user */
 document.getElementById("add-user-form").addEventListener("submit",(event)=>{
     event.preventDefault();
-    var clone = shared_users.cloneNode(true);
-    clone.id = "";
+
+    let clone = sharedUserInputs.cloneNode(true);
     clone.children[0].value = document.getElementById("new-person").value;
-    clone.children[1].for = "permission-"+peopleCounter;
-    clone.children[2].name = "permission-"+peopleCounter;
-    clone.children[2].id = "permission-"+peopleCounter;
-    peopleCounter++;
-    users.appendChild(clone);
-})
+    clone.children[0].name = id;
 
-var deleteBtnExample = document.getElementById("delete-button-example").children[0];
+    clone.children[1].for = id + ":permission";
+    clone.children[2].id = id + ":permission";
 
-var usersForm = document.querySelector(".form-edit-space-settings .space-share")
-usersForm.addEventListener("click",(event)=>{
-    if(event.target.nodeName == "svg")
-    {
-        event.target.parentNode.parentNode.remove();
-    }
-    else if(event.target.parentNode.nodeName == "svg")
-    {
-        event.target.parentNode.parentNode.parentNode.remove();
-    }
+    clone.children[2].name = id + ":permission";
+
+    id--;
+    usersFieldset.appendChild(clone);
 })
 
 
+/* Delete Shared User */
+usersFieldset.addEventListener("click",(event)=>{
+    let toDelete = false
+    let clickedButton = event.target.parentElement
+    let span = clickedButton.parentElement
+    if (event.target.nodeName == "svg") {
+        toDelete = true
+    }
+    if(event.target.nodeName == "path") {
+        toDelete = true
+        clickedButton = clickedButton.parentElement
+        span = span.parentElement
+    }
+
+    if (toDelete) {
+        let input = span.querySelector("input[type='email']")
+        
+        if (input.name < 0) {
+            clickedButton.parentElement.remove()
+            console.log(clickedButton.parentElement)
+        } else {
+            clickedButton.parentElement.classList.toggle("user-deleted")
+            input.name += ":deleted"
+        }
+    }
+})
 
