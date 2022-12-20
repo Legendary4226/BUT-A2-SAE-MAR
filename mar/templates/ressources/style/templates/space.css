@@ -89,7 +89,7 @@ form > h1 {
     gap: 2rem;
 }
 
-form input[type="text"], 
+form input[type="email"], 
 form select {
     padding: .2rem .5rem;
 
@@ -126,13 +126,9 @@ form select {
     height: 50px;
 }
 
-#init-clone
+#init-clone,
+span.user-deleted
 {
     display: none;
     visibility: hidden;
-}
-
-.deleted
-{
-    
 }
