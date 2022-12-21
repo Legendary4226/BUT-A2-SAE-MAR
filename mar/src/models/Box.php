@@ -67,15 +67,33 @@ class BoxDAO {
     /**
      * Delete a Box.
      * This function suppose that all informations are correct.
-     * @param Box $box
+     * @param string $box_id
      * @return bool if delete, else return Null
      */
-    public function deleteBox($boxId)
+    public function deleteBox(string $box_id)
     {
         $result = $this->db->executeQuery(
             "DELETE FROM box WHERE box_id = ?;",
             array(
-                $boxId,
+                $box_id,
+            )
+        );
+
+        return $result != false;
+    }
+
+    /**
+     * Update a box informations.
+     * @param Box $box The updated box
+     * @return bool True if the box was successfully updated, otherwise false.
+     */
+    public function updateBox(Box $box)
+    {
+        $result = $this->db->executeQuery(
+            "UPDATE box SET box_name = ? WHERE box_id = ?;",
+            array(
+                htmlspecialchars($box->getBoxName()),
+                $box->getBoxId()
             )
         );
 

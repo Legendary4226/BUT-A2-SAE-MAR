@@ -34,12 +34,8 @@ $headerButtonsLinks = array(
             <?php
             ob_start();
             foreach ($user_spaces as $space) {
-                if ($space->getSpaceId() == $_SESSION['user_current_space']){
-                    $selected = "selected";
-                } else {$selected = null;}
-
             ?>
-                <option value="<?=$space->getSpaceId() ?>" <?= $selected?>> <?=$space->getSpaceName() ?> </option>
+                <option value="<?= $space->getSpaceId() ?>" <?= $space->getSpaceId() == $_SESSION['user_current_space'] ? 'selected' : '' ?>><?= $space->getSpaceName() ?></option>
             <?php
             }
             ob_end_flush();
@@ -60,9 +56,14 @@ $headerButtonsLinks = array(
 
         <?php 
         ob_start();
-        foreach ($spaceBoxs as $box) {
+
+        if (empty($user_boxes)) {
+            echo '<p style="text-align: center">No boxs to see here!</p>';
+        }
+
+        foreach ($user_boxes as $box) {
         ?>
-            <a href="#<?= $box->getBoxId() ?>">
+            <a href="<?= LINK_SPACE . "&action=switchBox&box-id=" . $box->getBoxId() ?>" <?= $box->getBoxId() == $_SESSION['user_current_box'] ? 'class="selected"' : "" ?>>
                 <?php require(ICON_SVG_BOX_BOX) ?>
                 <input type="text" value="<?= $box->getBoxName() ?>" name="<?= $box->getBoxId() ?>" maxlength="20" required>
                 <?php require(ICON_SVG_TRASH_CAN) ?>

@@ -56,7 +56,7 @@ selectBoxForm.addEventListener("click", (event) => {
         if (aParent.querySelector("input").name < 0) {
             aParent.remove()
         } else {
-            aParent.querySelector("input").name += "-deleted"
+            aParent.querySelector("input").name += ":deleted"
         }
     }
 })

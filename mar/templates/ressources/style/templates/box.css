@@ -69,13 +69,14 @@ body > main {
 
 #select-space {
     width: 100%;
-    padding: .5rem;
+    padding: .5rem 0;
 
     background: none;
     border: none;
     border-bottom: 2px solid var(--color-secondary-opacity-25);
 
-    font-size: 1.5em;
+    font-size: 1.2em;
+    text-align: center;
 }
 
 #save-boxs-change {

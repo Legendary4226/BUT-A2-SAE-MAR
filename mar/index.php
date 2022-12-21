@@ -2,6 +2,11 @@
 
 session_start();
 
+if (version_compare(PHP_VERSION, "8.0.13") < 0) {
+    echo "<p>Your server is running PHP <b>V" . PHP_VERSION . "</b>. Please upgrade to PHP <b>V8.0.13</b> or superior!</p>";
+    exit(-1);
+}
+
 if (!isset($_SESSION['user_id'])) {
     $_SESSION['user_id'] = null;
 }
