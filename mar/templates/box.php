@@ -84,40 +84,32 @@ $headerButtonsLinks = array(
 </menu>
 
 <main>
-    <form action="<?= LINK_SPACE . "&action=saveBoxContent"?>" method="POST" class="form-box-content">
-        <input type="text" name="box-title" class="box-title" value="Box title">
+    <form action="<?= LINK_SPACE . "&action=saveElements"?>" method="POST" class="form-box-content">
+        <input type="text" name="box-title" class="box-title" value="<?=$user_boxes[$_SESSION['user_current_box']]->getBoxName()?>">
         
-        <span class="task">
-            <input type="checkbox" name="task-1">
-            <input type="text" name="task-note-1" value="some text">
-        </span>
-
-        <span class="task">
-            <input type="checkbox" name="task-2">
-            <input type="text" name="task-note-2" value="some text">
-        </span>
-
-        <span class="task">
-            <input type="checkbox" name="task-3">
-            <input type="text" name="task-note-3" value="some text">
-        </span>
-
-        <span class="task">
-            <input type="checkbox" name="task-4">
-            <input type="text" name="task-note-4" value="some text">
-        </span>
-
-        <span class="note">
-            <textarea name="note-1">
-                *A little note
-            </textarea>
-        </span>
-
-        <span class="note">
-            <textarea name="note-2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </textarea>
-        </span>
+        <?php 
+        
+        ob_start();
+        foreach ($box_elements as $element){
+            if ($element->getElementType() == 'checkbox'){
+        ?>
+                <span class="task">
+                    <input type="<?=$element->getElementType()?>"  name="task-<?=$element->getElementId()?>">
+                    <input type="text" name="task-note-<?=$element->getElementId()?>" value="<?=$element->getElementContent()?>">
+                </span>
+        <?php 
+            } if ($element->getElementType() == 'note') {
+        ?>
+                <span class="note">
+                    <textarea name="note-<?=$element->getElementId()?>">
+                        <?=$element->getElementContent()?>
+                    </textarea>
+                </span>
+        <?php 
+            }
+        }
+        ob_end_flush();
+        ?>
 
         <button class="transition-simple-bump" id="save-modifications">
             <?php require(ICON_SVG_SAVE) ?>

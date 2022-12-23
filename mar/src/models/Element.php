@@ -11,7 +11,7 @@ class Element {
         $this->element_id = $element_id;
         $this->element_content = $element_content;
         $this->element_box = $element_box;
-        $this->$element_type = $element_type;
+        $this->element_type = $element_type;
     }
 
     // Getters
@@ -89,9 +89,9 @@ class ElementDAO {
             )
         )->fetchAll();
 
-        $boxes = array();
+        $elements = array();
         foreach($result as $element) {
-            $boxes[$element[0]] = new Element(
+            $elements[$element[0]] = new Element(
                 $element[0],
                 $element[1],
                 $element[2],
@@ -99,7 +99,8 @@ class ElementDAO {
             );
         }
 
-        return $boxes;
+        
+        return $elements;
     }
 
     /**

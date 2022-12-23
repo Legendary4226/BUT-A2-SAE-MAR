@@ -45,7 +45,8 @@ if (!isset($_SESSION['user_current_box'])) {
     $_SESSION['user_current_box'] = array_key_first($user_boxes);
 }
 
-
+// Set the current element in box
+$box_elements = $elementDAO->getElements($_SESSION['user_current_box']);
 
 //--- Actions
 
@@ -89,7 +90,9 @@ if ($action == "switchBox") {
     header("Location: " . LINK_SPACE);
 }
 
-if ($action == "saveElements") {}
+if ($action == "saveElements") {    //var_dump($box_elements);
+    
+}
 
 
 
