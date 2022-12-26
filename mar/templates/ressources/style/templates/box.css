@@ -155,22 +155,6 @@ body > main {
     background: none;
 }
 
-/* Element : Box Title */
-.form-box-content input.box-title {
-    margin-bottom: 1rem;
-
-    font-size: 2em;
-}
-
-/* Element : Note */
-.form-box-content .note {
-    margin-bottom: .8rem;
-}
-
-/* Element : Task */
-.form-box-content .task {
-    margin-bottom: .5rem;
-}
 
 #save-modifications {
     position: fixed;
@@ -237,4 +221,67 @@ body > main {
 .svg-icon-share path,
 .svg-icon-plus path {
     fill: var(--color-complementary-1);
+}
+
+
+
+
+/*
+*
+*
+    BOX ELEMENTS
+*
+*
+*/
+.box-elements {
+    width: 40rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+}
+
+.box-elements .element {
+    width: 100%;
+    position: relative;
+    
+}
+.box-elements .element::after {
+    content: "Add";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    font-size: 1em;
+    padding: .2rem 5rem;
+    text-align: center;
+
+    visibility: hidden;
+    opacity: 0;
+
+    color: var(--color-text);
+    background-color: rgba(92, 92, 95, 0.1);
+    border-radius: 20px;
+
+    transition: 150ms ease-in-out opacity;
+}
+.box-elements .element:hover::after {
+    visibility: visible;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+/* Box Title */
+.form-box-content input.box-title {
+    margin-bottom: 1rem;
+
+    font-size: 2em;
+}
+
+/* NOTE */
+.note textarea {
+    min-width: 100%;
+    max-width: 100%;
 }

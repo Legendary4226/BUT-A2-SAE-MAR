@@ -17,16 +17,16 @@ if ($action == "signin") {
     // Check $_POST values
     if (!empty($_POST['email']) && !empty($_POST['pass'])) {
 
-        $user = $userDAO->getUserByEmail($_POST['email']);
+        $user = $userDAO->getByEmail($_POST['email']);
         if ($user != null) {
             
-            $validPass = password_verify($_POST['pass'], $user->getUserPass());
+            $validPass = password_verify($_POST['pass'], $user->getPass());
             if ($validPass){
                 // Define the SESSION variables
-                $_SESSION['user_id'] = $user->getUserId();
-                $_SESSION['user_email'] = $user->getUserEmail();
-                $_SESSION['user_name'] = $user->getUserName();
-                $_SESSION['user_pass'] = $user->getUserPass();
+                $_SESSION['user_id'] = $user->getId();
+                $_SESSION['user_email'] = $user->getEmail();
+                $_SESSION['user_name'] = $user->getName();
+                $_SESSION['user_pass'] = $user->getPass();
 
                 header("Location: " . LINK_HOME);
             } else {
@@ -68,7 +68,7 @@ if ($action == "signup") {
                     password_hash($_POST['pass'], PASSWORD_BCRYPT)
                 );
 
-                $isEmailNotInDatabase = $userDAO->getUserByEmail($newUser->getUserEmail()) == null;
+                $isEmailNotInDatabase = $userDAO->getByEmail($newUser->getEmail()) == null;
                 if ($isEmailNotInDatabase) {
 
                     $accountCreated = $userDAO->createUser($newUser);

@@ -25,13 +25,13 @@ if (!empty($_GET['action'])) {
 
 
 // Define default user space
-$user_spaces = $spaceDAO->getSpaces($_SESSION['user_id']);
+$user_spaces = $spaceDAO->gets($_SESSION['user_id']);
 if (sizeof($user_spaces) == 0) {
     $spaceDAO->createSpace(
         new Space(-1, $_SESSION['user_name'] . "'s space", $_SESSION['user_id'])
     );
 
-    $user_spaces = $spaceDAO->getSpaces($_SESSION['user_id']);
+    $user_spaces = $spaceDAO->gets($_SESSION['user_id']);
 }
 
 // Set the current user space ID
@@ -40,13 +40,23 @@ if (!isset($_SESSION['user_current_space'])) {
 }
 
 // Set the current user box ID
-$user_boxes = $boxDAO->getBoxes($_SESSION['user_current_space']);
+$user_boxes = $boxDAO->getes($_SESSION['user_current_space']);
 if (!isset($_SESSION['user_current_box'])) {
     $_SESSION['user_current_box'] = array_key_first($user_boxes);
 }
 
-// Set the current element in box
-$box_elements = $elementDAO->getElements($_SESSION['user_current_box']);
+// Set the current elements in box
+$elements = array();
+if ($_SESSION['user_current_box'] != null) {
+    $elements = $elementDAO->gets($_SESSION['user_current_box']);
+}
+
+// Determine the Box title
+$box_title = "It's empty here?";
+if ($_SESSION['user_current_box'] != null) {
+    $box_title = $user_boxes[$_SESSION['user_current_box']]->getName();
+}
+
 
 //--- Actions
 
@@ -66,8 +76,8 @@ if ($action == "saveBox") {
             $boxDAO->deleteBox($boxId);
         }
         // Rename a box
-        elseif($user_boxes[$boxId]->getBoxName() != $boxName) {
-            $user_boxes[$boxId]->setBoxName($boxName);
+        elseif($user_boxes[$boxId]->getName() != $boxName) {
+            $user_boxes[$boxId]->getName($boxName);
             $boxDAO->updateBox($user_boxes[$boxId]);
         }
     }

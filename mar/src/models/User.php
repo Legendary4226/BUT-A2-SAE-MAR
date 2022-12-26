@@ -15,27 +15,27 @@ class User {
     }
 
     // Getters
-    public function getUserId(){
+    public function getId(){
         return $this->user_id;
     }
-    public function getUserEmail(){
+    public function getEmail(){
         return $this->user_email;
     }
-    public function getUserName(){
+    public function getName(){
         return $this->user_name;
     }
-    public function getUserPass(){
+    public function getPass(){
         return $this->user_pass;
     }
 
     // Setters
-    public function setUserEmail(string $user_email){
+    public function setEmail(string $user_email){
         $this->user_email = $user_email;
     }
-    public function setUserName(string $user_name){
+    public function setName(string $user_name){
         $this->user_name = $user_name;
     }
-    public function setUserPass(string $user_pass){
+    public function setPass(string $user_pass){
         $this->user_pass = $user_pass;
     }
 }
@@ -55,7 +55,7 @@ class UserDAO {
      * @param string $email The user's email.
      * @return User|null The User or null.
      */
-    public function getUserByEmail(string $email)
+    public function getByEmail(string $email)
     {
         $statement = $this->db->prepareStatement("SELECT * FROM users WHERE user_email = ?;");
         $statement->execute(array($email));
@@ -74,7 +74,7 @@ class UserDAO {
      * @param string $id The user's ID.
      * @return User|null The User or null.
      */
-    public function getUserByID(string $id)
+    public function getByID(string $id)
     {
         $statement = $this->db->prepareStatement("SELECT * FROM users WHERE user_id = ?;");
         $statement->execute(array($id));
@@ -99,9 +99,9 @@ class UserDAO {
         $result = $this->db->executeQuery(
             "INSERT INTO users(user_email, user_name, user_pass) VALUES(?, ?, ?)",
             array(
-                htmlspecialchars($user->getUserEmail()),
-                htmlspecialchars($user->getUserName()),
-                $user->getUserPass()
+                htmlspecialchars($user->getEmail()),
+                htmlspecialchars($user->getName()),
+                $user->getPass()
             )
         );
 
@@ -119,10 +119,10 @@ class UserDAO {
         $result = $this->db->executeQuery(
             "UPDATE users SET user_email = ?, user_name = ?, user_pass = ? where user_id = ?;",
             array(
-                $user->getUserEmail(),
-                $user->getUserName(),
-                $user->getUserPass(),
-                $user->getUserID()
+                $user->getEmail(),
+                $user->getName(),
+                $user->getPass(),
+                $user->getID()
             )
         );
 

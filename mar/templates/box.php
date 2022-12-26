@@ -35,7 +35,7 @@ $headerButtonsLinks = array(
             ob_start();
             foreach ($user_spaces as $space) {
             ?>
-                <option value="<?= $space->getSpaceId() ?>" <?= $space->getSpaceId() == $_SESSION['user_current_space'] ? 'selected' : '' ?>><?= $space->getSpaceName() ?></option>
+                <option value="<?= $space->getId() ?>" <?= $space->getId() == $_SESSION['user_current_space'] ? 'selected' : '' ?>><?= $space->getName() ?></option>
             <?php
             }
             ob_end_flush();
@@ -63,9 +63,9 @@ $headerButtonsLinks = array(
 
         foreach ($user_boxes as $box) {
         ?>
-            <a href="<?= LINK_SPACE . "&action=switchBox&box-id=" . $box->getBoxId() ?>" <?= $box->getBoxId() == $_SESSION['user_current_box'] ? 'class="selected"' : "" ?>>
+            <a href="<?= LINK_SPACE . "&action=switchBox&box-id=" . $box->getId() ?>" <?= $box->getId() == $_SESSION['user_current_box'] ? 'class="selected"' : "" ?>>
                 <?php require(ICON_SVG_BOX_BOX) ?>
-                <input type="text" value="<?= $box->getBoxName() ?>" name="<?= $box->getBoxId() ?>" maxlength="20" required>
+                <input type="text" value="<?= $box->getName() ?>" name="<?= $box->getId() ?>" maxlength="20" required>
                 <?php require(ICON_SVG_TRASH_CAN) ?>
             </a>
         <?php
@@ -85,32 +85,40 @@ $headerButtonsLinks = array(
 
 <main>
     <form action="<?= LINK_SPACE . "&action=saveElements"?>" method="POST" class="form-box-content">
-        <input type="text" name="box-title" class="box-title" value="<?=$user_boxes[$_SESSION['user_current_box']]->getBoxName()?>">
+        <input type="text" name="box-title" class="box-title" value="<?= $box_title ?>">
         
-        <?php 
-        
-        ob_start();
-        foreach ($box_elements as $element){
-            if ($element->getElementType() == 'checkbox'){
-        ?>
-                <span class="task">
-                    <input type="<?=$element->getElementType()?>"  name="task-<?=$element->getElementId()?>">
-                    <input type="text" name="task-note-<?=$element->getElementId()?>" value="<?=$element->getElementContent()?>">
-                </span>
-        <?php 
-            } if ($element->getElementType() == 'note') {
-        ?>
-                <span class="note">
-                    <textarea name="note-<?=$element->getElementId()?>">
-                        <?=$element->getElementContent()?>
-                    </textarea>
-                </span>
-        <?php 
-            }
-        }
-        ob_end_flush();
-        ?>
+        <div class="box-elements">
+            <?php 
+            ob_start();
 
+            foreach ($elements as $element){
+                
+                ?> <div class="element <?= $element->getType() ?>"> <?php
+
+                switch($element->getType()) {
+
+                    case 'task': ?>
+
+                        <input type="checkbox" name="task-<?= $element->getId() ?>" <?= $element->getContent()["checked"] ? "checked" : "" ?>>
+                        <input type="text" name="task-note-<?= $element->getId() ?>" value="<?= $element->getContent()["content"] ?>">
+
+                        <?php break;
+                    case 'note': ?>
+
+                        <textarea name="note-<?= $element->getId() ?>">
+                            <?= $element->getContent()["content"] ?>
+                        </textarea>
+
+                        <?php break;
+                }
+
+                ?> </div> <?php
+
+            }
+
+            ob_end_flush();
+            ?>
+        </div>
         <button class="transition-simple-bump" id="save-modifications">
             <?php require(ICON_SVG_SAVE) ?>
         </button>

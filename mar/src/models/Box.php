@@ -13,24 +13,24 @@ class Box {
     }
 
     // Getters
-    public function getBoxId(){
+    public function getId(){
         return $this->box_id;
     }
 
-    public function getBoxName(){
+    public function getName(){
         return $this->box_name;
     }
 
-    public function getBoxSpace(){
+    public function getSpace(){
         return $this->box_space;
     }
 
     // Setters
-    public function setBoxName($box_name){
+    public function setName($box_name){
         $this->box_name = $box_name;
     }
 
-    public function setBoxSpace($box_space){
+    public function get($box_space){
         $this->box_space = $box_space;
     }
 
@@ -56,8 +56,8 @@ class BoxDAO {
         $result = $this->db->executeQuery(
             "INSERT INTO box(box_name, box_space) VALUES(?, ?)",
             array(
-                htmlspecialchars($box->getBoxName()),
-                $box->getBoxSpace()
+                htmlspecialchars($box->getName()),
+                $box->getSpace()
             )
         );
 
@@ -92,8 +92,8 @@ class BoxDAO {
         $result = $this->db->executeQuery(
             "UPDATE box SET box_name = ? WHERE box_id = ?;",
             array(
-                htmlspecialchars($box->getBoxName()),
-                $box->getBoxId()
+                htmlspecialchars($box->getName()),
+                $box->getId()
             )
         );
 
@@ -105,7 +105,7 @@ class BoxDAO {
      * @param string $box_space
      * @return array Containing Boxes of the Space associating box_space => Box.
      */
-    public function getBoxes(string $box_space)
+    public function getes(string $box_space)
     {
         $result = $this->db->executeQuery(
             "SELECT * FROM box WHERE box_space = ?",
@@ -131,7 +131,7 @@ class BoxDAO {
      * @param string $box_id
      * @return Box return box corresponding of $box_id
      */
-    public function getBox(string $box_id)
+    public function get(string $box_id)
     {
         $result = $this->db->executeQuery(
             "SELECT * FROM box WHERE box_id = ?",

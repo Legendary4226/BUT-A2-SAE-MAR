@@ -20,7 +20,7 @@ if ($action == 'modifyAccount'){
     if (!empty($_POST['name'] && $_POST['name'] != $_SESSION['user_name'])) {
         if (strlen($_POST['name']) <= 25) {
             $_SESSION['user_name'] = htmlspecialchars($_POST['name']);
-            $updateUser->setUserName($_SESSION['user_name']);
+            $updateUser->getName($_SESSION['user_name']);
             $atLeastOneModified = true;
         } else {
             ThrowError::redirect(
@@ -33,7 +33,7 @@ if ($action == 'modifyAccount'){
 
     if (!empty($_POST['email']) && $_POST['email'] != $_SESSION['user_email']) {
         $_SESSION['user_email'] = htmlspecialchars($_POST['email']);
-        $updateUser->setUserEmail($_SESSION['user_email']);
+        $updateUser->getEmail($_SESSION['user_email']);
         $atLeastOneModified = true;
     }
 
@@ -41,7 +41,7 @@ if ($action == 'modifyAccount'){
 
         if (strlen($_POST['changepass']) >= 8 && $_POST['changepass'] == $_POST['confpass']) {
             $_SESSION['user_pass'] = password_hash($_POST['changepass'], PASSWORD_BCRYPT);
-            $updateUser->setUserPass($_SESSION['user_pass']);
+            $updateUser->getPass($_SESSION['user_pass']);
             $atLeastOneModified = true;
         } else {
             ThrowError::redirect(
