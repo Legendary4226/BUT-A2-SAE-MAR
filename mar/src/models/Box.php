@@ -1,15 +1,17 @@
-<?php
+<?
 
 class Box {
     private $box_id;
     private $box_space;
     private string $box_name;
+    private $box_elements_order;
 
-    public function __construct($box_id, $box_space, string $box_name)
+    public function __construct($box_id, $box_space, string $box_name, $box_elements_order)
     {
         $this->box_id = $box_id;
         $this->box_space = $box_space;
         $this->box_name = $box_name;
+        $this->box_elements_order = json_decode($box_elements_order);
     }
 
     // Getters
@@ -25,12 +27,16 @@ class Box {
         return $this->box_space;
     }
 
+    public function getElementsOrder() {
+        return $this->box_elements_order;
+    }
+
     // Setters
     public function setName($box_name){
         $this->box_name = $box_name;
     }
 
-    public function get($box_space){
+    public function setSpace($box_space){
         $this->box_space = $box_space;
     }
 
@@ -54,10 +60,11 @@ class BoxDAO {
     public function createBox(Box $box)
     {
         $result = $this->db->executeQuery(
-            "INSERT INTO box(box_name, box_space) VALUES(?, ?)",
+            "INSERT INTO box(box_name, box_space, box_elements_order) VALUES(?, ?, ?)",
             array(
-                htmlspecialchars($box->getName()),
-                $box->getSpace()
+                $box->getName(),
+                $box->getSpace(),
+                json_encode($box->getElementsOrder())
             )
         );
 
@@ -90,9 +97,10 @@ class BoxDAO {
     public function updateBox(Box $box)
     {
         $result = $this->db->executeQuery(
-            "UPDATE box SET box_name = ? WHERE box_id = ?;",
+            "UPDATE box SET box_name = ?, box_elements_order = ? WHERE box_id = ?;",
             array(
                 htmlspecialchars($box->getName()),
+                json_encode($box->getElementsOrder()),
                 $box->getId()
             )
         );
@@ -105,7 +113,7 @@ class BoxDAO {
      * @param string $box_space
      * @return array Containing Boxes of the Space associating box_space => Box.
      */
-    public function getes(string $box_space)
+    public function getBoxs(string $box_space)
     {
         $result = $this->db->executeQuery(
             "SELECT * FROM box WHERE box_space = ?",
@@ -119,10 +127,11 @@ class BoxDAO {
             $boxes[$box[0]] = new Box(
                 $box[0],
                 $box[1],
-                $box[2]
+                $box[2],
+                $box[3]
             );
         }
-
+        
         return $boxes;
     }
 
@@ -131,7 +140,7 @@ class BoxDAO {
      * @param string $box_id
      * @return Box return box corresponding of $box_id
      */
-    public function get(string $box_id)
+    public function getBox(string $box_id)
     {
         $result = $this->db->executeQuery(
             "SELECT * FROM box WHERE box_id = ?",
@@ -144,7 +153,8 @@ class BoxDAO {
             $result = new Box(
                 $result[0],
                 $result[1],
-                $result[2]
+                $result[2],
+                $result[3]
             );
         }
 

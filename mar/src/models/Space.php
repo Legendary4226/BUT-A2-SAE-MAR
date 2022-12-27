@@ -1,4 +1,4 @@
-<?php
+<?
 
 class Space {
     private $space_id;
@@ -64,7 +64,7 @@ class SpaceDAO {
      * @param string $user_id
      * @return array Containing Spaces of the user associating space_id => Space.
      */
-    public function gets(string $user_id)
+    public function getSpaces(string $user_id)
     {
         $result = $this->db->executeQuery(
             "SELECT * FROM space WHERE space_owner = ?",
@@ -90,7 +90,7 @@ class SpaceDAO {
      * @param string $space_id
      * @return Space return space corresponding of $space_id
      */
-    public function get(string $space_id)
+    public function getSpace(string $space_id)
     {
         $result = $this->db->executeQuery(
             "SELECT * FROM space WHERE space_id = ?",

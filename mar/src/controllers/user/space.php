@@ -1,4 +1,4 @@
-<?php
+<?
 
 require_once(MODELS . "Space.php");
 require_once(MODELS . "Box.php");
@@ -25,13 +25,13 @@ if (!empty($_GET['action'])) {
 
 
 // Define default user space
-$user_spaces = $spaceDAO->gets($_SESSION['user_id']);
+$user_spaces = $spaceDAO->getSpaces($_SESSION['user_id']);
 if (sizeof($user_spaces) == 0) {
     $spaceDAO->createSpace(
         new Space(-1, $_SESSION['user_name'] . "'s space", $_SESSION['user_id'])
     );
 
-    $user_spaces = $spaceDAO->gets($_SESSION['user_id']);
+    $user_spaces = $spaceDAO->getSpaces($_SESSION['user_id']);
 }
 
 // Set the current user space ID
@@ -40,7 +40,7 @@ if (!isset($_SESSION['user_current_space'])) {
 }
 
 // Set the current user box ID
-$user_boxes = $boxDAO->getes($_SESSION['user_current_space']);
+$user_boxes = $boxDAO->getBoxs($_SESSION['user_current_space']);
 if (!isset($_SESSION['user_current_box'])) {
     $_SESSION['user_current_box'] = array_key_first($user_boxes);
 }
@@ -48,13 +48,13 @@ if (!isset($_SESSION['user_current_box'])) {
 // Set the current elements in box
 $elements = array();
 if ($_SESSION['user_current_box'] != null) {
-    $elements = $elementDAO->gets($_SESSION['user_current_box']);
+    $elements = $elementDAO->getElements($_SESSION['user_current_box']);
 }
 
-// Determine the Box title
-$box_title = "It's empty here?";
+// Determine the current Box object
+$current_box = null;
 if ($_SESSION['user_current_box'] != null) {
-    $box_title = $user_boxes[$_SESSION['user_current_box']]->getName();
+    $current_box = $user_boxes[$_SESSION['user_current_box']];
 }
 
 
@@ -69,7 +69,7 @@ if ($action == "saveBox") {
 
         // New boxs have a negative ID like -1, -2, ...
         if ($boxId < 0){ 
-            $boxDAO->createBox(new Box(-1, $_SESSION['user_current_space'], $boxName));
+            $boxDAO->createBox(new Box(-1, $_SESSION['user_current_space'], $boxName, "[]"));
         } 
         // Delete a box
         elseif(isset($splitted[1]) && str_contains($splitted[1], "deleted")) {

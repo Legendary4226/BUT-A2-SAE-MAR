@@ -1,5 +1,5 @@
 <header>
-    <?php
+    <?
     if (isset($enableLeftBoxMenu)) {
         echo "<div class='header-left-box-menu' id='left-box-button'>";
         require(ICON_SVG_MENU);
@@ -13,7 +13,7 @@
     </div>
     
     <div class="header-buttons">
-        <?php
+        <?
         if (!empty($headerButtonsLinks)) {
             ob_start();
 
@@ -22,7 +22,7 @@
             <a href="<?= $buttonLink ?>">
                 <button class="blue-button"><?= $buttonName ?></button>
             </a>
-        <?php
+        <?
             }
             ob_end_flush();
         }

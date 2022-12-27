@@ -1,4 +1,4 @@
-<?php
+<?
 
 class Element {
     private $element_id;
@@ -36,7 +36,7 @@ class Element {
         $this->element_content = $element_content;
     }
 
-    public function get($element_box){
+    public function setBox($element_box){
         $this->element_box = $element_box;
     }
 
@@ -66,8 +66,8 @@ class ElementDAO {
         $result = $this->db->executeQuery(
             "INSERT INTO element(element_content, element_box, element_type) VALUES(?, ?, ?)",
             array(
-                htmlspecialchars($element->getContent()),
-                $element->get(),
+                $element->getContent(),
+                $element->getBox(),
                 $element->getType()
             )
         );
@@ -80,7 +80,7 @@ class ElementDAO {
      * @param string $element_box
      * @return array Containing Elements of the Box associating element_box => Element.
      */
-    public function gets(string $element_box)
+    public function getElements(string $element_box)
     {
         $result = $this->db->executeQuery(
             "SELECT * FROM element WHERE element_box = ?",
@@ -108,7 +108,7 @@ class ElementDAO {
      * @param string $element_id
      * @return Element return element corresponding of $element_id
      */
-    public function get(string $element_id)
+    public function getElement(string $element_id)
     {
         $result = $this->db->executeQuery(
             "SELECT * FROM element WHERE element_id = ?",

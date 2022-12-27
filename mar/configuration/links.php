@@ -1,4 +1,4 @@
-<?php
+<?
 
 define("INDEX_FILE", "index.php?page=");
 

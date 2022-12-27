@@ -6,20 +6,20 @@
     <title>Document</title>
 
     <!-- Global CSS Files -->
-    <?php require_once(TEMPLATES . "ressources/css_files.php") ?>
+    <? require_once(TEMPLATES . "ressources/css_files.php") ?>
 
     <!-- Specific CSS Files -->
     <link rel="stylesheet" href="<?= STYLES ?>templates/account.css">
     <link rel="stylesheet" href="<?= STYLES ?>templates/space.css">
 </head>
 <body>
-<?php
+<?
 $headerButtonsLinks = array(
     "Spaces" => LINK_SPACE,
     "Log out" => LINK_CONNECTION_LOGOUT
 );
 ?>
-<?php require_once("ressources/header.php"); ?>
+<? require_once("ressources/header.php"); ?>
 
 <main>
     <section class="panel">
@@ -62,7 +62,7 @@ $headerButtonsLinks = array(
                     </select>
 
                     <button class="action-button transition-simple-bump">
-                        <?php require(ICON_SVG_CLOSE) ?>
+                        <? require(ICON_SVG_CLOSE) ?>
                     </button>
                 </span>
 
@@ -76,7 +76,7 @@ $headerButtonsLinks = array(
                     </select>
 
                     <button class="action-button transition-simple-bump">
-                        <?php require(ICON_SVG_CLOSE) ?>
+                        <? require(ICON_SVG_CLOSE) ?>
                     </button>
                 </span>
 
@@ -90,14 +90,14 @@ $headerButtonsLinks = array(
                     </select>
 
                     <button class="action-button transition-simple-bump">
-                        <?php require(ICON_SVG_CLOSE) ?>
+                        <? require(ICON_SVG_CLOSE) ?>
                     </button>
                 </span>
             </fieldset>
 
             <fieldset>
                 <button class="action-button transition-simple-bump" id="save-modifications">
-                    <?php require(ICON_SVG_SAVE) ?>
+                    <? require(ICON_SVG_SAVE) ?>
                 </button>
             </fieldset>
         </form>
@@ -114,7 +114,7 @@ $headerButtonsLinks = array(
                         </select>
 
                         <button class="action-button transition-simple-bump" id="add-shared-people">
-                            <?php require_once(ICON_SVG_PLUS) ?>
+                            <? require_once(ICON_SVG_PLUS) ?>
                         </button>
                     </span>
             </fieldset>
@@ -122,6 +122,6 @@ $headerButtonsLinks = array(
     </section>
 </main>
 
-<?php require_once("ressources/footer.php"); ?>
+<? require_once("ressources/footer.php"); ?>
 </body>
 </html>

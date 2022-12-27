@@ -1,4 +1,4 @@
-<?php
+<?
 
 define ('BD_HOST','141.145.201.28');
 define('DB_PORT', 13306);

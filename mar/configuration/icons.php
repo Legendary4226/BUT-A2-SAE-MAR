@@ -1,4 +1,4 @@
-<?php
+<?
 
 // Client get classic images with the URL
 define("IMAGES", "https://" . $_SERVER["SERVER_NAME"] . "/" . TEMPLATES . "ressources/images/");

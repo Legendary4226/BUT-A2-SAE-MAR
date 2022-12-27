@@ -1,4 +1,4 @@
-<?php
+<?
 
 /**
  * Singleton for the Database containing the PDO instance.

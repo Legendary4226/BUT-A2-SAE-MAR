@@ -135,7 +135,7 @@ body > main {
 }
 
 /*
-    Box title, content and save button
+    Box title and save button
 */
 
 .form-box-content {
@@ -145,16 +145,6 @@ body > main {
     flex-direction: column;
     align-items: center;
 }
-
-.form-box-content input[type="text"],
-.form-box-content textarea {
-    text-align: center;
-    font-size: 1em;
-
-    border: none;
-    background: none;
-}
-
 
 #save-modifications {
     position: fixed;
@@ -179,8 +169,8 @@ body > main {
 
 .box-management {
     position: fixed;
-    top: 6rem;
-    right: 4rem;
+    top: 5rem;
+    right: 3rem;
     display: flex;
     flex-direction: column;
     align-items: end;
@@ -239,49 +229,93 @@ body > main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3rem;
+    gap: 2.5rem;
 }
 
-.box-elements .element {
+.element {
     width: 100%;
     position: relative;
-    
 }
-.box-elements .element::after {
-    content: "Add";
+.element.deleted {
+    display: none;
+    visibility: hidden;
+}
+
+.action-add, 
+.action-delete{
     position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-
-    font-size: 1em;
-    padding: .2rem 5rem;
-    text-align: center;
-
     visibility: hidden;
     opacity: 0;
-
-    color: var(--color-text);
-    background-color: rgba(92, 92, 95, 0.1);
+    background-color: rgba(85, 85, 218, 0.08);
     border-radius: 20px;
+    border: none;
 
     transition: 150ms ease-in-out opacity;
 }
-.box-elements .element:hover::after {
+.action-add {
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: .2rem 5rem;
+}
+.action-delete {
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    padding: .5rem .5rem;
+    border-radius: 10px;
+}
+.action-add svg,
+.action-delete svg {
+    width: 20px;
+    height: 20px;
+}
+
+.element:hover .action-add,
+.element:hover .action-delete {
     visibility: visible;
     opacity: 0.8;
     cursor: pointer;
 }
 
-/* Box Title */
-.form-box-content input.box-title {
-    margin-bottom: 1rem;
+.element-body {
+    width: 100%;
+}
 
+.element-body input[type="text"],
+.element-body textarea {
+    font-size: 1em;
+    border: none;
+    background: none;
+}
+
+/* Box Title */
+.box-title {
+    margin-bottom: 2rem;
     font-size: 2em;
+    text-align: center;
+
+    border: none;
+    background: none;
 }
 
 /* NOTE */
 .note textarea {
     min-width: 100%;
     max-width: 100%;
+    min-height: 1.4rem;
+}
+
+/* TASK */
+.task {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+.task input[type="text"] {
+    width: 15rem;
+}
+.task input[type="checkbox"] {
+    width: 1.3rem;
+    height: 1.3rem;
 }

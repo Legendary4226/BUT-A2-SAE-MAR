@@ -1,4 +1,4 @@
-<?php
+<?
 
 // Important Paths to project files
 define("CONTROLLERS", "src/controllers/");

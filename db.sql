@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS box
     box_id INTEGER PRIMARY KEY AUTO_INCREMENT,
     box_space INTEGER NOT NULL,
     box_name VARCHAR(20) NOT NULL,
+    box_elements_order JSON,
 
     FOREIGN KEY (box_space) REFERENCES space(space_id),
 );
