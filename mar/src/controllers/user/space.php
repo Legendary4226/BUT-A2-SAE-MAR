@@ -100,8 +100,43 @@ if ($action == "switchBox") {
     header("Location: " . LINK_SPACE);
 }
 
-if ($action == "saveElements") {    //var_dump($box_elements);
-    
+if ($action == "saveElements") {
+    $elementId = [];
+    $i = 0;
+    $temp = [];
+    foreach($_POST as $id=>$element){
+        $splitted = preg_split("/:/", $id);
+        $elementId[$i] = $splitted[0];
+        
+        if ($elementId[$i] > 0){
+            $temp[$i] = $elementDAO->getElement($elementId[$i]);
+        }
+
+        if ($elementId[$i] < 0){
+            if ($_POST[$id] == 'task'){
+                $elementDAO->createElement(new Element(
+                    $id, 
+                    '{"checked": '.(isset($_POST[$id.':task']) ? 'true' : 'false').', "content":"' . $_POST[$id.":tasknote"] .'"}',
+                    $_SESSION['user_current_box'], 
+                    $_POST[$id]
+                ));
+            }
+            if ($_POST[$id] == 'note'){
+                $elementDAO->createElement(new Element(
+                    $id, '{"content":"' . $_POST[$id.":note"] .'"}', 
+                    $_SESSION['user_current_box'], 
+                    $_POST[$id]
+                ));
+            }
+        }    
+        $i++;
+
+    }
+    /*
+    // update Element Order of current BOX
+    $boxtemp = $boxDAO->getBox($_SESSION['user_current_box']);
+    $boxtemp->setElementOrder($_POST['elements-order']);
+    $boxDAO->updateBox($boxtemp);*/
 }
 
 

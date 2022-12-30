@@ -48,7 +48,7 @@ function addElement(element) {
             childrens = clone.querySelector("div.element-body").children
             
             childrens[0].name = newId
-            childrens[1].name.replace(/note-ID/, newId)
+            childrens[1].name = childrens[1].name.replace(/note-ID/, newId)
 
             break;
 
@@ -57,8 +57,8 @@ function addElement(element) {
             childrens = clone.querySelector("div.element-body").children
 
             childrens[0].name = newId
-            childrens[1].name.replace(/task-ID/, newId)
-            childrens[2].name.replace(/task-ID/, newId)
+            childrens[1].name = childrens[1].name.replace(/task-ID/, newId)
+            childrens[2].name = childrens[2].name.replace(/task-ID/, newId)
 
             break;
 

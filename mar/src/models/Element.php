@@ -33,7 +33,7 @@ class Element {
 
     // Setters
     public function setContent($element_content){
-        $this->element_content = $element_content;
+        $this->element_content = json_decode($element_content, true);
     }
 
     public function setBox($element_box){
@@ -64,9 +64,9 @@ class ElementDAO {
     public function createElement(Element $element)
     {
         $result = $this->db->executeQuery(
-            "INSERT INTO element(element_content, element_box, element_type) VALUES(?, ?, ?)",
+            "INSERT INTO element(element_data, element_box, element_type) VALUES(?, ?, ?)",
             array(
-                $element->getContent(),
+                json_encode($element->getContent()),
                 $element->getBox(),
                 $element->getType()
             )
