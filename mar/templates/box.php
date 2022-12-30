@@ -119,7 +119,7 @@ $ENABLE_LEFT_BOX_MENU = true; ?>
 
             <? ob_start();
 
-            foreach ($current_box == null ? [] : $current_box->getElementsOrder() as $element_id){
+            foreach ($current_box == null ? [] : $updatedBox->getElementsOrder() as $element_id){ 
 
                 $element = $elements[$element_id]; ?>
                 

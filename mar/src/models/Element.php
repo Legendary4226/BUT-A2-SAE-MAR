@@ -76,6 +76,44 @@ class ElementDAO {
     }
 
     /**
+     * Delete a Element.
+     * This function suppose that all informations are correct.
+     * @param string $element_id
+     * @return bool if delete, else return Null
+     */
+    public function deleteElement(string $element_id)
+    {
+        $result = $this->db->executeQuery(
+            "DELETE FROM element WHERE element_id = ?;",
+            array(
+                $element_id,
+            )
+        );
+
+        return $result != false;
+    }
+
+    /**
+     * Update a Element informations.
+     * @param Element $Element The updated Element
+     * @return bool True if the Element was successfully updated, otherwise false.
+     */
+    public function updateElement(Element $element)
+    {
+        $result = $this->db->executeQuery(
+            "UPDATE element SET element_data = ?, element_box = ?, element_type = ? WHERE Element_id = ?;",
+            array(
+                json_encode($element->getContent()),
+                $element->getBox(),
+                $element->getType(),
+                $element->getId()
+            )
+        );
+
+        return $result != false;
+    }
+
+    /**
      * Get an array with all Element of the Box.
      * @param string $element_box
      * @return array Containing Elements of the Box associating element_box => Element.
@@ -128,4 +166,7 @@ class ElementDAO {
 
         return $result;
     }
+
+
+
 }

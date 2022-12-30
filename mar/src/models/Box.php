@@ -11,7 +11,7 @@ class Box {
         $this->box_id = $box_id;
         $this->box_space = $box_space;
         $this->box_name = $box_name;
-        $this->box_elements_order = json_decode($box_elements_order);
+        $this->box_elements_order = json_decode($box_elements_order, true);
     }
 
     // Getters
@@ -40,7 +40,7 @@ class Box {
         $this->box_space = $box_space;
     }
 
-    public function setElementOrder($box_elements_order){
+    public function setElementsOrder($box_elements_order){
         $this->box_elements_order = json_decode($box_elements_order);
     }
 
