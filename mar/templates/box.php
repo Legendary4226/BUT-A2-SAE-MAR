@@ -107,7 +107,7 @@ $ENABLE_LEFT_BOX_MENU = true; ?>
         <!-- END ELEMENTS HTML TEMPLATES -->
     </div>
     <form action="<?= LINK_SPACE . "&action=saveElements"?>" method="POST" class="form-box-content">
-        <input type="text" name="box-title" class="box-title" value="<?= $current_box == null ? "It's empty here?" : $current_box->getName() ?>">
+        <h1 class="box-title"><?= $current_box == null ? "It's empty here?" : $current_box->getName() ?></h1>
 
         <input type="hidden" name="elements-order" id="elements-order" value='<?= $current_box == null ? "[]" : json_encode($current_box->getElementsOrder()) ?>'>
         
@@ -119,7 +119,7 @@ $ENABLE_LEFT_BOX_MENU = true; ?>
 
             <? ob_start();
 
-            foreach ($current_box == null ? [] : $updatedBox->getElementsOrder() as $element_id){ 
+            foreach ($current_box == null ? [] : $current_box->getElementsOrder() as $element_id){ 
 
                 $element = $elements[$element_id]; ?>
                 

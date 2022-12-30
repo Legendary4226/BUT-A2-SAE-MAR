@@ -80,7 +80,7 @@ function deleteElement(element) {
     if (elementId < 0) {
         element.remove()
     } else {
-        elementBody.children[0].name += ":deleted"
+        elementBody.children[0].value += ":deleted"
         element.classList.add("deleted")
     }
 }

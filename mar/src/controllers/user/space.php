@@ -76,7 +76,7 @@ if ($action == "saveBox") {
             $boxDAO->deleteBox($boxId);
         }
 
-        // Rename a box
+        // Rename a box if values are different
         elseif($user_boxes[$boxId]->getName() != $boxName) {
             $user_boxes[$boxId]->setName($boxName);
             $boxDAO->updateBox($user_boxes[$boxId]);
@@ -89,6 +89,7 @@ if ($action == "saveBox") {
 if ($action == "switchSpace") {
     $_SESSION['user_current_space'] = $_POST["space-id"];
     unset($_SESSION["user_current_box"]);
+
     header("Location: " . LINK_SPACE);
 }
 
@@ -98,74 +99,72 @@ if ($action == "switchBox") {
     } else {
         unset($_SESSION['user_current_box']);
     }
+
     header("Location: " . LINK_SPACE);
 }
 
-$updatedBox = $boxDAO->getBox($_SESSION['user_current_box']);
-
 if ($action == "saveElements") {
-    $current_box_elements = $elementDAO->getElements($current_box->getId());
+    $updatedBox = clone $current_box;
     $updatedBox->setElementsOrder($_POST['elements-order']);
-    
-    $curentElementsId = [];
-    foreach($current_box_elements as $id){
-        array_push($curentElementsId, $id->getId());
-    }
+    unset($_POST['elements-order']);
 
-    foreach($_POST as $id=>$element){
-        @[ $elementId, $elementType ] = preg_split("/:/", $id);
-        
-        // New elements have a negative ID like -1, -2, ...
-        if ($elementId < 0){
-            if ($_POST[$id] == 'task'){
+    foreach($_POST as $id=>$elementType){
+        $isId = ! str_contains($id, ":");
+        $isNew = $isId && $id < 0;
+        $isToDelete = $isId && str_contains($elementType, "deleted");
+        $isBoxNotUpdated = false;
+
+        if ($isToDelete) {
+            $elementDAO->deleteElement($id);
+
+            unset(
+                $updatedBox->getElementsOrder()[
+                    array_search($id, $updatedBox->getElementsOrder())
+                ]
+            );
+
+            $isBoxNotUpdated = true;
+        }
+
+        if ($isNew) {
+            if ($elementType == 'task'){
                 $newElem = new Element(
-                    $id, 
+                    $id,
                     '{"checked": '.(isset($_POST[$id.':task']) ? 'true' : 'false').', "content":"' . $_POST[$id.":tasknote"] .'"}',
-                    $_SESSION['user_current_box'], 
-                    $_POST[$id]
+                    $_SESSION['user_current_box'],
+                    $elementType
                 );
             }
-            if ($_POST[$id] == 'note'){
+            if ($elementType == 'note'){
                 $newElem = new Element(
-                    $id, 
-                    '{"content":"' . $_POST[$id.":note"] .'"}', 
-                    $_SESSION['user_current_box'], 
-                    $_POST[$id]
+                    $id,
+                    '{"content":"' . $_POST[$id.":note"] .'"}',
+                    $_SESSION['user_current_box'],
+                    $elementType
                 );
             }
             $elementDAO->createElement($newElem);
         }
 
-        // delete elements
-        elseif(isset($elementType) && str_contains($elementType, "deleted")){
-            $elementDAO->deleteElement($elementId);
-
-            $orderId = $updatedBox->getElementsOrder();
-            $supprId = array_search($elementId, $orderId);
-            unset($orderId[$supprId]);
-
-            $updatedBox->setElementsOrder(json_encode($orderId));
-        }
-
-        // Modify elements
-        elseif ($elementId > 0 && $elementId != 'box-title' && $elementId != 'elements-order'){
-            $modified_element = $elementDAO->getElement($elementId);
-            if ($modified_element && in_array($modified_element->getId(), $curentElementsId)){
-                $elem = $elementDAO->getElement($elementId);
-                if ($_POST[$elementId] == 'task'){
-                    $elem->setContent('{"checked": '.(isset($_POST[$elementId.':task']) ? 'true' : 'false').', "content":"' . $_POST[$elementId.":tasknote"] .'"}');  
+        // Element to modify or do nothing
+        if ($isId && ! $isToDelete && ! $isNew) {
+            if ($elements[$id] && in_array($elements[$id]->getId(), $current_box->getElementsOrder())){
+                if ($_POST[$id] == 'task'){
+                    $elements[$id]->setContent('{"checked": '.(isset($_POST[$id.':task']) ? 'true' : 'false').', "content":"' . $_POST[$id.":tasknote"] .'"}');  
                 }
-                if ($_POST[$elementId] == 'note'){
-                    $elem->setContent('{"content":"' . $_POST[$elementId.":note"] .'"}');
+                if ($_POST[$id] == 'note'){
+                    $elements[$id]->setContent('{"content":"' . $_POST[$id.":note"] .'"}');
                 }
-                $elementDAO->updateElement($elem);
+                $elementDAO->updateElement($elements[$id]);
             }
         }
-
-        $elements = $elementDAO->getElements($updatedBox->getId());
     }
-    var_dump($_POST);
-    $boxDAO->updateBox($updatedBox);
+
+    if ($isBoxNotUpdated) {
+        $boxDAO->updateBox($updatedBox);
+    }
+
+    //header("Location: " . LINK_SPACE);
 }
 
 
