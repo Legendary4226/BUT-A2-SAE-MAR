@@ -32,8 +32,12 @@ class Element {
     }
 
     // Setters
-    public function setContent($element_content){
-        $this->element_content = json_decode($element_content, true);
+    public function setContent($element_content, $isJSON = false){
+        if ($isJSON) {
+            $this->element_content = $element_content;
+        } else {
+            $this->element_content = json_decode($element_content, true);
+        }
     }
 
     public function setBox($element_box){
@@ -43,8 +47,6 @@ class Element {
     public function setType($element_type){
         $this->element_type = $element_type;
     }
-
-    
 }
 
 class ElementDAO {

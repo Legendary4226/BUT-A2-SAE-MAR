@@ -107,66 +107,127 @@ if ($action == "saveElements") {
     $updatedBox = clone $current_box;
     $updatedBox->setElementsOrder($_POST['elements-order']);
     unset($_POST['elements-order']);
+    $deletedElements = [];
 
-    foreach($_POST as $id=>$elementType){
-        $isId = ! str_contains($id, ":");
-        $isNew = $isId && $id < 0;
-        $isToDelete = $isId && str_contains($elementType, "deleted");
-        $isBoxNotUpdated = false;
+    $isBoxNotUpdated = false;
+    $indexInOrder = 0;
+    foreach($_POST as $id=>$type)
+    {
+        $isId = ! str_contains($id, ':');
 
-        if ($isToDelete) {
-            $elementDAO->deleteElement($id);
+        if ($isId) {
+            $isNew = $id < 0;
+            $isToDelete = str_contains($type, "deleted");
+            $isToModify = ! $isToDelete && ! $isNew;
 
-            unset(
-                $updatedBox->getElementsOrder()[
-                    array_search($id, $updatedBox->getElementsOrder())
-                ]
-            );
-
-            $isBoxNotUpdated = true;
-        }
-
-        if ($isNew) {
-            if ($elementType == 'task'){
-                $newElem = new Element(
-                    $id,
-                    '{"checked": '.(isset($_POST[$id.':task']) ? 'true' : 'false').', "content":"' . $_POST[$id.":tasknote"] .'"}',
-                    $_SESSION['user_current_box'],
-                    $elementType
-                );
-            }
-            if ($elementType == 'note'){
-                $newElem = new Element(
-                    $id,
-                    '{"content":"' . $_POST[$id.":note"] .'"}',
-                    $_SESSION['user_current_box'],
-                    $elementType
-                );
-            }
-            $elementDAO->createElement($newElem);
-        }
-
-        // Element to modify or do nothing
-        if ($isId && ! $isToDelete && ! $isNew) {
-            if ($elements[$id] && in_array($elements[$id]->getId(), $current_box->getElementsOrder())){
-                if ($_POST[$id] == 'task'){
-                    $elements[$id]->setContent('{"checked": '.(isset($_POST[$id.':task']) ? 'true' : 'false').', "content":"' . $_POST[$id.":tasknote"] .'"}');  
+            if ($isToDelete) {
+                $elementDAO->deleteElement($id);
+                $updatedBox->deleteElementFromOrder($id);
+                $deletedElements[] = $id;
+                if ($indexInOrder > 0) {
+                    $indexInOrder--;
                 }
-                if ($_POST[$id] == 'note'){
-                    $elements[$id]->setContent('{"content":"' . $_POST[$id.":note"] .'"}');
-                }
-                $elementDAO->updateElement($elements[$id]);
+                $isBoxNotUpdated = true;
             }
+    
+            if ($isNew) {
+                createNewElement($id, $type);
+                $updatedBox->insertElementOrder($indexInOrder, $id);
+                $isBoxNotUpdated = true;
+            }
+
+            if ($isToModify) {
+                modifyElement($id, $type);
+            }
+
+            $indexInOrder++;
         }
     }
 
     if ($isBoxNotUpdated) {
+        $newElementsIDs = array_diff($boxDAO->getElementsIDList($_SESSION['user_current_box']), $current_box->getElementsOrder(), $deletedElements);
+        sort($newElementsIDs);
+
+        $j = 0;
+        for($i = 0; $i < count($updatedBox->getElementsOrder()); $i++) {
+            if ($updatedBox->getElementsOrder()[$i] < 0) {
+                $updatedBox->replaceElementOrder($i, $newElementsIDs[$j]);
+                $j++;
+            }
+        }
+
         $boxDAO->updateBox($updatedBox);
     }
 
     //header("Location: " . LINK_SPACE);
 }
 
+// REFACTOR : Create a model foreach elements Type ! This change will make these infinite switch shorter and cleaner.
+// Create a interface 'Element', because 
+
+function createNewElement($id, $type) {
+    global $elementDAO;
+    $newElement = null;
+
+    switch ($type)
+    {
+        case 'task':
+            $newElement = new Element( $id, "", $_SESSION['user_current_box'], $type );
+            $newElement->setContent([
+                "checked" => isset($_POST[$id.':task']),
+                "content" => $_POST[$id.":tasknote"]
+            ], true);
+            break;
+        case 'note':
+            $newElement = new Element( $id, "", $_SESSION['user_current_box'], $type );
+            $newElement->setContent([
+                "content" => $_POST[$id.":note"]
+            ], true);
+            break;
+    }
+    if ($newElement != null) {
+        $elementDAO->createElement($newElement);
+    }
+}
+
+function modifyElement($id, $type) {
+    global $elements, $elementDAO;
+    $isModified = false;
+    $e = $elements[$id];
+    $content = $e->getContent();
+
+    switch ($type)
+    {
+        case 'task':
+            $isValid = isset($_POST["${id}:tasknote"]);
+            $newState = isset($_POST["${id}:task"]);
+            $newContent = $_POST["${id}:tasknote"];
+
+            if ($isValid && ( $content["checked"] != $newState || $content["content"] != $newContent )) {
+                $e->setContent([
+                    "checked" => $newState,
+                    "content" => $newContent
+                ],true);
+                $isModified = true;
+            }
+            break;
+
+        case 'note':
+            $isValid = isset($_POST["${id}:note"]);
+            $newContent = $_POST["${id}:note"];
+
+            if ($isValid && ( $content["content"] != $newContent )) {
+                $e->setContent([
+                    "content" => $newContent
+                ], true);
+                $isModified = true;
+            }
+            break;
+    }
+    if ($isModified) {
+        $elementDAO->updateElement($e);
+    }
+}
 
 
 require_once(TEMPLATES . $viewToRequire . ".php");

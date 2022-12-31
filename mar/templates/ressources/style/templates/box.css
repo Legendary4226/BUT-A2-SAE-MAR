@@ -313,7 +313,7 @@ body > main {
     gap: 1rem;
 }
 .task input[type="text"] {
-    width: 15rem;
+    width: 25rem;
 }
 .task input[type="checkbox"] {
     width: 1.3rem;

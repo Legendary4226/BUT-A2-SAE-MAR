@@ -4,9 +4,9 @@ class Box {
     private $box_id;
     private $box_space;
     private string $box_name;
-    private $box_elements_order;
+    private array $box_elements_order;
 
-    public function __construct($box_id, $box_space, string $box_name, $box_elements_order)
+    public function __construct($box_id, $box_space, string $box_name, string $box_elements_order)
     {
         $this->box_id = $box_id;
         $this->box_space = $box_space;
@@ -44,7 +44,20 @@ class Box {
         $this->box_elements_order = json_decode($box_elements_order);
     }
 
-    
+
+    public function deleteElementFromOrder($id) {
+        unset($this->box_elements_order[
+            array_search($id, $this->box_elements_order)
+        ]);
+    }
+
+    public function insertElementOrder($position, $insert) {
+        array_splice($this->box_elements_order, $position, 0, $insert);
+    }
+
+    public function replaceElementOrder($position, $value) {
+        array_splice($this->box_elements_order, $position, 1, $value);
+    }
 }
 
 class BoxDAO {
@@ -160,6 +173,27 @@ class BoxDAO {
                 $result[2],
                 $result[3]
             );
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get a Box elements IDs list.
+     * @param string $box_id
+     * @return array a list of IDs.
+     */
+    public function getElementsIDList(string $box_id) {
+        $elementsIds = $this->db->executeQuery(
+            "SELECT element_id FROM element WHERE element_box = ?",
+            array(
+                $box_id
+            )
+        )->fetchAll();
+
+        $result = [];
+        foreach($elementsIds as $id) {
+            $result[] = $id['element_id'];
         }
 
         return $result;
