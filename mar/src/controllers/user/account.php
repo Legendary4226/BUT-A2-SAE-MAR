@@ -1,8 +1,10 @@
 <?php
 
 require_once(MODELS . "User.php");
+require_once(MODELS . "Space.php");
 
 $userDAO = new UserDAO();
+$spaceDAO = new SpaceDAO();
 
 $action = null;
 $viewToRequire = "account";
@@ -10,6 +12,24 @@ $viewToRequire = "account";
 if (!empty($_GET['action'])) {
     $action = $_GET['action'];
 }
+
+
+
+//---  Initialisations
+
+
+
+$spaces = $spaceDAO->getSpaces($_SESSION['user_id']);
+
+if (! isset($_SESSION['user_current_space'])) {
+    $_SESSION['user_current_space'] = array_key_first($spaces);
+}
+
+
+
+//--- Actions
+
+
 
 if ($action == 'modifyAccount'){
     $viewToRequire = "account";
@@ -59,6 +79,13 @@ if ($action == 'modifyAccount'){
 
 if ($action == "manageSpace") {
     $viewToRequire = "space-management";
+}
+
+if ($action == "switchSpace") {
+    $_SESSION['user_current_space'] = $_GET["space-id"];
+    unset($_SESSION["user_current_box"]);
+
+    header("Location: " . LINK_ACCOUNT_SPACE_SETTINGS);
 }
 
 
