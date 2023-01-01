@@ -14,7 +14,7 @@ define("LINK_CONNECTION_LOGOUT", LINK_CONNECTION . "&action=logout");
 
 
 define("LINK_ACCOUNT", INDEX_FILE . "user/account");
-define("LINK_ACCOUNT_SPACE_SETTINGS", INDEX_FILE . "user/account&action=shareSpace");
+define("LINK_ACCOUNT_SPACE_SETTINGS", INDEX_FILE . "user/account&action=manageSpace");
 
 
 define("LINK_SPACE", INDEX_FILE . "user/space");

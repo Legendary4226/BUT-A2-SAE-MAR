@@ -12,6 +12,10 @@ main > section {
     padding: 1rem 0;
 }
 
+input::placeholder {
+    color: var(--color-secondary);
+}
+
 fieldset {
     border: none;
 }

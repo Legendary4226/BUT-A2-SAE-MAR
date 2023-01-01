@@ -10,7 +10,7 @@
 
     <!-- Specific CSS Files -->
     <link rel="stylesheet" href="<?= STYLES ?>templates/account.css">
-    <link rel="stylesheet" href="<?= STYLES ?>templates/space.css">
+    <link rel="stylesheet" href="<?= STYLES ?>templates/space-management.css">
 </head>
 <body>
 <?php
@@ -53,19 +53,6 @@ $headerButtonsLinks = array(
 
             <fieldset class="space-share">
 
-            <span>
-                    <input type="email" name="520" placeholder="example@email.com" required>
-                    <label for="ID:permission"> Permission :</label>
-                    <select name="ID:permission" id="ID:permission">
-                        <option value="read">Read</option>
-                        <option value="edit">Edit</option>
-                    </select>
-
-                    <button class="action-button transition-simple-bump" class="delete-button" type="button">
-                        <?php require(ICON_SVG_CLOSE) ?>
-                    </button>
-                </span>
-
                 <span id="init-clone">
                     <input type="email" name="ID" placeholder="example@email.com" required>
                     <label for="ID:permission"> Permission :</label>
@@ -102,6 +89,6 @@ $headerButtonsLinks = array(
 </main>
 
 <?php require_once("ressources/footer.php"); ?>
-<script src="<?= TEMPLATES ?>ressources/JS/space.js"></script>
+<script src="<?= TEMPLATES ?>ressources/javascript/space.js"></script>
 </body>
 </html>

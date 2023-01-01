@@ -57,8 +57,8 @@ if ($action == 'modifyAccount'){
     }
 }
 
-if ($action == "shareSpace") {
-    $viewToRequire = "space-sharing";
+if ($action == "manageSpace") {
+    $viewToRequire = "space-management";
 }
 
 
