@@ -48,3 +48,16 @@ usersFieldset.addEventListener("click",(event)=>{
     }
 })
 
+/* Add Space */
+let linkCreateSpace = document.getElementById("create-space");
+linkCreateSpace.addEventListener("click", (event) => {
+    let spaceName = prompt("Entrez le nom du nouvel espace :")
+
+    if (spaceName == null || spaceName == "") {
+        event.preventDefault();
+        if (spaceName == "") alert("Erreur lors de votre saisie.")
+        
+    } else {
+        linkCreateSpace.href += spaceName;
+    }
+})

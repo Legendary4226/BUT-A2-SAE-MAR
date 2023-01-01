@@ -41,6 +41,10 @@ $headerButtonsLinks = array(
             </a>
         <? }
         ob_end_flush(); ?>
+
+        <a id="create-space" class="transition-simple-bump" href="<?= LINK_ACCOUNT ?>&action=createSpace&newSpaceName=">
+            <?php require(ICON_SVG_PLUS) ?>
+        </a>
     </section>
     
     <section>
@@ -81,7 +85,7 @@ $headerButtonsLinks = array(
                     <span>
                         <input class="input-add-people-email" type="email" id="new-person" placeholder="example@email.com" maxlength="35">
                         <button class="action-button transition-simple-bump">
-                            <?php require_once(ICON_SVG_PLUS) ?>
+                            <?php require(ICON_SVG_PLUS) ?>
                         </button>
                     </span>
             </fieldset>

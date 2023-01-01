@@ -81,6 +81,16 @@ if ($action == "manageSpace") {
     $viewToRequire = "space-management";
 }
 
+if ($action == "createSpace") {
+    if (!empty($_GET["newSpaceName"]) && $_GET["newSpaceName"] != "") {
+        $spaceDAO->createSpace(new Space(
+            -1, $_GET["newSpaceName"], $_SESSION["user_id"]
+        ));
+    }
+
+    header("Location: " . LINK_ACCOUNT_SPACE_SETTINGS);
+}
+
 if ($action == "switchSpace") {
     $_SESSION['user_current_space'] = $_GET["space-id"];
     unset($_SESSION["user_current_box"]);
