@@ -6,19 +6,19 @@
     <title>Sign Up</title>
 
     <!-- Global CSS Files -->
-    <?php require_once(TEMPLATES . "ressources/css_files.php") ?>
+    <? require_once(TEMPLATES . "ressources/css_files.php") ?>
 
     <!-- Specific CSS Files -->
     <link rel="stylesheet" href="<?= STYLES ?>templates/login_signin.css">
 </head>
 <body>
-<?php
+<?
 $headerButtonsLinks = array(
     "Home" => LINK_HOME,
     "Sign In" => LINK_CONNECTION_SIGNIN
 );
 ?>
-<?php require_once("ressources/header.php"); ?>
+<? require_once("ressources/header.php"); ?>
 
 <main>
     <form method="POST" action="<?= LINK_CONNECTION_SIGNUP ?>" class="form-login-signin">
@@ -45,6 +45,6 @@ $headerButtonsLinks = array(
     </form>
 </main>
 
-<?php require_once("ressources/footer.php"); ?>
+<? require_once("ressources/footer.php"); ?>
 </body>
 </html>

@@ -6,19 +6,19 @@
     <title>Document</title>
 
     <!-- Global CSS Files -->
-    <?php require_once(TEMPLATES . "ressources/css_files.php") ?>
+    <? require_once(TEMPLATES . "ressources/css_files.php") ?>
 
     <!-- Specific CSS Files -->
     <link rel="stylesheet" href="<?= STYLES ?>templates/error.css">
     
 </head>
 <body>
-<?php
+<?
 $headerButtonsLinks = array(
     "Home" => LINK_HOME
 );
 ?>
-<?php require_once("ressources/header.php"); ?>
+<? require_once("ressources/header.php"); ?>
 
 <main>
     <h1 class="error-title"><?= (!empty($_GET['title'])) ? $_GET['title'] : "Error" ?></h1>
@@ -34,6 +34,6 @@ $headerButtonsLinks = array(
     </a>
 </main>
 
-<?php require_once("ressources/footer.php"); ?>
+<? require_once("ressources/footer.php"); ?>
 </body>
 </html>

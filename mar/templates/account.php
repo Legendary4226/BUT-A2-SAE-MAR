@@ -6,19 +6,19 @@
     <title>Account</title>
 
     <!-- Global CSS Files -->
-    <?php require_once(TEMPLATES . "ressources/css_files.php") ?>
+    <? require_once(TEMPLATES . "ressources/css_files.php") ?>
 
     <!-- Specific CSS Files -->
     <link rel="stylesheet" href="<?= STYLES ?>templates/account.css">
 </head>
 <body>
-<?php
+<?
 $headerButtonsLinks = array(
     "Spaces" => LINK_SPACE,
     "Log out" => LINK_CONNECTION_LOGOUT
 );
 ?>
-<?php require_once("ressources/header.php"); ?>
+<? require_once("ressources/header.php"); ?>
 
 <main>
 
@@ -60,6 +60,6 @@ $headerButtonsLinks = array(
 
 </main>
 
-<?php require_once("ressources/footer.php"); ?>
+<? require_once("ressources/footer.php"); ?>
 </body>
 </html>

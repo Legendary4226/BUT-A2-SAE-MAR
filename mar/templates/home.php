@@ -6,13 +6,13 @@
     <title>Document</title>
 
     <!-- Global CSS Files -->
-    <?php require_once(TEMPLATES . "ressources/css_files.php") ?>
+    <? require_once(TEMPLATES . "ressources/css_files.php") ?>
 
     <!-- Specific CSS Files -->
     <link rel="stylesheet" href="<?= STYLES ?>templates/home.css">
 </head>
 <body>
-<?php
+<?
 
 if ($_SESSION['user_id'] == null) {
     $headerButtonsLinks = array(
@@ -26,7 +26,7 @@ if ($_SESSION['user_id'] == null) {
     );
 }
 ?>
-<?php require_once("ressources/header.php"); ?>
+<? require_once("ressources/header.php"); ?>
 
 <main>
     <p>
@@ -36,6 +36,6 @@ if ($_SESSION['user_id'] == null) {
     <img src="">
 </main>
 
-<?php require_once("ressources/footer.php"); ?>
+<? require_once("ressources/footer.php"); ?>
 </body>
 </html>

@@ -1,4 +1,4 @@
-<?php
+<?
 
 /**
  * Singleton for the Database containing the PDO instance.
@@ -37,7 +37,7 @@ class DatabaseConnection{
     private $_PDO;
 
     function __construct(){
-        $this->_PDO = new PDO('mysql:host='. BD_HOST . ';port=' . DB_PORT .';dbname='. BD_DBNAME .';charset=utf8', BD_USER , BD_PWD);
+        $this->_PDO = new PDO('mysql:host='. BD_HOST . ';port=' . DB_PORT .';dbname='. BD_DBNAME .';charset=utf8mb4', BD_USER , BD_PWD);
         $this->_PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 

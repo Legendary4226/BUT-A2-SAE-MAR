@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS box
     box_id INTEGER PRIMARY KEY AUTO_INCREMENT,
     box_space INTEGER NOT NULL,
     box_name VARCHAR(20) NOT NULL,
+    box_elements_order JSON,
 
     FOREIGN KEY (box_space) REFERENCES space(space_id),
 );
@@ -43,9 +44,9 @@ CREATE TABLE IF NOT EXISTS box
 CREATE TABLE IF NOT EXISTS element
 (
     element_id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    element_content MEDIUMTEXT,
+    element_datas JSON,
     element_box INTEGER NOT NULL,
-    element_type VARCHAR(10),
+    element_type VARCHAR(50),
 
     FOREIGN KEY (element_box) REFERENCES box(box_id)
 );

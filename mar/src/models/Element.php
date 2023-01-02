@@ -1,50 +1,52 @@
-<?php
+<?
 
 class Element {
     private $element_id;
-    private string $element_content;
+    private $element_content;
     private $element_box;
     private $element_type;
 
     public function __construct($element_id, string $element_content, $element_box, $element_type)
     {
         $this->element_id = $element_id;
-        $this->element_content = $element_content;
+        $this->element_content = json_decode($element_content, true);
         $this->element_box = $element_box;
-        $this->$element_type = $element_type;
+        $this->element_type = $element_type;
     }
 
     // Getters
-    public function getElementId(){
+    public function getId(){
         return $this->element_id;
     }
 
-    public function getElementContent(){
+    public function getContent(){
         return $this->element_content;
     }
 
-    public function getElementBox(){
+    public function getBox(){
         return $this->element_box;
     }
 
-    public function getElementType(){
+    public function getType(){
         return $this->element_type;
     }
 
     // Setters
-    public function setElementContent($element_content){
-        $this->element_content = $element_content;
+    public function setContent($element_content, $isJSON = false){
+        if ($isJSON) {
+            $this->element_content = $element_content;
+        } else {
+            $this->element_content = json_decode($element_content, true);
+        }
     }
 
-    public function setElementBox($element_box){
+    public function setBox($element_box){
         $this->element_box = $element_box;
     }
 
-    public function setElementType($element_type){
+    public function setType($element_type){
         $this->element_type = $element_type;
     }
-
-    
 }
 
 class ElementDAO {
@@ -64,11 +66,49 @@ class ElementDAO {
     public function createElement(Element $element)
     {
         $result = $this->db->executeQuery(
-            "INSERT INTO element(element_content, element_box, element_type) VALUES(?, ?, ?)",
+            "INSERT INTO element(element_data, element_box, element_type) VALUES(?, ?, ?)",
             array(
-                htmlspecialchars($element->getElementContent()),
-                $element->getElementBox(),
-                $element->getElementType()
+                json_encode($element->getContent()),
+                $element->getBox(),
+                $element->getType()
+            )
+        );
+
+        return $result != false;
+    }
+
+    /**
+     * Delete a Element.
+     * This function suppose that all informations are correct.
+     * @param string $element_id
+     * @return bool if delete, else return Null
+     */
+    public function deleteElement(string $element_id)
+    {
+        $result = $this->db->executeQuery(
+            "DELETE FROM element WHERE element_id = ?;",
+            array(
+                $element_id,
+            )
+        );
+
+        return $result != false;
+    }
+
+    /**
+     * Update a Element informations.
+     * @param Element $Element The updated Element
+     * @return bool True if the Element was successfully updated, otherwise false.
+     */
+    public function updateElement(Element $element)
+    {
+        $result = $this->db->executeQuery(
+            "UPDATE element SET element_data = ?, element_box = ?, element_type = ? WHERE Element_id = ?;",
+            array(
+                json_encode($element->getContent()),
+                $element->getBox(),
+                $element->getType(),
+                $element->getId()
             )
         );
 
@@ -89,9 +129,9 @@ class ElementDAO {
             )
         )->fetchAll();
 
-        $boxes = array();
+        $elements = array();
         foreach($result as $element) {
-            $boxes[$element[0]] = new Element(
+            $elements[$element[0]] = new Element(
                 $element[0],
                 $element[1],
                 $element[2],
@@ -99,7 +139,8 @@ class ElementDAO {
             );
         }
 
-        return $boxes;
+        
+        return $elements;
     }
 
     /**
@@ -127,4 +168,7 @@ class ElementDAO {
 
         return $result;
     }
+
+
+
 }

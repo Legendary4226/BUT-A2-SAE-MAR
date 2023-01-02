@@ -1,4 +1,4 @@
-<?php
+<?
 
 class Space {
     private $space_id;
@@ -13,21 +13,21 @@ class Space {
     }
 
     // Getters
-    public function getSpaceId(){
+    public function getId(){
         return $this->space_id;
     }
-    public function getSpaceName(){
+    public function getName(){
         return $this->space_name;
     }
-    public function getSpaceOwner(){
+    public function getOwner(){
         return $this->space_owner;
     }
 
     // Setters
-    public function setSpaceName(string $space_name){
+    public function setName(string $space_name){
         $this->space_name = $space_name;
     }
-    public function setSpaceOwner($space_owner){
+    public function setOwner($space_owner){
         $this->space_owner = $space_owner;
     }
 }
@@ -51,8 +51,8 @@ class SpaceDAO {
         $result = $this->db->executeQuery(
             "INSERT INTO space(space_name, space_owner) VALUES(?, ?)",
             array(
-                htmlspecialchars($space->getSpaceName()),
-                $space->getSpaceOwner()
+                htmlspecialchars($space->getName()),
+                $space->getOwner()
             )
         );
 
