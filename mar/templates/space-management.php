@@ -48,7 +48,24 @@ $headerButtonsLinks = array(
     </section>
     
     <section>
-        <form methode="POST" action="" class="form-edit-space-settings">
+
+        <span id="init-clone">
+            <input type="email" name="ID" placeholder="example@email.com" required>
+            <label for="ID:permission"> Permission :</label>
+            <select name="ID:permission" id="ID:permission">
+                <option value="read">Read</option>
+                <option value="edit">Edit</option>
+            </select>
+
+            <button class="action-button transition-simple-bump" class="delete-button" type="button">
+                <?php require(ICON_SVG_CLOSE) ?>
+            </button>
+        </span>
+
+        <form method="POST" action="<?= LINK_ACCOUNT_SPACE_SETTINGS ?>" class="form-edit-space-settings">
+            <!-- Hidden input used to submit form with JS -->
+            <input id="submit-space-share" type="submit" style="display: none; visibility: hidden;">
+
             <fieldset class="space-name">
                 <label for="space-name">Space Name :</label>
                 <input id="space-name" type="text" name="space-name" value="<?= $spaces[$_SESSION['user_current_space']]->getName() ?>" maxlength="35" required> 
@@ -57,24 +74,11 @@ $headerButtonsLinks = array(
             <h1>Share with:</h1>
 
             <fieldset class="space-share">
-
-                <span id="init-clone">
-                    <input type="email" name="ID" placeholder="example@email.com" required>
-                    <label for="ID:permission"> Permission :</label>
-                    <select name="ID:permission" id="ID:permission">
-                        <option value="read">Read</option>
-                        <option value="edit">Edit</option>
-                    </select>
-
-                    <button class="action-button transition-simple-bump" class="delete-button" type="button">
-                        <?php require(ICON_SVG_CLOSE) ?>
-                    </button>
-                </span>
                 
             </fieldset>
 
             <fieldset>
-                <button class="action-button transition-simple-bump" id="save-modifications">
+                <button class="action-button transition-simple-bump" id="save-modifications" <?= $_SESSION['user_current_space'] == null ? 'style="display: none; visibility: hidden;"' : "" ?>>
                     <?php require(ICON_SVG_SAVE) ?>
                 </button>
             </fieldset>
