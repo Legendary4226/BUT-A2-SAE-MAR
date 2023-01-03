@@ -40,7 +40,7 @@ if ($action == 'modifyAccount'){
     if (!empty($_POST['name'] && $_POST['name'] != $_SESSION['user_name'])) {
         if (strlen($_POST['name']) <= 25) {
             $_SESSION['user_name'] = htmlspecialchars($_POST['name']);
-            $updateUser->getName($_SESSION['user_name']);
+            $updateUser->setName($_SESSION['user_name']);
             $atLeastOneModified = true;
         } else {
             ThrowError::redirect(
@@ -53,7 +53,7 @@ if ($action == 'modifyAccount'){
 
     if (!empty($_POST['email']) && $_POST['email'] != $_SESSION['user_email']) {
         $_SESSION['user_email'] = htmlspecialchars($_POST['email']);
-        $updateUser->getEmail($_SESSION['user_email']);
+        $updateUser->setEmail($_SESSION['user_email']);
         $atLeastOneModified = true;
     }
 
@@ -61,7 +61,7 @@ if ($action == 'modifyAccount'){
 
         if (strlen($_POST['changepass']) >= 8 && $_POST['changepass'] == $_POST['confpass']) {
             $_SESSION['user_pass'] = password_hash($_POST['changepass'], PASSWORD_BCRYPT);
-            $updateUser->getPass($_SESSION['user_pass']);
+            $updateUser->setPass($_SESSION['user_pass']);
             $atLeastOneModified = true;
         } else {
             ThrowError::redirect(
@@ -75,6 +75,8 @@ if ($action == 'modifyAccount'){
     if ($atLeastOneModified) {
         $userDAO->updateUser($updateUser);
     }
+
+    header("Location: " . LINK_ACCOUNT);
 }
 
 if ($action == "manageSpace") {

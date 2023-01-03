@@ -21,7 +21,7 @@ if ($_SESSION['user_id'] == null) {
     );
 } else {
     $headerButtonsLinks = array(
-        'Account' => LINK_ACCOUNT,
+        'Spaces' => LINK_SPACE,
         'Log Out' => LINK_CONNECTION_LOGOUT
     );
 }

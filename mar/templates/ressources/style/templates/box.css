@@ -140,6 +140,7 @@ body > main {
 
 .form-box-content {
     padding-top: 2rem;
+    padding-bottom: 15rem;
 
     display: flex;
     flex-direction: column;
@@ -244,8 +245,7 @@ body > main {
 .action-add, 
 .action-delete{
     position: absolute;
-    visibility: hidden;
-    opacity: 0;
+    opacity: 0.15;
     background-color: rgba(85, 85, 218, 0.08);
     border-radius: 20px;
     border: none;
@@ -273,7 +273,6 @@ body > main {
 
 .element:hover .action-add,
 .element:hover .action-delete {
-    visibility: visible;
     opacity: 0.8;
     cursor: pointer;
 }

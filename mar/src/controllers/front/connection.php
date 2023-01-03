@@ -28,7 +28,7 @@ if ($action == "signin") {
                 $_SESSION['user_name'] = $user->getName();
                 $_SESSION['user_pass'] = $user->getPass();
 
-                header("Location: " . LINK_HOME);
+                header("Location: " . LINK_SPACE);
             } else {
                 ThrowError::redirect(
                     "Mot de passe",

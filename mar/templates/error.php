@@ -27,7 +27,7 @@ $headerButtonsLinks = array(
         <p class="error-message"><?= (!empty($_GET['message'])) ? $_GET['message'] : "Unknown error" ?></p>
     </div>
 
-    <a href="<?= (!empty($_GET['return'])) ? $_GET['return'] : LINK_HOME ?>">
+    <a href="<?= !empty($_SESSION['error_return_link']) ? $_SESSION['error_return_link'] : LINK_HOME ?>">
         <button class="blue-button transition-simple-bump">
             Go Back
         </button>
