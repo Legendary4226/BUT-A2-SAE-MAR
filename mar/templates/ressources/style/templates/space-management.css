@@ -97,6 +97,10 @@ form select {
     position: fixed;
     bottom: 8rem;
     right: 4rem;
+
+    border: none;
+    background: none;
+    cursor: pointer;
 }
 
 #save-modifications .svg-icon-save {

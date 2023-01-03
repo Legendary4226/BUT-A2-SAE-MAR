@@ -2,9 +2,11 @@
 
 require_once(MODELS . "User.php");
 require_once(MODELS . "Space.php");
+require_once(MODELS . "SpaceSharing.php");
 
 $userDAO = new UserDAO();
 $spaceDAO = new SpaceDAO();
+$spaceSharingDAO = new SpaceSharingDAO();
 
 $action = null;
 $viewToRequire = "account";
@@ -81,6 +83,26 @@ if ($action == 'modifyAccount'){
 
 if ($action == "manageSpace") {
     $viewToRequire = "space-management";
+    if (!empty($_POST)){
+        foreach ($_POST as $key => $value){
+            @[ $shareId, $permission ] = preg_split("/:/", $key);
+
+            if ($key != "space-name" and $permission != null){
+                $shareUserId = $userDAO->getByEmail($_POST[$shareId]);
+                if ($shareUserId != null){
+                    $temp = new SpaceSharing(
+                        $shareUserId->getId(), 
+                        $_SESSION['user_current_space'],
+                        $_POST[$key] == 'Edit' ? 0 : 1
+                    );
+                    $spaceSharingDAO->createSpaceSharing($temp);
+                }
+            }
+            
+        }
+        
+        //var_dump($_SESSION);
+    }
 }
 
 if ($action == "createSpace") {

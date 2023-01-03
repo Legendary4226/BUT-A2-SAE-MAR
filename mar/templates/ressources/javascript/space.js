@@ -61,3 +61,10 @@ linkCreateSpace.addEventListener("click", (event) => {
         linkCreateSpace.href += spaceName;
     }
 })
+
+let saveBtn = document.getElementById("save-modification")
+
+/* Save space share */
+document.getElementById("save-modifications").addEventListener("click", () => {
+    document.getElementById("submit-space-share").dispatchEvent(new MouseEvent("click"))
+})
