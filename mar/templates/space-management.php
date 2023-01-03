@@ -36,8 +36,8 @@ $headerButtonsLinks = array(
         ob_start();
 
         foreach($spaces as $space) {?>
-            <a href="<?= LINK_ACCOUNT_SPACE_SETTINGS ?>&action=switchSpace&space-id=<?= $space->getSpaceId() ?>">
-                <button <?= $space->getSpaceId() == $_SESSION['user_current_space'] ? 'class="button-selected"' : '' ?>><?= $space->getSpaceName() ?></button>
+            <a href="<?= LINK_ACCOUNT_SPACE_SETTINGS ?>&action=switchSpace&space-id=<?= $space->getId() ?>">
+                <button <?= $space->getId() == $_SESSION['user_current_space'] ? 'class="button-selected"' : '' ?>><?= $space->getName() ?></button>
             </a>
         <? }
         ob_end_flush(); ?>
@@ -51,7 +51,7 @@ $headerButtonsLinks = array(
         <form methode="POST" action="" class="form-edit-space-settings">
             <fieldset class="space-name">
                 <label for="space-name">Space Name :</label>
-                <input id="space-name" type="text" name="space-name" value="<?= $spaces[$_SESSION['user_current_space']]->getSpaceName() ?>" maxlength="35" required> 
+                <input id="space-name" type="text" name="space-name" value="<?= $spaces[$_SESSION['user_current_space']]->getName() ?>" maxlength="35" required> 
             </fieldset>
 
             <h1>Share with:</h1>
