@@ -74,7 +74,23 @@ $headerButtonsLinks = array(
             <h1>Share with:</h1>
 
             <fieldset class="space-share">
-                
+                <?php foreach($spacesShared as $spaceShared){ 
+                    $email = $userDAO->getByID($spaceShared->getUsersId())->getEmail();
+                    $id = $spaceShared->getUsersId() .'-'. $spaceShared->getSpaceId();
+                    ?>
+                    <span id="<?=$id?>">
+                        <input type="email" name="<?=$id?>" value="<?= $email?>" required>
+                        <label for="<?=$id?>:permission"> Permission: </label>
+                        <select name="<?=$id?>:permission" id="<?=$id?>:permission">
+                            <option value="read" <?= $spaceShared->getPermission() == 'read' ? 'selected' : '' ?>>Read</option>
+                            <option value="edit" <?= $spaceShared->getPermission() == 'edit' ? 'selected' : '' ?>>Edit</option>
+                        </select>
+
+                        <button class="action-button transition-simple-bump" class="delete-button" type="button">
+                            <?php require(ICON_SVG_CLOSE) ?>
+                        </button>
+                    </span>
+                <?php } ?>
             </fieldset>
 
             <fieldset>
