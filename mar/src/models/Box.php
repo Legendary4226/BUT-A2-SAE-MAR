@@ -49,6 +49,8 @@ class Box {
         unset($this->box_elements_order[
             array_search($id, $this->box_elements_order)
         ]);
+        // Reset IDs of the array like [0:value, 2:value] to [0:value, 1:value]
+        $this->box_elements_order = array_values($this->box_elements_order);
     }
 
     public function insertElementOrder($position, $insert) {

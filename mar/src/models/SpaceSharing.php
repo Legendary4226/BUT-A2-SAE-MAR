@@ -65,12 +65,11 @@ class SpaceSharingDAO {
      * @param string $user_id
      * @return array Containing Spaces of the user associating space_id => Space.
      */
-    public function getShareSpaces(string $user_id, string $share_id)
+    public function getShareSpaces($share_id)
     {
         $result = $this->db->executeQuery(
-            "SELECT * FROM space_sharing WHERE share_user_id = ? AND share_space_id = ?",
+            "SELECT * FROM space_sharing WHERE share_space_id = ?",
             array(
-                $user_id,
                 $share_id
             )
         )->fetchAll();
@@ -110,5 +109,32 @@ class SpaceSharingDAO {
         }
 
         return $result;
+    }
+
+    public function updateShareSpace(SpaceSharing $spacesharing)
+    {
+        $result = $this->db->executeQuery(
+            "UPDATE space_sharing SET share_permission = ? WHERE share_user_id = ? and share_space_id = ? ;",
+            array(
+                $spacesharing->getPermission(),
+                $spacesharing->getUsersId(),
+                $spacesharing->getSpaceId()
+            )
+        );
+
+        return $result != false;
+    }
+
+    public function deleteElement($share_user_id, $share_space_id)
+    {
+        $result = $this->db->executeQuery(
+            "DELETE FROM space_sharing WHERE share_user_id = ? and share_space_id = ? ;",
+            array(
+                $share_user_id,
+                $share_space_id
+            )
+        );
+
+        return $result != false;
     }
 }
