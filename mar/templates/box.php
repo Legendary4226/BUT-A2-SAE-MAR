@@ -33,8 +33,18 @@ $ENABLE_LEFT_BOX_MENU = true; ?>
             foreach ($user_spaces as $space) {
             ?>
                 <option value="<?= $space->getId() ?>" <?= $space->getId() == $_SESSION['user_current_space'] ? 'selected' : '' ?>><?= $space->getName() ?></option>
-            <? }
-            ob_end_flush(); ?>
+            <? } ?>
+
+            <option value="">--separate--</option>
+
+            <?
+            foreach ($sharedSpace as $space_shared) {
+                $space = $spaceDAO->getSpace($space_shared->getSpaceId());
+            ?>
+                <option value="<?= $space->getId() ?>" <?= $space->getId() == $_SESSION['user_current_space'] ? 'selected' : '' ?>><?= $space->getName() ?></option>
+            <? } 
+            ob_end_flush(); 
+            ?>
         </select>
     </form>
     

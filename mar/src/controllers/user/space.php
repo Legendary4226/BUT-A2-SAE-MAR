@@ -1,12 +1,14 @@
 <?
 
 require_once(MODELS . "Space.php");
+require_once(MODELS . "SpaceSharing.php");
 require_once(MODELS . "Box.php");
 require_once(MODELS . "Element.php");
 
 $enableLeftBoxMenu = true;
 
 $spaceDAO = new SpaceDAO();
+$spaceSharedDAO = new SpaceSharingDAO();
 $boxDAO = new BoxDAO();
 $elementDAO = new ElementDAO();
 
@@ -33,6 +35,8 @@ if (sizeof($user_spaces) == 0) {
 
     $user_spaces = $spaceDAO->getSpaces($_SESSION['user_id']);
 }
+
+$sharedSpace = $spaceSharedDAO->getShareSpaceByUserId($_SESSION['user_id']);
 
 // Set the current user space ID
 if (!isset($_SESSION['user_current_space'])) {
