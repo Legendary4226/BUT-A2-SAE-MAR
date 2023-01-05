@@ -65,7 +65,7 @@ class SpaceSharingDAO {
      * @param string $user_id
      * @return array Containing Spaces of the user associating space_id => Space.
      */
-    public function getShareSpaces($share_id)
+    public function getShareSpaceBySpaceIds($share_id)
     {
         $result = $this->db->executeQuery(
             "SELECT * FROM space_sharing WHERE share_space_id = ?",
@@ -91,7 +91,7 @@ class SpaceSharingDAO {
      * @param string $space_id
      * @return Space return space corresponding of $space_id
      */
-    public function getShareSpace(string $space_id)
+    public function getShareSpaceBySpaceId(string $space_id)
     {
         $result = $this->db->executeQuery(
             "SELECT * FROM space_sharing WHERE space_share_id = ?",
@@ -101,7 +101,7 @@ class SpaceSharingDAO {
         )->fetch();
 
         if ($result != false) {
-            $result = new Space(
+            $result = new SpaceSharing(
                 $result[0],
                 $result[1],
                 $result[2]
@@ -109,6 +109,27 @@ class SpaceSharingDAO {
         }
 
         return $result;
+    }
+
+    public function getShareSpaceByUserId(string $user_id)
+    {
+        $result = $this->db->executeQuery(
+            "SELECT * FROM space_sharing WHERE share_user_id = ?",
+            array(
+                $user_id
+            )
+        )->fetchAll();
+
+        $spaces = array();
+        foreach($result as $space) {
+            array_push($spaces, new SpaceSharing(
+                $space[0],
+                $space[1],
+                $space[2]
+            ));
+        }
+
+        return $spaces;
     }
 
     public function updateShareSpace(SpaceSharing $spacesharing)

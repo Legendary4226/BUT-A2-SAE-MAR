@@ -28,7 +28,7 @@ if (! isset($_SESSION['user_current_space'])) {
 }
 
 
-$spacesShared = $spaceSharingDAO->getShareSpaces($_SESSION['user_current_space']); 
+$spacesShared = $spaceSharingDAO->getShareSpaceBySpaceIds($_SESSION['user_current_space']); 
 
 
 //--- Actions
@@ -118,6 +118,7 @@ if ($action == "manageSpace") {
                 }
             }
         }
+        header("Location: " . LINK_ACCOUNT_SPACE_SETTINGS);
     }
 }
 
