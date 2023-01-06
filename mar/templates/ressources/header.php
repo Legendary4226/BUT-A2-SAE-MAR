@@ -7,6 +7,10 @@
     }
     ?>
 
+    <? if (isset($_GET['notification'])) {
+        echo "<div id='notification'><p>" . $_GET['notification'] . "</p></div>";
+    } ?>
+
 
     <div class="header-title">
         <h1>My Amazing Reminder</h1>

@@ -52,3 +52,36 @@ input:focus {
 input:invalid {
     color: var(--color-complementary-2);
 }
+
+
+/* Notification */
+@keyframes pop-up {
+    10%, 50% {
+        transform: translateY(0);
+    }
+    60% {
+        transform: translateY(-10rem);
+    }
+}
+#notification {
+    position: absolute;
+    left: 5rem;
+    
+    height: 1rem;
+    padding: .5rem 1rem;
+    transform: translateY(-10rem);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow: 0px 0px 7px 1px var(--color-complementary-1);
+    border-radius: 20px;
+
+    animation: forwards 6s pop-up;
+}
+
+#notification p {
+    color: var(--color-text);
+    text-align: center;
+}

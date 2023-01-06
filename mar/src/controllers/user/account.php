@@ -76,7 +76,7 @@ if ($action == 'modifyAccount'){
         $userDAO->updateUser($updateUser);
     }
 
-    header("Location: " . LINK_ACCOUNT);
+    header("Location: " . LINK_ACCOUNT . "&notification=Modifications saved.");
 }
 
 if ($action == "manageSpace") {

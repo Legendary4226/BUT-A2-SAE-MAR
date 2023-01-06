@@ -83,7 +83,7 @@ if ($action == "saveBox") {
         }
     }
     
-    header("Location: " . LINK_SPACE);
+    header("Location: " . LINK_SPACE . "&notification=Boxes saved.");
 }
 
 if ($action == "switchSpace") {
@@ -159,7 +159,7 @@ if ($action == "saveElements") {
         $boxDAO->updateBox($updatedBox);
     }
 
-    header("Location: " . LINK_SPACE);
+    header("Location: " . LINK_SPACE . "&notification=Modifications saved.");
 }
 
 // REFACTOR : Create a model foreach elements Type ! This change will make these infinite switch shorter and cleaner.
