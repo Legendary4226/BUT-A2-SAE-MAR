@@ -6,20 +6,18 @@
     <title>Document</title>
 
     <!-- Global CSS Files -->
-    <?php require_once(TEMPLATES . "ressources/css_files.php") ?>
+    <? require_once(TEMPLATES . "ressources/css_files.php") ?>
 
     <!-- Specific CSS Files -->
     <link rel="stylesheet" href="<?= STYLES ?>templates/account.css">
     <link rel="stylesheet" href="<?= STYLES ?>templates/space-management.css">
 </head>
 <body>
-<?php
-$headerButtonsLinks = array(
+<? $headerButtonsLinks = array(
     "Spaces" => LINK_SPACE,
     "Log out" => LINK_CONNECTION_LOGOUT
 );
-?>
-<?php require_once("ressources/header.php"); ?>
+require_once("ressources/header.php"); ?>
 
 <main>
     <section class="panel">
@@ -43,7 +41,7 @@ $headerButtonsLinks = array(
         ob_end_flush(); ?>
 
         <a id="create-space" class="transition-simple-bump" href="<?= LINK_ACCOUNT ?>&action=createSpace&newSpaceName=">
-            <?php require(ICON_SVG_PLUS) ?>
+            <? include(ICON_SVG_PLUS) ?>
         </a>
     </section>
     
@@ -58,11 +56,11 @@ $headerButtonsLinks = array(
             </select>
 
             <button class="action-button transition-simple-bump" class="delete-button" type="button">
-                <?php require(ICON_SVG_CLOSE) ?>
+                <? include(ICON_SVG_CLOSE) ?>
             </button>
         </span>
 
-        <form method="POST" action="<?= LINK_ACCOUNT_SPACE_SETTINGS ?>" class="form-edit-space-settings">
+        <form method="POST" action="<?= LINK_ACCOUNT . "&action=updateSpaceAndShare" ?>" class="form-edit-space-settings">
             <!-- Hidden input used to submit form with JS -->
             <input id="submit-space-share" type="submit" style="display: none; visibility: hidden;">
 
@@ -74,28 +72,36 @@ $headerButtonsLinks = array(
             <h1>Share with:</h1>
 
             <fieldset class="space-share">
-                <?php foreach($spacesShared as $spaceShared){ 
-                    $email = $userDAO->getByID($spaceShared->getUsersId())->getEmail();
-                    $id = $spaceShared->getUsersId() .'-'. $spaceShared->getSpaceId();
-                    ?>
-                    <span id="<?=$id?>">
-                        <input type="email" name="<?=$id?>" value="<?= $email?>" required>
-                        <label for="<?=$id?>:permission"> Permission: </label>
-                        <select name="<?=$id?>:permission" id="<?=$id?>:permission">
-                            <option value="read" <?= $spaceShared->getPermission() == 'read' ? 'selected' : '' ?>>Read</option>
-                            <option value="edit" <?= $spaceShared->getPermission() == 'edit' ? 'selected' : '' ?>>Edit</option>
+                <? ob_start();
+                foreach($sharingInfo as $user_id => $share)
+                { ?>
+                    <span id="<?= $share["user_id"] ?>">
+
+                        <input type="email" name="<?= $share["user_id"] ?>" value="<?= $share["user_email"] ?>" required>
+                        <label for="<?= $share["user_id"] ?>:permission"> Permission: </label>
+                        
+                        <select name="<?= $share["user_id"] ?>:permission" id="<?= $share["user_id"] ?>:permission">
+
+                            <option value="read" <?= $share["share_permission"] == 'read' ? 'selected' : '' ?>>
+                                Read
+                            </option>
+                            <option value="edit" <?= $share["share_permission"] == 'edit' ? 'selected' : '' ?>>
+                                Edit
+                            </option>
+
                         </select>
 
                         <button class="action-button transition-simple-bump" class="delete-button" type="button">
-                            <?php require(ICON_SVG_CLOSE) ?>
+                            <? include(ICON_SVG_CLOSE) ?>
                         </button>
                     </span>
-                <?php } ?>
+                <? } 
+                ob_end_flush(); ?>
             </fieldset>
 
             <fieldset>
                 <button class="action-button transition-simple-bump" id="save-modifications" <?= $_SESSION['user_current_space'] == null ? 'style="display: none; visibility: hidden;"' : "" ?>>
-                    <?php require(ICON_SVG_SAVE) ?>
+                    <? include(ICON_SVG_SAVE) ?>
                 </button>
             </fieldset>
         </form>
@@ -105,7 +111,7 @@ $headerButtonsLinks = array(
                     <span>
                         <input class="input-add-people-email" type="email" id="new-person" placeholder="example@email.com" maxlength="35">
                         <button class="action-button transition-simple-bump">
-                            <?php require(ICON_SVG_PLUS) ?>
+                            <? include(ICON_SVG_PLUS) ?>
                         </button>
                     </span>
             </fieldset>
@@ -113,7 +119,7 @@ $headerButtonsLinks = array(
     </section>
 </main>
 
-<?php require_once("ressources/footer.php"); ?>
+<? require_once("ressources/footer.php"); ?>
 <script src="<?= TEMPLATES ?>ressources/javascript/space.js"></script>
 </body>
 </html>

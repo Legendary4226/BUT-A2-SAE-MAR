@@ -31,16 +31,16 @@ if ($action == "signin") {
                 header("Location: " . LINK_SPACE);
             } else {
                 ThrowError::redirect(
-                    "Mot de passe",
-                    "Le mot de passe n'est pas valide.",
+                    "Password",
+                    "Wrong password.",
                     LINK_CONNECTION_SIGNIN
                 );
             } 
             
         } else {
             ThrowError::redirect(
-                "Compte inexistant",
-                "Le compte associé à l'email n'existe pas.",
+                "Non-existent account",
+                "The account associated with the email does not exist.",
                 LINK_CONNECTION_SIGNIN
             );
         }
@@ -76,30 +76,30 @@ if ($action == "signup") {
                         header("Location: " . LINK_CONNECTION_SIGNIN);
                     } else {
                         ThrowError::redirect(
-                            "Echec de la création",
-                            "Une erreur avec la base de données nous empêche de créer votre compte, pas de bol.",
+                            "Failure of the creation",
+                            "An error with the database prevents us from creating your account, no luck.",
                             LINK_CONNECTION_SIGNUP
                         );
                     }
 
                 } else {
                     ThrowError::redirect(
-                        "Email déjà enregistré",
-                        "L'email donné est déjà associé à un compte.",
+                        "Email already registered",
+                        "The given email is already associated with an account.",
                         LINK_CONNECTION_SIGNUP
                     );
                 }
             } else {
                 ThrowError::redirect(
-                    "Sécurité",
-                    "Les mots de passes sont différents ou ont moins de 8 caractères.",
+                    "Security",
+                    "Passwords are different or have less than 8 characters.",
                     LINK_CONNECTION_SIGNUP
                 );
             }
         } else {
             ThrowError::redirect(
-                "Nom d'utilisateur",
-                "Votre nom d'utilisateur fait plus de 25 caractères.",
+                "User name",
+                "Your username is longer than 25 characters.",
                 LINK_CONNECTION_SIGNUP
             );
         }

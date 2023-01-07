@@ -2,7 +2,7 @@
     <?
     if (isset($enableLeftBoxMenu)) {
         echo "<div class='header-left-box-menu' id='left-box-button'>";
-        require(ICON_SVG_MENU);
+        include(ICON_SVG_MENU);
         echo "</div>";
     }
     ?>

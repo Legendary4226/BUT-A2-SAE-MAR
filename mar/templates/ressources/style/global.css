@@ -75,8 +75,10 @@ input:invalid {
     justify-content: center;
     align-items: center;
 
+    background-color: var(--color-background);
     box-shadow: 0px 0px 7px 1px var(--color-complementary-1);
     border-radius: 20px;
+    z-index: 1000;
 
     animation: forwards 6s pop-up;
 }

@@ -60,6 +60,25 @@ class SpaceDAO {
     }
 
     /**
+     * Update a Space.
+     * This function suppose that all informations are correct.
+     * @param Space $space 
+     * @return bool If created, returns true or return false.
+     */
+    public function updateSpace(Space $space)
+    {
+        $result = $this->db->executeQuery(
+            "UPDATE space SET space_name = ? WHERE space_id = ?;",
+            array(
+                $space->getName(),
+                $space->getId()
+            )
+        );
+
+        return $result != false;
+    }
+
+    /**
      * Get an array with all Spaces of the user.
      * @param string $user_id
      * @return array Containing Spaces of the user associating space_id => Space.

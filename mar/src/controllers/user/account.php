@@ -23,12 +23,15 @@ if (!empty($_GET['action'])) {
 
 $spaces = $spaceDAO->getSpaces($_SESSION['user_id']);
 
-if (! isset($_SESSION['user_current_space'])) {
+if (!isset($_SESSION['user_current_space'])) {
+    $_SESSION['user_current_space'] = array_key_first($spaces);
+}
+if (!isset($spaces[$_SESSION['user_current_space']])) {
     $_SESSION['user_current_space'] = array_key_first($spaces);
 }
 
+$sharingInfo = $spaceSharingDAO->getSharingInfo($_SESSION['user_current_space']);
 
-$spacesShared = $spaceSharingDAO->getShareSpaceBySpaceIds($_SESSION['user_current_space']); 
 
 
 //--- Actions
@@ -48,8 +51,8 @@ if ($action == 'modifyAccount'){
             $atLeastOneModified = true;
         } else {
             ThrowError::redirect(
-                "Nom d'utilisateur",
-                "Votre nom d'utilisateur fait plus de 25 caractères.",
+                "User Name",
+                "Your username is longer than 25 characters.",
                 LINK_ACCOUNT
             );
         }
@@ -69,8 +72,8 @@ if ($action == 'modifyAccount'){
             $atLeastOneModified = true;
         } else {
             ThrowError::redirect(
-                "Sécurité",
-                "Les mots de passes sont différents ou ont moins de 8 caractères.",
+                "Security",
+                "Passwords are different or have less than 8 characters.",
                 LINK_ACCOUNT
             );
         }
@@ -85,48 +88,115 @@ if ($action == 'modifyAccount'){
 
 if ($action == "manageSpace") {
     $viewToRequire = "space-management";
-    if (!empty($_POST)){
-        foreach ($_POST as $key => $value){
-            @[ $shareId, $permission ] = preg_split("/:/", $key);
-            if ($key < 0){
-                if ($key != "space-name" and $permission != null){
-                    $shareUserId = $userDAO->getByEmail($_POST[$shareId]);
-                    if ($shareUserId != null && $shareUserId->getId() != $_SESSION['user_id']){
-                        $temp = new SpaceSharing(
-                            $shareUserId->getId(), 
+}
+
+if ($action == "updateSpaceAndShare") {
+
+    if(isset($_POST["space-name"])) {
+        $spaceNameLenght = strlen($_POST["space-name"]);
+        
+        if (0 < $spaceNameLenght && $spaceNameLenght <= 35){
+            $spaceDAO->updateSpace(
+                new Space($_SESSION['user_current_space'], $_POST["space-name"], $_SESSION['user_id'])
+            );
+        } else {
+            ThrowError::redirect(
+                "Space name",
+                "The space name can't be empty or can't exceed 35 characters.",
+                LINK_ACCOUNT_SPACE_SETTINGS
+            );
+        }
+        
+        unset($_POST["space-name"]);
+    }
+
+    if (!empty($_POST)) {
+
+        foreach ($_POST as $id => $email)
+        {
+            @[ $user_id, $tag ] = preg_split("/:/", $id);
+
+            $isDeleted = preg_match("/deleted/", $tag);
+            $isNotOtherDatas = $tag == null;
+            $isNew = $isNotOtherDatas && $id < 0;
+            $isToModify = $isNotOtherDatas && !$isNew && !$isDeleted;
+
+            $newPermission = $isNew || $isToModify ? $_POST[$user_id . ":permission"] : null;
+
+            if ($isDeleted) {
+                $debug = $spaceSharingDAO->deleteSpaceSharing($user_id, $_SESSION['user_current_space']);
+
+                if (DEBUG_MODE && $debug == false) {
+                    var_dump("Issue deleting SpaceSharing with values : user_id=" . $user_id . "  space_id=" . $_SESSION['user_current_space']);
+                }
+            }
+            
+            if ($isNew) {
+                $potentialShareUser = $userDAO->getByEmail($email);
+                
+                if ($potentialShareUser != null && !isset($sharingInfo[$potentialShareUser->getId() . "-" . $_SESSION['user_current_space']])){
+                    $debug = $spaceSharingDAO->createSpaceSharing(
+                        new SpaceSharing(
+                            $potentialShareUser->getId(), 
                             $_SESSION['user_current_space'],
-                            $_POST[$key]
-                        );
-                        $spaceSharingDAO->createSpaceSharing($temp);
+                            $newPermission
+                        )
+                    );
+
+                    if (DEBUG_MODE && $debug == false) {
+                        var_dump("Issue creating SpaceSharing with values : user_id=" . $potentialShareUser->getId() . "  space_id=" . $_SESSION['user_current_space'] . "  newPermission=" . $newPermission);
                     }
                 }
             }
-            elseif ($key != "space-name" and $permission == 'deleted'){
-                $spaceSharingDAO->deleteElement($shareUserId->getId(),$_SESSION['user_current_space']);
-            }
-            elseif ($key > 0){
-                if ($key != "space-name" and $permission != null and isset($_POST[$shareId])){
-                    $shareUserId = $userDAO->getByEmail($_POST[$shareId]);
-                    if ($shareUserId != null){
-                        $temp = new SpaceSharing(
-                            $shareUserId->getId(), 
+
+            if ($isToModify) {
+                $shareId = $id . "-" . $_SESSION["user_current_space"];
+                $datasExists = isset($sharingInfo[$shareId]) && isset($sharingInfo[$user_id . ":permission"]);
+                $oldPermission = $datasExists ? $sharingInfo[$user_id . ":permission"] : null;
+                $datasValid = $datasExists && $newPermission != $oldPermission && ($newPermission == "read" || $newPermission == "edit");
+
+                if ($datasValid) {
+                    $debug = $spaceSharingDAO->updateShareSpace(
+                        new SpaceSharing(
+                            $potentialShareUser->getId(),
                             $_SESSION['user_current_space'],
-                            $_POST[$key]
-                        );
-                        $spaceSharingDAO->updateShareSpace($temp);
+                            $newPermission
+                        )
+                    );
+
+                    if (DEBUG_MODE && $debug == false) {
+                        var_dump("Issue updating SpaceSharing with values : user_id=" . $potentialShareUser->getId() . "  space_id=" . $_SESSION['user_current_space'] . "  newPermission=" . $newPermission);
                     }
                 }
             }
         }
-        header("Location: " . LINK_ACCOUNT_SPACE_SETTINGS);
     }
+
+    header("Location: " . LINK_ACCOUNT_SPACE_SETTINGS . "&notification=Saved.");
 }
 
 if ($action == "createSpace") {
-    if (!empty($_GET["newSpaceName"]) && $_GET["newSpaceName"] != "") {
+    $newSpaceNameExists = !empty($_GET["newSpaceName"]) && $_GET["newSpaceName"] != "";
+    $isNewSpaceValid = strlen($_GET["newSpaceName"]) <= 35;
+    
+    if ($newSpaceNameExists && $isNewSpaceValid) {
         $spaceDAO->createSpace(new Space(
             -1, $_GET["newSpaceName"], $_SESSION["user_id"]
         ));
+    }
+    elseif(!$newSpaceNameExists) {
+        ThrowError::redirect(
+            "Space name",
+            "Please fill the field.",
+            LINK_ACCOUNT_SPACE_SETTINGS
+        );
+    }
+    elseif(!$isNewSpaceValid) {
+        ThrowError::redirect(
+            "Space name",
+            "The space name can't exceed 35 characters.",
+            LINK_ACCOUNT_SPACE_SETTINGS
+        );
     }
 
     header("Location: " . LINK_ACCOUNT_SPACE_SETTINGS);

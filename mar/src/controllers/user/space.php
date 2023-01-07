@@ -36,7 +36,7 @@ if (sizeof($user_spaces) == 0) {
     $user_spaces = $spaceDAO->getSpaces($_SESSION['user_id']);
 }
 
-$sharedSpace = $spaceSharedDAO->getShareSpaceByUserId($_SESSION['user_id']);
+$sharedSpace = $spaceSharedDAO->getSharingsToAUser($_SESSION['user_id']);
 
 // Set the current user space ID
 if (!isset($_SESSION['user_current_space'])) {

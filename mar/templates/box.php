@@ -22,29 +22,33 @@ $ENABLE_LEFT_BOX_MENU = true; ?>
 <? require_once("ressources/header.php"); ?>
 
 <menu class="left-box-menu" id="left-box-menu">
+
     <form action="<?= LINK_SPACE . "&action=switchSpace"?>" method="POST" class="form-choose-space">
         <!-- Hidden input used to submit form with JS -->
         <input id="submit-space-switch" type="submit" style="display: none; visibility: hidden;">
 
         <select name="space-id" id="select-space">
+            <optgroup label="My spaces">
+                <? ob_start();
+                foreach ($user_spaces as $space) {
+                ?>
+                    <option value="<?= $space->getId() ?>" <?= $space->getId() == $_SESSION['user_current_space'] ? 'selected' : '' ?>>
+                        <?= $space->getName() ?>
+                    </option>
+                <? } ob_end_flush(); ?>
+            </optgroup>
 
-            <?
-            ob_start();
-            foreach ($user_spaces as $space) {
-            ?>
-                <option value="<?= $space->getId() ?>" <?= $space->getId() == $_SESSION['user_current_space'] ? 'selected' : '' ?>><?= $space->getName() ?></option>
-            <? } ?>
-
-            <option value="">--separate--</option>
-
-            <?
-            foreach ($sharedSpace as $space_shared) {
-                $space = $spaceDAO->getSpace($space_shared->getSpaceId());
-            ?>
-                <option value="<?= $space->getId() ?>" <?= $space->getId() == $_SESSION['user_current_space'] ? 'selected' : '' ?>><?= $space->getName() ?></option>
-            <? } 
-            ob_end_flush(); 
-            ?>
+            <?= empty($sharedSpace) ? '' : '<optgroup label="Shared spaces"' ?>
+                <? ob_start();
+                foreach ($sharedSpace as $space_shared) {
+                    $space = $spaceDAO->getSpace($space_shared->getSpaceId());
+                ?>
+                    <option class="shared-space" value="<?= $space->getId() ?>" <?= $space->getId() == $_SESSION['user_current_space'] ? 'selected' : '' ?>>
+                        <?= $space->getName() ?>
+                    </option>
+                <? } ob_end_flush(); ?>
+            <?= empty($sharedSpace) ? '' : '</optgroup>' ?>
+            
         </select>
     </form>
     
@@ -54,9 +58,9 @@ $ENABLE_LEFT_BOX_MENU = true; ?>
 
 
         <a href="#" id="add-box-clone">
-            <? require(ICON_SVG_BOX_BOX) ?>
+            <? include(ICON_SVG_BOX_BOX) ?>
             <input type="text" value="New Box" maxlength="20" required>
-            <? require(ICON_SVG_TRASH_CAN) ?>
+            <? include(ICON_SVG_TRASH_CAN) ?>
         </a>
 
         <? ob_start();
@@ -67,9 +71,9 @@ $ENABLE_LEFT_BOX_MENU = true; ?>
 
         foreach ($user_boxes as $box) { ?>
             <a href="<?= LINK_SPACE . "&action=switchBox&box-id=" . $box->getId() ?>" <?= $box->getId() == $_SESSION['user_current_box'] ? 'class="selected"' : "" ?>>
-                <? require(ICON_SVG_BOX_BOX) ?>
+                <? include(ICON_SVG_BOX_BOX) ?>
                 <input type="text" value="<?= $box->getName() ?>" name="<?= $box->getId() ?>" maxlength="20" required>
-                <? require(ICON_SVG_TRASH_CAN) ?>
+                <? include(ICON_SVG_TRASH_CAN) ?>
             </a>
         <? }
         ob_end_flush(); ?>
@@ -79,9 +83,10 @@ $ENABLE_LEFT_BOX_MENU = true; ?>
     <button id="save-boxs-change" class="empty-button transition-simple-jump">Save</button>
 
     <button class="empty-button transition-simple-jump" id="add-box">
-        <? require(ICON_SVG_PLUS) ?>
+        <? include(ICON_SVG_PLUS) ?>
         Add Box
     </button>
+    
 </menu>
 
 <main>
@@ -91,8 +96,8 @@ $ENABLE_LEFT_BOX_MENU = true; ?>
 
         <!-- TASK -->
         <div class="element" id="template-task">
-            <button type="button" class="action-add"> <? require(ICON_SVG_PLUS) ?> </button>
-            <button type="button" class="action-delete"> <? require(ICON_SVG_TRASH_CAN) ?> </button>
+            <button type="button" class="action-add"> <? include(ICON_SVG_PLUS) ?> </button>
+            <button type="button" class="action-delete"> <? include(ICON_SVG_TRASH_CAN) ?> </button>
 
             <div class="element-body task">
                 <input type="hidden" name="task-ID" value="task">
@@ -104,8 +109,8 @@ $ENABLE_LEFT_BOX_MENU = true; ?>
 
         <!-- NOTE -->
         <div class="element" id="template-note">
-            <button type="button" class="action-add"> <? require(ICON_SVG_PLUS) ?> </button>
-            <button type="button" class="action-delete"> <? require(ICON_SVG_TRASH_CAN) ?> </button>
+            <button type="button" class="action-add"> <? include(ICON_SVG_PLUS) ?> </button>
+            <button type="button" class="action-delete"> <? include(ICON_SVG_TRASH_CAN) ?> </button>
 
             <div class="element-body note">
                 <input type="hidden" name="note-ID" value="note">
@@ -116,6 +121,7 @@ $ENABLE_LEFT_BOX_MENU = true; ?>
 
         <!-- END ELEMENTS HTML TEMPLATES -->
     </div>
+
     <form action="<?= LINK_SPACE . "&action=saveElements"?>" method="POST" class="form-box-content">
         <h1 class="box-title"><?= $current_box == null ? "It's empty here?" : $current_box->getName() ?></h1>
 
@@ -124,7 +130,7 @@ $ENABLE_LEFT_BOX_MENU = true; ?>
         <div class="box-elements">
 
             <div class="element" style="min-height: 2rem; <?= $current_box == null ? "display: none; visibility: hidden;" : "" ?>">
-                <button type="button" class="action-add"> <? require(ICON_SVG_PLUS) ?> </button>
+                <button type="button" class="action-add"> <? include(ICON_SVG_PLUS) ?> </button>
             </div>
 
             <? ob_start();
@@ -135,8 +141,8 @@ $ENABLE_LEFT_BOX_MENU = true; ?>
                 
                 <div class="element">
 
-                    <button type="button" class="action-add"> <? require(ICON_SVG_PLUS) ?> </button>
-                    <button type="button" class="action-delete"> <? require(ICON_SVG_TRASH_CAN) ?> </button>
+                    <button type="button" class="action-add"> <? include(ICON_SVG_PLUS) ?> </button>
+                    <button type="button" class="action-delete"> <? include(ICON_SVG_TRASH_CAN) ?> </button>
                     
                     <div class="element-body <?= $element->getType() ?>">
 
@@ -163,21 +169,22 @@ $ENABLE_LEFT_BOX_MENU = true; ?>
             ob_end_flush(); ?>
         </div>
         <button class="transition-simple-bump" id="save-modifications" <?= $current_box == null ? 'style="display: none; visibility: hidden;"' : "" ?>>
-            <? require(ICON_SVG_SAVE) ?>
+            <? include(ICON_SVG_SAVE) ?>
         </button>
     </form>
 
-    
 </main>
 
+<!--
 <section class="box-management">
     <div class="label">
         <button class="green-button">A Label</button>
         <button class="green-button">Another Label</button>
-        <button class="add-label"><? require(ICON_SVG_PLUS) ?></button>
+        <button class="add-label"><\? include(ICON_SVG_PLUS) ?></button>
     </div>
-    <button> <? require(ICON_SVG_SHARE) ?></button>
+    <button> <\? include(ICON_SVG_SHARE) ?></button>
 </section>
+-->
 
 <? require_once("ressources/footer.php"); ?>
 
