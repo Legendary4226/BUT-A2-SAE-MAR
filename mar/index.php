@@ -11,6 +11,8 @@ if (!isset($_SESSION['user_id'])) {
     $_SESSION['user_id'] = null;
 }
 
+define("DEBUG_MODE", true);
+
 require_once("configuration/paths.php");
 require_once("configuration/icons.php");
 require_once("configuration/links.php");
@@ -28,14 +30,26 @@ if ($isControllerExists) {
         $isPageRequiresLoggedIn = preg_match('/^front\//', $_GET["page"]) != 1;
         // If the user isn't connected AND tries to access a page not in the "front/" controllers folder.
         if ($_SESSION['user_id'] == null && $isPageRequiresLoggedIn) {
-            echo "Trying to access a page that require to be connected.";
+            ThrowError::redirect(
+                "Forbidden",
+                "Trying to access a page that requires to be connected.",
+                LINK_CONNECTION_SIGNIN
+            );
         } else {
             require_once(CONTROLLERS . $_GET["page"] . ".php");
         }
 
     } catch (Exception $e) {
-        echo "Error when loading the page.";
-        echo $e->getMessage();
+        if (DEBUG_MODE) {
+            echo "Unknown error :" . $e->getMessage();
+        } else {
+            ThrowError::redirect(
+                "Unknown error",
+                "Sorry for the disturbances encountered.",
+                LINK_HOME
+            );
+        }
+        
     };
 } else {
     header("Location: " . LINK_HOME);
