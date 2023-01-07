@@ -38,7 +38,7 @@ $ENABLE_LEFT_BOX_MENU = true; ?>
                 <? } ob_end_flush(); ?>
             </optgroup>
 
-            <?= empty($sharedSpace) ? '' : '<optgroup label="Shared spaces"' ?>
+            <?= empty($sharedSpace) ? '' : '<optgroup label="Shared spaces">' ?>
                 <? ob_start();
                 foreach ($sharedSpace as $space_shared) {
                     $space = $spaceDAO->getSpace($space_shared->getSpaceId());
