@@ -84,6 +84,7 @@ if ($action == 'modifyAccount'){
     }
 
     header("Location: " . LINK_ACCOUNT . "&notification=Modifications saved.");
+    exit;
 }
 
 if ($action == "manageSpace") {
@@ -151,14 +152,17 @@ if ($action == "updateSpaceAndShare") {
 
             if ($isToModify) {
                 $shareId = $id . "-" . $_SESSION["user_current_space"];
-                $datasExists = isset($sharingInfo[$shareId]) && isset($sharingInfo[$user_id . ":permission"]);
-                $oldPermission = $datasExists ? $sharingInfo[$user_id . ":permission"] : null;
+                $datasExists = isset($sharingInfo[$shareId]) && isset($_POST[$user_id . ":permission"]);
+
+                $sharingInfoID = $user_id . "-" . $_SESSION['user_current_space'];
+                $oldPermission = $datasExists ? $sharingInfo[$sharingInfoID]['share_permission'] : null;
                 $datasValid = $datasExists && $newPermission != $oldPermission && ($newPermission == "read" || $newPermission == "edit");
 
                 if ($datasValid) {
+
                     $debug = $spaceSharingDAO->updateShareSpace(
                         new SpaceSharing(
-                            $potentialShareUser->getId(),
+                            $user_id,
                             $_SESSION['user_current_space'],
                             $newPermission
                         )
@@ -173,6 +177,7 @@ if ($action == "updateSpaceAndShare") {
     }
 
     header("Location: " . LINK_ACCOUNT_SPACE_SETTINGS . "&notification=Saved.");
+    exit;
 }
 
 if ($action == "createSpace") {
@@ -200,6 +205,7 @@ if ($action == "createSpace") {
     }
 
     header("Location: " . LINK_ACCOUNT_SPACE_SETTINGS);
+    exit;
 }
 
 if ($action == "switchSpace") {
@@ -207,6 +213,7 @@ if ($action == "switchSpace") {
     unset($_SESSION["user_current_box"]);
 
     header("Location: " . LINK_ACCOUNT_SPACE_SETTINGS);
+    exit;
 }
 
 

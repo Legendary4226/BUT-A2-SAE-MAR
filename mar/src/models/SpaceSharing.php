@@ -74,13 +74,13 @@ class SpaceSharingDAO {
             )
         )->fetchAll();
 
-        $spaces = array();
+        $spaces = [];
         foreach($result as $space) {
-            array_push($spaces, new SpaceSharing(
+            $spaces[$space[1]] = new SpaceSharing(
                 $space[0],
                 $space[1],
                 $space[2]
-            ));
+            );
         }
 
         return $spaces;

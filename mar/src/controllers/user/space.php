@@ -67,6 +67,15 @@ if ($_SESSION['user_current_box'] != null) {
 
 
 if ($action == "saveBox") {
+
+    if (isset($sharedSpace[$_SESSION['user_current_space']]) && $sharedSpace[$_SESSION['user_current_space']]->getPermission() != "edit") {
+        ThrowError::redirect(
+            "Permission missing",
+            "You can only read this space. Ask to the owner to grant you the 'edit' permission.",
+            LINK_SPACE
+        );
+    }
+
     foreach ($_POST as $id=>$boxName){
         @[ $boxId, $boxDeleted ] = preg_split("/:/", $id);
 
@@ -88,6 +97,7 @@ if ($action == "saveBox") {
     }
     
     header("Location: " . LINK_SPACE . "&notification=Boxes saved.");
+    exit;
 }
 
 if ($action == "switchSpace") {
@@ -95,6 +105,7 @@ if ($action == "switchSpace") {
     unset($_SESSION["user_current_box"]);
 
     header("Location: " . LINK_SPACE);
+    exit;
 }
 
 if ($action == "switchBox") {
@@ -105,9 +116,19 @@ if ($action == "switchBox") {
     }
 
     header("Location: " . LINK_SPACE);
+    exit;
 }
 
 if ($action == "saveElements") {
+
+    if (isset($sharedSpace[$_SESSION['user_current_space']]) && $sharedSpace[$_SESSION['user_current_space']]->getPermission() != "edit") {
+        ThrowError::redirect(
+            "Permission missing",
+            "You can only read this space. Ask to the owner to grant you the 'edit' permission.",
+            LINK_SPACE
+        );
+    }
+
     $updatedBox = clone $current_box;
     $updatedBox->setElementsOrder($_POST['elements-order']);
     unset($_POST['elements-order']);
@@ -164,6 +185,7 @@ if ($action == "saveElements") {
     }
 
     header("Location: " . LINK_SPACE . "&notification=Modifications saved.");
+    exit;
 }
 
 // REFACTOR : Create a model foreach elements Type ! This change will make these infinite switch shorter and cleaner.
@@ -203,9 +225,9 @@ function modifyElement($id, $type) {
     switch ($type)
     {
         case 'task':
-            $isValid = isset($_POST["${id}:tasknote"]);
-            $newState = isset($_POST["${id}:task"]);
-            $newContent = $_POST["${id}:tasknote"];
+            $isValid = isset($_POST[$id . ":tasknote"]);
+            $newState = isset($_POST[$id . ":task"]);
+            $newContent = $_POST[$id . ":tasknote"];
 
             if ($isValid && ( $content["checked"] != $newState || $content["content"] != $newContent )) {
                 $e->setContent([
@@ -217,8 +239,8 @@ function modifyElement($id, $type) {
             break;
 
         case 'note':
-            $isValid = isset($_POST["${id}:note"]);
-            $newContent = $_POST["${id}:note"];
+            $isValid = isset($_POST[$id . ":note"]);
+            $newContent = $_POST[$id . ":note"];
 
             if ($isValid && ( $content["content"] != $newContent )) {
                 $e->setContent([

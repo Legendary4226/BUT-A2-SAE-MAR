@@ -29,6 +29,7 @@ if ($action == "signin") {
                 $_SESSION['user_pass'] = $user->getPass();
 
                 header("Location: " . LINK_SPACE);
+                exit;
             } else {
                 ThrowError::redirect(
                     "Password",
@@ -44,8 +45,6 @@ if ($action == "signin") {
                 LINK_CONNECTION_SIGNIN
             );
         }
-    } else {
-        //echo 'Please fill in the fields';
     }
 }
 
@@ -74,6 +73,7 @@ if ($action == "signup") {
                     $accountCreated = $userDAO->createUser($newUser);
                     if ($accountCreated) {
                         header("Location: " . LINK_CONNECTION_SIGNIN);
+                        exit;
                     } else {
                         ThrowError::redirect(
                             "Failure of the creation",
@@ -103,8 +103,6 @@ if ($action == "signup") {
                 LINK_CONNECTION_SIGNUP
             );
         }
-    } else {
-        //echo 'Please fill in the fields';
     }
 }
 
@@ -112,6 +110,7 @@ if ($action == "logout") {
     session_destroy();
 
     header("Location: " . LINK_HOME);
+    exit;
 }
 
 require_once(TEMPLATES . $viewToRequire . ".php");
