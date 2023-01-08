@@ -30,10 +30,15 @@ if ($_SESSION['user_id'] == null) {
 
 <main>
     <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        Welcome to My Amazing Reminder. 
+        <br><br>This website will allow you to easily create and maintain notes spaces, shareable or not, in ordre to note whatever you want to remember.
+       You can create as much spaces as you want ! 
+        <br><br>Moreover, You can add other users to your spaces in order to generate more boxes and notes in collaboration.
+        In every box you create, you can add totally personalisable text fields and checkboxes !
+        <br><br> Here is a representation of what you can see in the box page of any space.
     </p>
     
-    <img src="">
+    <img src="<?= MISCIMAGES?>home-presentation2.png" height="450px" width="900px"/>
 </main>
 
 <? require_once("ressources/footer.php"); ?>
