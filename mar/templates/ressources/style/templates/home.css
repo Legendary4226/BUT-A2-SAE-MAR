@@ -1,10 +1,29 @@
-body > main{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    grid-auto-rows: minmax(100px, auto);
+.wrapper-body > main{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+
+    margin: 2rem 0;
 
     text-align: center;
-    padding-left: 5%;
-    padding-right: 5%;
+    padding: 0 2rem;
+}
+
+main > p {
+    width: 400px;
+}
+
+.presentation-img {
+    width: 1000px;
+    height: auto;
+
+    border: 2px solid var(--color-secondary-opacity-25);
+    border-radius: .5rem;
+}
+
+@media screen and (max-width: 1100px) {
+    .presentation-img {
+        width: 100%;
+    }
 }

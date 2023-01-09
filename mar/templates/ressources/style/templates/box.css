@@ -2,7 +2,7 @@
     Global
 */
 
-body > main {
+.wrapper-body > main {
     justify-content: flex-start;
 }
 

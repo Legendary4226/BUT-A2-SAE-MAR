@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="<?= STYLES ?>templates/account.css">
 </head>
 <body>
+<div class="wrapper-body">
 <?
 $headerButtonsLinks = array(
     "Spaces" => LINK_SPACE,
@@ -63,5 +64,6 @@ $headerButtonsLinks = array(
 </main>
 
 <? require_once("ressources/footer.php"); ?>
+</div>
 </body>
 </html>

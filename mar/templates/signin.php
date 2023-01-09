@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="<?= STYLES ?>templates/login_signin.css">
 </head>
 <body>
+<div class="wrapper-body">
 <?
 $headerButtonsLinks = array(
     "Home" => LINK_HOME,
@@ -40,5 +41,6 @@ $headerButtonsLinks = array(
 </main>
 
 <? require_once("ressources/footer.php"); ?>
+</div>
 </body>
 </html>

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="<?= STYLES ?>templates/space-management.css">
 </head>
 <body>
+<div class="wrapper-body">
 <? $headerButtonsLinks = array(
     "Spaces" => LINK_SPACE,
     "Log out" => LINK_CONNECTION_LOGOUT
@@ -123,5 +124,6 @@ require_once("ressources/header.php"); ?>
 <? require_once("ressources/footer.php"); ?>
 <script src="<?= JAVASCRIPT ?>space.js"></script>
 <script src="<?= JAVASCRIPT ?>alertUnsave.js"></script>
+</div>
 </body>
 </html>

@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="<?= STYLES ?>templates/box.css">
 </head>
 <body>
+<div class="wrapper-body">
 <? $headerButtonsLinks = array(
     "Account" => LINK_ACCOUNT,
     "Log out" => LINK_CONNECTION_LOGOUT
@@ -192,5 +193,6 @@ $ENABLE_LEFT_BOX_MENU = true; ?>
 <script src="<?= JAVASCRIPT ?>box-left-menu.js"></script>
 <script src="<?= JAVASCRIPT ?>box-content.js"></script>
 <script src="<?= JAVASCRIPT ?>alertUnsave.js"></script>
+</div>
 </body>
 </html>

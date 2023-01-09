@@ -13,7 +13,8 @@
 
 
     <div class="header-title">
-        <h1>My Amazing Reminder</h1>
+        <h1 class="default-title">My Amazing Reminder</h1>
+        <h1 class="reduced-title">MAR</h1>
     </div>
     
     <div class="header-buttons">

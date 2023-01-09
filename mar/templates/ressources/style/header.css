@@ -16,6 +16,23 @@ header > .header-title {
     justify-content: center;
 }
 
+.reduced-title {
+    display: none;
+    visibility: hidden;
+}
+
+@media screen and (max-width: 1000px) {
+    .default-title {
+        display: none;
+        visibility: hidden;
+    }
+
+    .reduced-title {
+        display: inline;
+        visibility: visible;
+    }
+}
+
 .header-buttons {
     min-width: 20rem;
 
