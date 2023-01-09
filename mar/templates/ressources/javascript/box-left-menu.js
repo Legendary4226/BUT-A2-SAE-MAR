@@ -1,3 +1,5 @@
+let documentModified = false;
+
 /* Display / Hide the Left Box Menu */
 let leftBoxMenu = document.getElementById("left-box-menu")
 document.getElementById("left-box-button").addEventListener("click", () => {
@@ -19,6 +21,7 @@ addBoxClone.removeAttribute("id")
 let newBoxsId = -1
 
 document.getElementById("add-box").addEventListener("click", () => {
+    documentModified = true
     addBoxClone.querySelector("input").name = newBoxsId
     newBoxsId--
     formBoxs.appendChild(addBoxClone.cloneNode(true))
@@ -56,6 +59,7 @@ selectBoxForm.addEventListener("click", (event) => {
         if (aParent.querySelector("input").name < 0) {
             aParent.remove()
         } else {
+            documentModified = true
             aParent.querySelector("input").name += ":deleted"
         }
     }
@@ -64,6 +68,14 @@ selectBoxForm.addEventListener("click", (event) => {
 
 /* Save boxs change */
 document.getElementById("save-boxs-change").addEventListener("click", () => {
+    documentModified = false;
     submitBoxsChange.dispatchEvent(new MouseEvent("click"))
 })
 
+/* verify save */
+addEventListener('beforeunload', (e) => {
+    e.preventDefault();
+    if (documentModified){
+        return e.returnValue = "modified";
+    }
+})

@@ -34,6 +34,7 @@ let taskClone = document.getElementById("template-task").cloneNode(true);
 taskClone.removeAttribute("id")
 
 function addElement(element) {
+    documentModified = true
     let choose = prompt("Choisissez un élément :\n• 1: Une note\n• 2: Une tâche\n?", "1");
     
     let clone = null;
@@ -74,6 +75,7 @@ function addElement(element) {
 }
 
 function deleteElement(element) {
+    documentModified = true
     let elementBody = element.querySelector("div.element-body")
     let elementId = elementBody.children[0].name
 
@@ -84,3 +86,11 @@ function deleteElement(element) {
         element.classList.add("deleted")
     }
 }
+
+/* verify save */
+addEventListener('beforeunload', (e) => {
+    e.preventDefault();
+    if (documentModified){
+        return e.returnValue = "modified";
+    }
+})

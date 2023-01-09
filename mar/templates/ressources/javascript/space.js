@@ -2,6 +2,7 @@ let sharedUserInputs = document.getElementById("init-clone").cloneNode(true);
 sharedUserInputs.removeAttribute("id")
 let id = -1;
 let usersFieldset = document.getElementsByClassName("space-share")[0];
+var documentModified = false;
 
 /* Add shared user */
 document.getElementById("add-user-form").addEventListener("submit",(event)=>{
@@ -42,6 +43,7 @@ usersFieldset.addEventListener("click",(event)=>{
             clickedButton.parentElement.remove()
             console.log(clickedButton.parentElement)
         } else {
+            documentModified = true
             clickedButton.parentElement.classList.toggle("user-deleted")
             input.name += ":deleted"
         }
@@ -58,7 +60,8 @@ linkCreateSpace.addEventListener("click", (event) => {
         if (spaceName == "") alert("Erreur lors de votre saisie.")
         
     } else {
-        linkCreateSpace.href += spaceName;
+        documentModified = true
+        linkCreateSpace.href += spaceName
     }
 })
 
@@ -66,5 +69,14 @@ let saveBtn = document.getElementById("save-modification")
 
 /* Save space share */
 document.getElementById("save-modifications").addEventListener("click", () => {
+    documentModified = false
     document.getElementById("submit-space-share").dispatchEvent(new MouseEvent("click"))
+})
+
+/* verify save */
+addEventListener('beforeunload', (e) => {
+    e.preventDefault();
+    if (documentModified){
+        return e.returnValue = "modified";
+    }
 })
