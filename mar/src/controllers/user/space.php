@@ -96,6 +96,8 @@ if ($action == "saveBox") {
         }
     }
     
+    unset($_SESSION['user_current_box']);
+    
     header("Location: " . LINK_SPACE . "&notification=Boxes saved.");
     exit;
 }
