@@ -121,6 +121,7 @@ require_once("ressources/header.php"); ?>
 </main>
 
 <? require_once("ressources/footer.php"); ?>
-<script src="<?= TEMPLATES ?>ressources/javascript/space.js"></script>
+<script src="<?= JAVASCRIPT ?>space.js"></script>
+<script src="<?= JAVASCRIPT ?>alertUnsave.js"></script>
 </body>
 </html>

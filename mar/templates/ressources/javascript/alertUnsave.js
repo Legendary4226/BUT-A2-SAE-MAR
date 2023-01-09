@@ -2,8 +2,8 @@ let documentModified = false
 
 /* verify save */
 addEventListener('beforeunload', (e) => {
-    e.preventDefault();
     if (documentModified){
+        e.preventDefault();
         return e.returnValue = "modified";
     }
 })

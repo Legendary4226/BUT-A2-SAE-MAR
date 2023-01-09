@@ -6,6 +6,7 @@ let usersFieldset = document.getElementsByClassName("space-share")[0];
 /* Add shared user */
 document.getElementById("add-user-form").addEventListener("submit",(event)=>{
     event.preventDefault();
+    documentModified = true
 
     let clone = sharedUserInputs.cloneNode(true);
     clone.children[0].value = document.getElementById("new-person").value;
@@ -59,12 +60,10 @@ linkCreateSpace.addEventListener("click", (event) => {
         if (spaceName == "") alert("Erreur lors de votre saisie.")
         
     } else {
-        documentModified = true
         linkCreateSpace.href += spaceName
     }
 })
 
-let saveBtn = document.getElementById("save-modification")
 
 /* Save space share */
 document.getElementById("save-modifications").addEventListener("click", () => {
