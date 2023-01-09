@@ -46,7 +46,7 @@ if ($action == 'modifyAccount'){
 
     if (!empty($_POST['name'] && $_POST['name'] != $_SESSION['user_name'])) {
         if (strlen($_POST['name']) <= 25) {
-            $_SESSION['user_name'] = htmlspecialchars($_POST['name']);
+            $_SESSION['user_name'] = htmlspecialchars($_POST['name'], ENT_HTML5);
             $updateUser->setName($_SESSION['user_name']);
             $atLeastOneModified = true;
         } else {
@@ -59,7 +59,7 @@ if ($action == 'modifyAccount'){
     }
 
     if (!empty($_POST['email']) && $_POST['email'] != $_SESSION['user_email']) {
-        $_SESSION['user_email'] = htmlspecialchars($_POST['email']);
+        $_SESSION['user_email'] = htmlspecialchars($_POST['email'], ENT_HTML5);
         $updateUser->setEmail($_SESSION['user_email']);
         $atLeastOneModified = true;
     }

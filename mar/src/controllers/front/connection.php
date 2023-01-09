@@ -62,8 +62,8 @@ if ($action == "signup") {
 
                 $newUser = new User(
                     -1,
-                    htmlspecialchars($_POST['email']),
-                    htmlspecialchars($_POST['username']),
+                    htmlspecialchars($_POST['email'],  ENT_HTML5),
+                    htmlspecialchars($_POST['username'], ENT_HTML5),
                     password_hash($_POST['pass'], PASSWORD_BCRYPT)
                 );
 

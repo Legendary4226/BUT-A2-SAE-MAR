@@ -1,20 +1,29 @@
+-- ###############
+-- CREATION SCRIPT
+-- ###############
+
 CREATE DATABASE IF NOT EXISTS todolist;
 
 USE todolist;
 
+/*
+* Notice : Some VARCHAR have a huge size but the real size allowed to users is way lower.
+* That's because PHP apply the htmlspecialchars() function to each user inputs. For example the character "<" is replaced by "&lt;"
+* So the datas saved can be larger than the PHP limit. So PHP manage at 100% the constraints on datas and a margin is provided. 
+*/
 
 CREATE TABLE IF NOT EXISTS users
 (
     user_id INTEGER PRIMARY KEY AUTO_INCREMENT,
     user_email VARCHAR(50) UNIQUE NOT NULL,
-    user_name VARCHAR(25) NOT NULL,
+    user_name VARCHAR(100) NOT NULL,
     user_pass VARCHAR(65) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS space
 (
     space_id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    space_name VARCHAR(35) NOT NULL,
+    space_name VARCHAR(140) NOT NULL,
     space_owner INTEGER NOT NULL,
 
     FOREIGN KEY (space_owner) REFERENCES users(user_id)
@@ -35,7 +44,7 @@ CREATE TABLE IF NOT EXISTS box
 (
     box_id INTEGER PRIMARY KEY AUTO_INCREMENT,
     box_space INTEGER NOT NULL,
-    box_name VARCHAR(20) NOT NULL,
+    box_name VARCHAR(80) NOT NULL,
     box_elements_order JSON,
 
     FOREIGN KEY (box_space) REFERENCES space(space_id),
@@ -68,65 +77,38 @@ CREATE TABLE IF NOT EXISTS label_using
 )
 
 /*
-*   Optimisations (à déterminer en fonction des requêtes)
+*   Optimisations
 */
 
--- CREATE INDEX...
+CREATE INDEX index_space_sharing ON space_sharing(share_user_id, share_space_id);
+
+-- ###################
+-- END CREATION SCRIPT
+-- ###################
 
 
-/*
-*   Commandes pour intéragir avec la db
-*/
-
--- Vérifier qu'un utilisateur n'est pas dans la bdd
-SELECT count(*) FROM users WHERE email = ?;
-
--- Rentrer les informations de l'utilisateur dans la bdd
-INSERT INTO users (user_email,user_name,user_pass) VALUES (?,?,?);
-
--- Changer le mot de passe de l'utilisateur
-UPDATE users SET user_pass=? WHERE id = ?;
-
--- Changer le mot pseudo de l'utilisateur
-UPDATE users SET user_name=? WHERE id = ?;
-
--- Changer infos utilisateur
-UPDATE users SET user_pass=?, user_name=?, user_pass=? where id = ?;
-
--- Ajouter un espace
-INSERT INTO space ('name',space_id,'owner') VALUES ('nouvel space',?,?)
-
--- Changer nom de l'espace
-UPDATE space SET 'name' = ? WHERE id = ?;
-
--- Ajouter boite
-INSERT INTO box (space_id,'owner') VALUES (?,?)
-
--- Changer le titre de la box
-UPDATE box SET 'name'=? WHERE box_id = ?;
-
--- Ajouter element
-INSERT INTO element (box_id,element_type) VALUES (?,?);
 
 
 /*
 * Database cleanup
 */
 
--- Erase tables content
+-- Reset tables contents
 
+TRUNCATE TABLE IF EXISTS space_sharing;
 TRUNCATE TABLE IF EXISTS label;
 TRUNCATE TABLE IF EXISTS element;
 TRUNCATE TABLE IF EXISTS box;
 TRUNCATE TABLE IF EXISTS space;
 TRUNCATE TABLE IF EXISTS users;
 
--- Delete database
+-- Delete the entire database
 
 DROP DATABASE IF EXISTS todolist;
 
--- Delete database tables
+-- Delete tables
 
+DROP TABLE IF EXISTS space_sharing;
 DROP TABLE IF EXISTS label;
 DROP TABLE IF EXISTS element;
 DROP TABLE IF EXISTS box;
