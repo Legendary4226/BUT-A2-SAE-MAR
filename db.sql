@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS space_sharing
 (
     share_user_id INTEGER NOT NULL,
     share_space_id INTEGER NOT NULL,
-    share_permission INTEGER NOT NULL,
+    share_permission VARCHAR(10) NOT NULL,
 
     PRIMARY KEY (share_user_id, share_space_id),
     FOREIGN KEY (share_user_id) REFERENCES users(user_id),
@@ -47,34 +47,18 @@ CREATE TABLE IF NOT EXISTS box
     box_name VARCHAR(80) NOT NULL,
     box_elements_order JSON,
 
-    FOREIGN KEY (box_space) REFERENCES space(space_id),
+    FOREIGN KEY (box_space) REFERENCES space(space_id)
 );
 
 CREATE TABLE IF NOT EXISTS element
 (
     element_id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    element_datas JSON,
+    element_data JSON,
     element_box INTEGER NOT NULL,
     element_type VARCHAR(50),
 
-    FOREIGN KEY (element_box) REFERENCES box(box_id)
+    FOREIGN KEY (element_box) REFERENCES box(box_id) ON DELETE CASCADE
 );
-
-CREATE TABLE IF NOT EXISTS label 
-(
-    label_id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    label_name VARCHAR(25) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS label_using
-(
-    user_id INTEGER NOT NULL,
-    label_id INTEGER NOT NULL,
-
-    PRIMARY KEY(user_id,label_id),
-    FOREIGN KEY (user_id) REFERENCES user(user_id),
-    FOREIGN KEY (label_id) REFERENCES label(label_id)
-)
 
 /*
 *   Optimisations
@@ -101,10 +85,6 @@ TRUNCATE TABLE IF EXISTS element;
 TRUNCATE TABLE IF EXISTS box;
 TRUNCATE TABLE IF EXISTS space;
 TRUNCATE TABLE IF EXISTS users;
-
--- Delete the entire database
-
-DROP DATABASE IF EXISTS todolist;
 
 -- Delete tables
 
