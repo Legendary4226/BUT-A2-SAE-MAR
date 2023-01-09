@@ -38,7 +38,7 @@ if ($_SESSION['user_id'] == null) {
         <br><br> Here is a representation of what you can see in the box page of any space.
     </p>
     
-    <img src="<?= MISCIMAGES?>home-presentation2.png" height="450px" width="900px"/>
+    <img src="<?= MISCIMAGES ?>home-presentation.png" height="450px" width="900px"/>
 </main>
 
 <? require_once("ressources/footer.php"); ?>
