@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * Singleton for the Database containing the PDO instance.
@@ -31,7 +31,7 @@ class Database {
 /**
 * DatabaseConnection containing the PDO instance and general methods to make queries to the database.
 * Do not use this Object, prefer using the Database singleton object.
-* @see prepareStatement() Ensure that DatabaseConnection instance is unique.
+* @see DatabaseConnection::prepareStatement() Ensure that DatabaseConnection instance is unique.
 */
 class DatabaseConnection{
     private $_PDO;

@@ -191,5 +191,6 @@ $ENABLE_LEFT_BOX_MENU = true; ?>
 
 <script src="<?= JAVASCRIPT ?>box-left-menu.js"></script>
 <script src="<?= JAVASCRIPT ?>box-content.js"></script>
+<script src="<?= JAVASCRIPT ?>alertUnsave.js"></script>
 </body>
 </html>

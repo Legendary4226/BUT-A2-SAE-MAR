@@ -1,5 +1,3 @@
-let documentModified = false;
-
 /* Display / Hide the Left Box Menu */
 let leftBoxMenu = document.getElementById("left-box-menu")
 document.getElementById("left-box-button").addEventListener("click", () => {
@@ -72,10 +70,3 @@ document.getElementById("save-boxs-change").addEventListener("click", () => {
     submitBoxsChange.dispatchEvent(new MouseEvent("click"))
 })
 
-/* verify save */
-addEventListener('beforeunload', (e) => {
-    e.preventDefault();
-    if (documentModified){
-        return e.returnValue = "modified";
-    }
-})

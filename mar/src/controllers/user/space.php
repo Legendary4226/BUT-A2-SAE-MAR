@@ -1,4 +1,4 @@
-<?
+<?php
 
 require_once(MODELS . "Space.php");
 require_once(MODELS . "SpaceSharing.php");

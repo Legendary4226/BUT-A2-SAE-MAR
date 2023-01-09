@@ -87,10 +87,7 @@ function deleteElement(element) {
     }
 }
 
-/* verify save */
-addEventListener('beforeunload', (e) => {
-    e.preventDefault();
-    if (documentModified){
-        return e.returnValue = "modified";
-    }
+/* Save space share */
+document.getElementById("save-modifications").addEventListener("click", () => {
+    documentModified = false
 })

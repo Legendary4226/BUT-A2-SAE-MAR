@@ -1,5 +1,9 @@
-<?
+<?php
 
+/**
+ * SpaceSharing corresponding at the table in Database.
+ * @see SpaceSharingDAO
+ */
 class SpaceSharing {
     private $share_user_id;
     private $share_space_id;
@@ -32,6 +36,10 @@ class SpaceSharing {
     }
 }
 
+/**
+ * SpaceSharingDAO to make operation between object and the table database.
+ * @see SpaceSharing
+ */
 class SpaceSharingDAO {
     private DatabaseConnection $db;
 
@@ -54,6 +62,44 @@ class SpaceSharingDAO {
                 $spaceSharing->getUsersId(),
                 $spaceSharing->getSpaceId(),
                 $spaceSharing->getPermission()
+            )
+        );
+
+        return $result != false;
+    }
+
+    /**
+     * Update a SpaceSharing.
+     * @param SpaceSharing $spaceSharing
+     * @return bool return true if updated otherwise false
+     */
+    public function updateShareSpace(SpaceSharing $spaceSharing)
+    {
+        $result = $this->db->executeQuery(
+            "UPDATE space_sharing SET share_permission = ? WHERE share_user_id = ? and share_space_id = ? ;",
+            array(
+                $spaceSharing->getPermission(),
+                $spaceSharing->getUsersId(),
+                $spaceSharing->getSpaceId()
+            )
+        );
+
+        return $result != false;
+    }
+
+    /**
+     * Delete a SpaceSharing.
+     * @param string $share_user_id
+     * @param string $share_space_id
+     * @return bool return true if deleted otherwise false
+     */
+    public function deleteSpaceSharing($share_user_id, $share_space_id)
+    {
+        $result = $this->db->executeQuery(
+            "DELETE FROM space_sharing WHERE share_user_id = ? and share_space_id = ? ;",
+            array(
+                $share_user_id,
+                $share_space_id
             )
         );
 
@@ -105,43 +151,5 @@ class SpaceSharingDAO {
         }
 
         return $informations;
-    }
-
-    /**
-     * Update a SpaceSharing.
-     * @param SpaceSharing $spaceSharing
-     * @return bool return true if updated otherwise false
-     */
-    public function updateShareSpace(SpaceSharing $spaceSharing)
-    {
-        $result = $this->db->executeQuery(
-            "UPDATE space_sharing SET share_permission = ? WHERE share_user_id = ? and share_space_id = ? ;",
-            array(
-                $spaceSharing->getPermission(),
-                $spaceSharing->getUsersId(),
-                $spaceSharing->getSpaceId()
-            )
-        );
-
-        return $result != false;
-    }
-
-    /**
-     * Delete a SpaceSharing.
-     * @param string $share_user_id
-     * @param string $share_space_id
-     * @return bool return true if deleted otherwise false
-     */
-    public function deleteSpaceSharing($share_user_id, $share_space_id)
-    {
-        $result = $this->db->executeQuery(
-            "DELETE FROM space_sharing WHERE share_user_id = ? and share_space_id = ? ;",
-            array(
-                $share_user_id,
-                $share_space_id
-            )
-        );
-
-        return $result != false;
     }
 }

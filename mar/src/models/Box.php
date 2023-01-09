@@ -1,5 +1,9 @@
-<?
+<?php
 
+/**
+ * Box to make operation between object and the table database.
+ * @see BoxDAO
+ */
 class Box {
     private $box_id;
     private $box_space;
@@ -62,6 +66,10 @@ class Box {
     }
 }
 
+/**
+ * BoxDAO to make operation between object and the table database.
+ * @see Box
+ */
 class BoxDAO {
     private DatabaseConnection $db;
 
@@ -91,24 +99,6 @@ class BoxDAO {
     }
 
     /**
-     * Delete a Box.
-     * This function suppose that all informations are correct.
-     * @param string $box_id
-     * @return bool if delete, else return Null
-     */
-    public function deleteBox(string $box_id)
-    {
-        $result = $this->db->executeQuery(
-            "DELETE FROM box WHERE box_id = ?;",
-            array(
-                $box_id,
-            )
-        );
-
-        return $result != false;
-    }
-
-    /**
      * Update a box informations.
      * @param Box $box The updated box
      * @return bool True if the box was successfully updated, otherwise false.
@@ -121,6 +111,24 @@ class BoxDAO {
                 htmlspecialchars($box->getName()),
                 json_encode($box->getElementsOrder()),
                 $box->getId()
+            )
+        );
+
+        return $result != false;
+    }
+
+    /**
+     * Delete a Box.
+     * This function suppose that all informations are correct.
+     * @param string $box_id
+     * @return bool if delete, else return Null
+     */
+    public function deleteBox(string $box_id)
+    {
+        $result = $this->db->executeQuery(
+            "DELETE FROM box WHERE box_id = ?;",
+            array(
+                $box_id,
             )
         );
 

@@ -1,5 +1,9 @@
-<?
+<?php
 
+/**
+ * Space corresponding at the table in Database.
+ * @see SpaceDAO
+ */
 class Space {
     private $space_id;
     private string $space_name;
@@ -32,6 +36,10 @@ class Space {
     }
 }
 
+/**
+ * SpaceDAO to make operation between object and the table database.
+ * @see Space
+ */
 class SpaceDAO {
     private DatabaseConnection $db;
 

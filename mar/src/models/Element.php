@@ -1,5 +1,9 @@
-<?
+<?php
 
+/**
+ * Element to make operation between object and the table database.
+ * @see ElementDAO
+ */
 class Element {
     private $element_id;
     private $element_content;
@@ -49,6 +53,10 @@ class Element {
     }
 }
 
+/**
+ * ElementDAO to make operation between object and the table database.
+ * @see Element
+ */
 class ElementDAO {
     private DatabaseConnection $db;
 
@@ -76,25 +84,7 @@ class ElementDAO {
 
         return $result != false;
     }
-
-    /**
-     * Delete a Element.
-     * This function suppose that all informations are correct.
-     * @param string $element_id
-     * @return bool if delete, else return Null
-     */
-    public function deleteElement(string $element_id)
-    {
-        $result = $this->db->executeQuery(
-            "DELETE FROM element WHERE element_id = ?;",
-            array(
-                $element_id,
-            )
-        );
-
-        return $result != false;
-    }
-
+    
     /**
      * Update a Element informations.
      * @param Element $Element The updated Element
@@ -109,6 +99,24 @@ class ElementDAO {
                 $element->getBox(),
                 $element->getType(),
                 $element->getId()
+            )
+        );
+
+        return $result != false;
+    }
+
+    /**
+     * Delete a Element.
+     * This function suppose that all informations are correct.
+     * @param string $element_id
+     * @return bool if delete, else return Null
+     */
+    public function deleteElement(string $element_id)
+    {
+        $result = $this->db->executeQuery(
+            "DELETE FROM element WHERE element_id = ?;",
+            array(
+                $element_id,
             )
         );
 

@@ -1,5 +1,9 @@
-<?
+<?php
 
+/**
+ * User corresponding at the table in Database.
+ * @see UserDAO
+ */
 class User {
     private $user_id;
     private string $user_email;
@@ -41,51 +45,16 @@ class User {
 }
 
 
-
+/**
+ * UserDAO to make operation between object and the table database.
+ * @see User
+ */
 class UserDAO {
     private DatabaseConnection $db;
 
     public function __construct()
     {
        $this->db = Database::getInstance();
-    }
-
-    /** 
-     * Return a User object if a user exists with the provided email.
-     * @param string $email The user's email.
-     * @return User|null The User or null.
-     */
-    public function getByEmail(string $email)
-    {
-        $statement = $this->db->prepareStatement("SELECT * FROM users WHERE user_email = ?;");
-        $statement->execute(array($email));
-        $datas = $statement->fetch();
-
-        $user = null;
-        if ($datas != false) {
-            $user = new User($datas[0], $datas[1], $datas[2], $datas[3]);
-        }
-
-        return $user;
-    }
-
-    /** 
-     * Return a User object if a user exists with the provided ID.
-     * @param string $id The user's ID.
-     * @return User|null The User or null.
-     */
-    public function getByID(string $id)
-    {
-        $statement = $this->db->prepareStatement("SELECT * FROM users WHERE user_id = ?;");
-        $statement->execute(array($id));
-        $datas = $statement->fetch();
-
-        $user = null;
-        if ($datas != false) {
-            $user = new User($datas[0], $datas[1], $datas[2], $datas[3]);
-        }
-
-        return $user;
     }
 
     /**
@@ -128,4 +97,44 @@ class UserDAO {
 
         return $result != false;
     }
+
+    /** 
+     * Return a User object if a user exists with the provided email.
+     * @param string $email The user's email.
+     * @return User|null The User or null.
+     */
+    public function getByEmail(string $email)
+    {
+        $statement = $this->db->prepareStatement("SELECT * FROM users WHERE user_email = ?;");
+        $statement->execute(array($email));
+        $datas = $statement->fetch();
+
+        $user = null;
+        if ($datas != false) {
+            $user = new User($datas[0], $datas[1], $datas[2], $datas[3]);
+        }
+
+        return $user;
+    }
+
+    /** 
+     * Return a User object if a user exists with the provided ID.
+     * @param string $id The user's ID.
+     * @return User|null The User or null.
+     */
+    public function getByID(string $id)
+    {
+        $statement = $this->db->prepareStatement("SELECT * FROM users WHERE user_id = ?;");
+        $statement->execute(array($id));
+        $datas = $statement->fetch();
+
+        $user = null;
+        if ($datas != false) {
+            $user = new User($datas[0], $datas[1], $datas[2], $datas[3]);
+        }
+
+        return $user;
+    }
+
+    
 }
