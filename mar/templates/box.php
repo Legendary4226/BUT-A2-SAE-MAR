@@ -127,14 +127,24 @@ $ENABLE_LEFT_BOX_MENU = true; ?>
     </div>
 
     <form action="<?= LINK_SPACE . "&action=saveElements"?>" method="POST" class="form-box-content <?= !$hasWritePermission ? 'controls-hidden' : '' ?>">
-        <h1 class="box-title"><?= $current_box == null ? "It's empty here?" : $current_box->getName() ?></h1>
+        <h1 class="box-title"><?= $current_box == null ? "It's very empty here?" : $current_box->getName() ?></h1>
+
+        <?= $current_box == null ?
+        '<p style="text-align: center; line-height: 1.6em; margin: 0 2rem;">To start using the app, open the left side panel by a clic on the three stacked lines.<br>
+        Then clic on « Add Box » to create a new Box, name it and clic « Save ».<br>
+        After the reloading of the page you are able to create « elements », it’s for example notes or tasks.
+        <br>To do this you must clic on the « + » button under the box title in the middle of the page.<br>
+        By default, « + » and « Trash » buttons are transparent, remember the place of the buttons.<br><br>
+        Have a great experience with MAR !</p>'
+        : ''
+        ?>
 
         <input type="hidden" name="elements-order" id="elements-order" value='<?= $current_box == null ? "[]" : json_encode($current_box->getElementsOrder()) ?>'>
         
         <div class="box-elements">
 
-            <div class="element" style="min-height: 2rem; <?= $current_box == null ? "display: none; visibility: hidden;" : "" ?>">
-                <button type="button" class="action-add"> <? include(ICON_SVG_PLUS) ?> </button>
+            <div class="element <?= $current_box == null ? 'is-hidden' : '' ?>" style="min-height: 2rem;">
+                <button type="button" class="action-add" <?= sizeof($elements) == 0 ? 'style="opacity: 1;"' : '' ?>> <? include(ICON_SVG_PLUS) ?> </button>
             </div>
 
             <? ob_start();
