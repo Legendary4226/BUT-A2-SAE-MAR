@@ -82,9 +82,11 @@ $ENABLE_LEFT_BOX_MENU = true; ?>
 
     </form>
 
-    <button id="save-boxs-change" class="empty-button transition-simple-jump">Save</button>
+    <button id="save-boxs-change" class="empty-button transition-simple-jump <?= !$hasWritePermission ? 'is-hidden' : '' ?>">
+        Save
+    </button>
 
-    <button class="empty-button transition-simple-jump" id="add-box">
+    <button class="empty-button transition-simple-jump <?= !$hasWritePermission ? 'is-hidden' : '' ?>" id="add-box">
         <? include(ICON_SVG_PLUS) ?>
         Add Box
     </button>
@@ -124,7 +126,7 @@ $ENABLE_LEFT_BOX_MENU = true; ?>
         <!-- END ELEMENTS HTML TEMPLATES -->
     </div>
 
-    <form action="<?= LINK_SPACE . "&action=saveElements"?>" method="POST" class="form-box-content">
+    <form action="<?= LINK_SPACE . "&action=saveElements"?>" method="POST" class="form-box-content <?= !$hasWritePermission ? 'controls-hidden' : '' ?>">
         <h1 class="box-title"><?= $current_box == null ? "It's empty here?" : $current_box->getName() ?></h1>
 
         <input type="hidden" name="elements-order" id="elements-order" value='<?= $current_box == null ? "[]" : json_encode($current_box->getElementsOrder()) ?>'>
@@ -143,8 +145,12 @@ $ENABLE_LEFT_BOX_MENU = true; ?>
                 
                 <div class="element">
 
-                    <button type="button" class="action-add"> <? include(ICON_SVG_PLUS) ?> </button>
-                    <button type="button" class="action-delete"> <? include(ICON_SVG_TRASH_CAN) ?> </button>
+                    <button type="button" class="action-add" >
+                        <? include(ICON_SVG_PLUS) ?>
+                    </button>
+                    <button type="button" class="action-delete" >
+                        <? include(ICON_SVG_TRASH_CAN) ?>
+                    </button>
                     
                     <div class="element-body <?= $element->getType() ?>">
 
@@ -170,7 +176,7 @@ $ENABLE_LEFT_BOX_MENU = true; ?>
             <? }
             ob_end_flush(); ?>
         </div>
-        <button class="transition-simple-bump" id="save-modifications" <?= $current_box == null ? 'style="display: none; visibility: hidden;"' : "" ?>>
+        <button class="transition-simple-bump <?= $current_box == null || !$hasWritePermission ? 'is-hidden' : '' ?>" id="save-modifications">
             <? include(ICON_SVG_SAVE) ?>
         </button>
     </form>

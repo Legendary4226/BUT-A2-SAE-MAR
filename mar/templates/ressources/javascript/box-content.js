@@ -71,6 +71,9 @@ function addElement(element) {
     element.parentElement.insertBefore(clone, element.nextSibling)
     elementsOrder.splice(elementsOrder.indexOf(elementId), 0, String(newId))
 
+    // Auto Focus first input
+    clone.querySelector('input[type="text"], textarea').focus();
+
     newId--
 }
 

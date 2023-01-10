@@ -258,6 +258,8 @@ option {
     width: 100%;
     position: relative;
 }
+.controls-hidden .element .action-add,
+.controls-hidden .element .action-delete,
 .element.deleted {
     display: none;
     visibility: hidden;

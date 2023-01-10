@@ -61,6 +61,13 @@ if ($_SESSION['user_current_box'] != null) {
     $current_box = $user_boxes[$_SESSION['user_current_box']];
 }
 
+// Determine the current permission of the user
+$hasWritePermission = true;
+if (isset($sharedSpace[$_SESSION['user_current_space']])) {
+    $hasWritePermission = $sharedSpace[$_SESSION['user_current_space']]->getPermission() == "edit";
+}
+
+
 
 //--- Actions
 
@@ -68,7 +75,7 @@ if ($_SESSION['user_current_box'] != null) {
 
 if ($action == "saveBox") {
 
-    if (isset($sharedSpace[$_SESSION['user_current_space']]) && $sharedSpace[$_SESSION['user_current_space']]->getPermission() != "edit") {
+    if (!$hasWritePermission) {
         ThrowError::redirect(
             "Permission missing",
             "You can only read this space. Ask to the owner to grant you the 'edit' permission.",
@@ -123,7 +130,7 @@ if ($action == "switchBox") {
 
 if ($action == "saveElements") {
 
-    if (isset($sharedSpace[$_SESSION['user_current_space']]) && $sharedSpace[$_SESSION['user_current_space']]->getPermission() != "edit") {
+    if (!$hasWritePermission) {
         ThrowError::redirect(
             "Permission missing",
             "You can only read this space. Ask to the owner to grant you the 'edit' permission.",
