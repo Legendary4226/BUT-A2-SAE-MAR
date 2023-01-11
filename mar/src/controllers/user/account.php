@@ -28,6 +28,7 @@ if (!isset($_SESSION['user_current_space'])) {
 }
 if (!isset($spaces[$_SESSION['user_current_space']])) {
     $_SESSION['user_current_space'] = array_key_first($spaces);
+    unset($_SESSION['user_current_box']);
 }
 
 $sharingInfo = $spaceSharingDAO->getSharingInfo($_SESSION['user_current_space']);
