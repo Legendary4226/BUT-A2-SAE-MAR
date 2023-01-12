@@ -4,6 +4,7 @@ require_once(MODELS . "User.php");
 require_once(MODELS . "Space.php");
 require_once(MODELS . "SpaceSharing.php");
 
+
 $userDAO = new UserDAO();
 $spaceDAO = new SpaceDAO();
 $spaceSharingDAO = new SpaceSharingDAO();
@@ -215,6 +216,53 @@ if ($action == "switchSpace") {
 
     header("Location: " . LINK_ACCOUNT_SPACE_SETTINGS);
     exit;
+}
+
+if ($action == "accessDatas"){
+    $viewToRequire = "accessDatas";
+    
+    require_once(MODELS . "Box.php");
+    require_once(MODELS . "Element.php");
+
+    $boxDAO = new BoxDAO();
+    $elementDAO = new ElementDAO();
+
+    $access = [];
+    foreach($spaces as $space) {
+        $access[$space->getId()] = [
+            'space_name' => $space->getName(),
+            'boxes' => [],
+            'sharings' => []
+        ];
+        $curr_space = $access[$space->getId()];
+
+        $temp_boxes = $boxDAO->getBoxes($space->getId());
+        foreach($temp_boxes as $box) {
+            $curr_space['boxes'][$box->getId()] = [
+                'box_name' => $box->getName(),
+                'elements_order' => $box->getElementsOrder(),
+                'elements' => []
+            ];
+            $curr_box = $curr_space['boxes'][$box->getId()];
+            
+            $temp_elements = $elementDAO->getElements($box->getId());
+            foreach($temp_elements as $element) {
+                $curr_box['elements'][$box->getId()] = [
+                    'element_type' => $element->getType(),
+                    'element_content' => $element->getContent()
+                ];
+            }
+        }
+
+        $temp_sharings = $spaceSharingDAO->getSharingInfo($space->getId());
+        foreach($temp_sharings as $sharing) {
+            $curr_space['sharings'][$sharing['user_id'] . "-" . $sharing['share_space_id']] = [
+                'shared_with' => $userDAO->get,
+                'permission' => $sharing->getPermission()
+            ];
+        }
+    }
+    var_dump($access);
 }
 
 

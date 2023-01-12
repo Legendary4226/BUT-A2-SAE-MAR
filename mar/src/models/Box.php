@@ -140,7 +140,7 @@ class BoxDAO {
      * @param string $box_space
      * @return array Containing Boxes of the Space associating box_space => Box.
      */
-    public function getBoxs(string $box_space)
+    public function getBoxes(string $box_space)
     {
         $result = $this->db->executeQuery(
             "SELECT * FROM box WHERE box_space = ?",

@@ -44,7 +44,7 @@ if (!isset($_SESSION['user_current_space'])) {
 }
 
 // Set the current user box ID
-$user_boxes = $boxDAO->getBoxs($_SESSION['user_current_space']);
+$user_boxes = $boxDAO->getBoxes($_SESSION['user_current_space']);
 if (!isset($_SESSION['user_current_box'])) {
     $_SESSION['user_current_box'] = array_key_first($user_boxes);
 }

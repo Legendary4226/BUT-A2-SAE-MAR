@@ -43,6 +43,16 @@ main > section {
     background-color: var(--color-secondary-opacity-25);
 }
 
+.content{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.content:first-child{
+    align-items: flex-end;
+}
+
 form{
     display:flex;
     flex-direction: column;

@@ -17,7 +17,7 @@ class SpaceSharing {
     }
 
     // Getters
-    public function getUsersId(){
+    public function getUserId(){
         return $this->share_user_id;
     }
     public function getSpaceId(){
@@ -59,7 +59,7 @@ class SpaceSharingDAO {
         $result = $this->db->executeQuery(
             "INSERT INTO space_sharing(share_user_id, share_space_id, share_permission) VALUES(?, ?, ?)",
             array(
-                $spaceSharing->getUsersId(),
+                $spaceSharing->getUserId(),
                 $spaceSharing->getSpaceId(),
                 $spaceSharing->getPermission()
             )
@@ -79,7 +79,7 @@ class SpaceSharingDAO {
             "UPDATE space_sharing SET share_permission = ? WHERE share_user_id = ? and share_space_id = ? ;",
             array(
                 $spaceSharing->getPermission(),
-                $spaceSharing->getUsersId(),
+                $spaceSharing->getUserId(),
                 $spaceSharing->getSpaceId()
             )
         );

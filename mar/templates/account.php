@@ -34,7 +34,14 @@ $headerButtonsLinks = array(
         </a>
     </section>
 
-    <section>
+    <section class="content">
+        <div>
+            <a href="<?= LINK_ACCESS_DATAS ?>">
+                <button style="width:13rem;" class="blue-button">
+                    Access my datas
+                </button>
+            </a>
+        </div>
         <div>
             <form method="post" action="<?= LINK_ACCOUNT . "&action=modifyAccount" ?>">
                 <span>
@@ -55,9 +62,6 @@ $headerButtonsLinks = array(
                 </span>
                 <input type="submit" value="Save" class="save">
             </form>
-        </div>
-        <div>
-            <img src="">
         </div>
     </section>
 
